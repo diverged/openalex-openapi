@@ -8,6 +8,8 @@ servers:
 paths:
   /authors:
     $ref: ./paths/authors.yaml
+  /concepts:
+    $ref: ./paths/concepts.yaml
   /funders:
     $ref: ./paths/funders.yaml
   /institutions:

@@ -7,6 +7,8 @@ schemas:
     $ref: ./schemas/concept.yaml
   DehydratedAuthor:
     $ref: ./schemas/dehydrated_author.yaml
+  DehydratedConcept:
+    $ref: ./schemas/dehydrated_concept.yaml
   DehydratedInstitution:
     $ref: ./schemas/dehydrated_institution.yaml
   DehydratedSource:
@@ -17,6 +19,8 @@ schemas:
     $ref: ./schemas/funder.yaml
   Grant:
     $ref: ./schemas/grant.yaml
+  GroupBy:
+    $ref: ./schemas/group_by.yaml
   Institution:
     $ref: ./schemas/institution.yaml
   Keyword:
@@ -25,6 +29,8 @@ schemas:
     $ref: ./schemas/location.yaml
   MeshTag:
     $ref: ./schemas/mesh_tag.yaml
+  Meta:
+    $ref: ./schemas/meta.yaml
   OpenAccess:
     $ref: ./schemas/open_access.yaml
   Page:
@@ -49,3 +55,18 @@ schemas:
     $ref: ./schemas/work.yaml
   Cursor:
     $ref: ./schemas/cursor.yaml
+parameters:
+  filter:
+    $ref: ./parameters/filter_parameter.yaml
+  search:
+    $ref: ./parameters/search_parameter.yaml
+  sort:
+    $ref: ./parameters/sort_parameter.yaml
+  page:
+    $ref: ./parameters/page_parameter.yaml
+  per_page:
+    $ref: ./parameters/per_page_parameter.yaml
+  select:
+    $ref: ./parameters/select_parameter.yaml
+  group_by:
+    $ref: ./parameters/group_by_parameter.yaml
