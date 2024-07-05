@@ -3,6 +3,13 @@ properties:
   abstract_inverted_index:
     description: The abstract of the work, as an inverted index.
     type: object
+    example:
+      Despite: [0]
+      growing: [1]
+      interest: [2]
+      in: [3, 57, 73, 110, 122]
+      Open: [4, 201]
+      Access: [5]
   apc_list:
     description: Information about this work's APC (article processing charge) list price.
     properties:
@@ -19,6 +26,11 @@ properties:
         description: The APC converted into USD.
         type: integer
     type: object
+    example:
+      value: 3200
+      currency: USD
+      value_usd: 3200
+      provenance: doaj
   apc_paid:
     description: Information about the paid APC (article processing charge) for this work.
     properties:
@@ -35,6 +47,11 @@ properties:
         description: The paid APC converted into USD.
         type: integer
     type: object
+    example:
+      value: 2250
+      currency: EUR
+      value_usd: 2426
+      provenance: openapc
   authorships:
     description: List of authorship information for the work, including authors and their institutions.
     items:
@@ -94,13 +111,22 @@ properties:
           type: integer
       type: object
     type: array
+    example:
+      - year: 2022
+        cited_by_count: 8
+      - year: 2021
+        cited_by_count: 252
+      - year: 2012
+        cited_by_count: 79
   created_date:
     description: The date and time this Work object was created in the OpenAlex dataset.
     format: date
     type: string
+    example: "2017-08-08"
   display_name:
     description: The title of this work (same as title).
     type: string
+    example: "The state of OA: a large-scale analysis of the prevalence and impact of Open Access articles"
   doi:
     description: The DOI for the work.
     type: string
@@ -110,6 +136,7 @@ properties:
     description: If a work's full text is searchable in OpenAlex, this tells you how we got the text.
     enum: [pdf, ngrams]
     type: string
+    example: "pdf"
   grants:
     description: Information about grants that funded this work.
     items:
@@ -118,6 +145,7 @@ properties:
   has_fulltext:
     description: Set to true if the work's full text is searchable in OpenAlex.
     type: boolean
+    example: true
   id:
     description: The OpenAlex ID for this work.
     type: string
@@ -153,15 +181,19 @@ properties:
       enum: [arxiv, crossref, doaj, pubmed]
       type: string
     type: array
+    example: ["arxiv", "crossref", "pubmed"]
   institutions_distinct_count:
     description: Number of distinct institutions among the authorships for this work.
     type: integer
+    example: 4
   is_paratext:
     description: True if we think this work is paratext.
     type: boolean
+    example: false
   is_retracted:
     description: True if we know this work has been retracted.
     type: boolean
+    example: false
   keywords:
     description: A list of keywords associated with this work.
     items:
@@ -170,9 +202,11 @@ properties:
   language:
     description: The language of the work in ISO 639-1 format.
     type: string
+    example: "en"
   license:
     description: The license applied to this work at this host. Most toll-access works don't have an explicit license (they're under "all rights reserved" copyright), so this field generally has content only if is_oa is true.
     type: string
+    example: "cc-by"
   locations:
     description: List of locations where the work can be found, including various versions and sources.
     items:
@@ -181,6 +215,7 @@ properties:
   locations_count:
     description: Number of locations for this work.
     type: integer
+    example: 3
   mesh:
     description: List of Medical Subject Headings (MeSH) associated with the work, if applicable.
     items:
@@ -189,6 +224,7 @@ properties:
   ngrams_url:
     description: URL to retrieve n-grams for this work.
     type: string
+    example: "https://api.openalex.org/works/W2023271753/ngrams"
   open_access:
     $ref: ./open_access.yaml
     description: Information about the open access status of the work.
@@ -266,10 +302,13 @@ properties:
   type:
     description: The type of the work.
     type: string
+    example: "article"
   type_crossref:
     description: Legacy type information, using Crossref's "type" controlled vocabulary.
     type: string
+    example: "journal-article"
   updated_date:
     description: The last time anything in this Work object changed, including counts, formatted as an ISO 8601 date-time. This date is updated for any change at all, including increases in various counts.
     format: date-time
     type: string
+    example: "2022-01-02T00:22:35.180390"

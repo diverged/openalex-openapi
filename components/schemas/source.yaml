@@ -1,0 +1,225 @@
+type: object
+properties:
+  abbreviated_title:
+    type: string
+    description: An abbreviated title obtained from the ISSN Centre.
+    example: "J. addict. med. ther. sci."
+
+  alternate_titles:
+    type: array
+    items:
+      type: string
+    description: Alternate titles for this source, as obtained from the ISSN Centre and individual work records.
+    example: ["ACRJ"]
+
+  apc_prices:
+    type: array
+    items:
+      type: object
+      properties:
+        price:
+          type: integer
+        currency:
+          type: string
+    description: Article processing charge information, taken directly from DOAJ.
+    example:
+      - price: 3920
+        currency: "GBP"
+
+  apc_usd:
+    type: integer
+    description: The source's article processing charge in US Dollars, if available from DOAJ.
+    example: 5200
+
+  cited_by_count:
+    type: integer
+    description: The total number of Works that cite a Work hosted in this source.
+    example: 133702
+
+  country_code:
+    type: string
+    description: The country that this source is associated with, represented as an ISO two-letter country code.
+    example: "GB"
+
+  counts_by_year:
+    type: array
+    items:
+      type: object
+      properties:
+        year:
+          type: integer
+        works_count:
+          type: integer
+        cited_by_count:
+          type: integer
+    description: works_count and cited_by_count for each of the last ten years, binned by year.
+    example:
+      - year: 2021
+        works_count: 4338
+        cited_by_count: 127268
+
+  created_date:
+    type: string
+    format: date
+    description: The date this Source object was created in the OpenAlex dataset.
+    example: "2017-08-08"
+
+  display_name:
+    type: string
+    description: The name of the source.
+    example: "PeerJ"
+
+  homepage_url:
+    type: string
+    format: uri
+    description: The starting page for navigating the contents of this source; the homepage for this source's website.
+    example: "http://www.peerj.com/"
+
+  host_organization:
+    type: string
+    description: The host organization for this source as an OpenAlex ID.
+    example: "https://openalex.org/P4310320595"
+
+  host_organization_lineage:
+    type: array
+    items:
+      type: string
+    description: OpenAlex IDs of the host organization's lineage.
+    example:
+      - "https://openalex.org/P4310321285"
+      - "https://openalex.org/P4310319900"
+      - "https://openalex.org/P4310319965"
+
+  host_organization_name:
+    type: string
+    description: The display_name from the host_organization, shown for convenience.
+    example: "Elsevier BV"
+
+  id:
+    type: string
+    description: The OpenAlex ID for this source.
+    example: "https://openalex.org/S1983995261"
+
+  ids:
+    type: object
+    properties:
+      openalex:
+        type: string
+      issn_l:
+        type: string
+      issn:
+        type: array
+        items:
+          type: string
+      mag:
+        type: integer
+      fatcat:
+        type: string
+      wikidata:
+        type: string
+    description: All the external identifiers that we know about for this source.
+    example:
+      openalex: "https://openalex.org/S1983995261"
+      issn_l: "2167-8359"
+      issn: ["2167-8359"]
+      mag: 1983995261
+      fatcat: "https://fatcat.wiki/container/z3ijzhu7zzey3f7jwws7rzopoq"
+      wikidata: "https://www.wikidata.org/entity/Q96326029"
+
+  is_in_doaj:
+    type: boolean
+    description: Whether this is a journal listed in the Directory of Open Access Journals (DOAJ).
+    example: true
+
+  is_oa:
+    type: boolean
+    description: Whether this is currently fully-open-access source.
+    example: true
+
+  issn:
+    type: array
+    items:
+      type: string
+    description: The ISSNs used by this source.
+    example: ["2167-8359"]
+
+  issn_l:
+    type: string
+    description: The ISSN-L identifying this source.
+    example: "2167-8359"
+
+  societies:
+    type: array
+    items:
+      type: object
+      properties:
+        url:
+          type: string
+        organization:
+          type: string
+    description: Societies on whose behalf the source is published and maintained.
+    example:
+      - url: "http://www.counseling.org/"
+        organization: "American Counseling Association on behalf of the American College Counseling Association"
+
+  summary_stats:
+    type: object
+    properties:
+      2yr_mean_citedness:
+        type: number
+      h_index:
+        type: integer
+      i10_index:
+        type: integer
+    description: Citation metrics for this source
+    example:
+      2yr_mean_citedness: 1.5295340589458237
+      h_index: 105
+      i10_index: 5045
+
+  type:
+    type: string
+    enum: [journal, repository, conference, ebook platform, book series, metadata, other]
+    description: The type of source.
+    example: "journal"
+
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this Source object changed.
+    example: "2022-01-02T00:00:00"
+
+  works_api_url:
+    type: string
+    format: uri
+    description: A URL that will get you a list of all this source's Works.
+    example: "https://api.openalex.org/works?filter=primary_location.source.id:S1983995261"
+
+  works_count:
+    type: integer
+    description: The number of Works this source hosts.
+    example: 20184
+
+  x_concepts:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        wikidata:
+          type: string
+          nullable: true
+        display_name:
+          type: string
+        level:
+          type: integer
+        score:
+          type: number
+    description: The Concepts most frequently applied to works hosted by this source.
+    example:
+      - id: "https://openalex.org/C86803240"
+        wikidata: null
+        display_name: "Biology"
+        level: 0
+        score: 86.7
