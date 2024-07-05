@@ -1,0 +1,170 @@
+type: object
+properties:
+  alternate_titles:
+    type: array
+    items:
+      type: string
+    description: A list of alternate titles for this publisher.
+    example:
+      - "Elsevier"
+      - "elsevier.com"
+      - "Elsevier Science"
+      - "Uitg. Elsevier"
+      - "السفیر"
+      - "السویر"
+      - "انتشارات الزویر"
+      - "لودویک السفیر"
+      - "爱思唯尔"
+
+  cited_by_count:
+    type: integer
+    description: The number of citations to works that are linked to this publisher through journals or other sources.
+    example: 407508754
+
+  country_codes:
+    type: array
+    items:
+      type: string
+    description: The countries where the publisher is primarily located, as an ISO two-letter country code.
+    example: ["DE"]
+
+  counts_by_year:
+    type: array
+    items:
+      type: object
+      properties:
+        year:
+          type: integer
+        works_count:
+          type: integer
+        cited_by_count:
+          type: integer
+    description: The values of works_count and cited_by_count for each of the last ten years, binned by year.
+    example:
+      - year: 2021
+        works_count: 4211
+        cited_by_count: 120939
+      - year: 2020
+        works_count: 4363
+        cited_by_count: 119531
+
+  created_date:
+    type: string
+    format: date
+    description: The date this Publisher object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
+    example: "2017-08-08"
+
+  display_name:
+    type: string
+    description: The primary name of the publisher.
+    example: "Elsevier BV"
+
+  hierarchy_level:
+    type: integer
+    description: The hierarchy level for this publisher. A publisher with hierarchy level 0 has no parent publishers.
+    example: 1
+
+  id:
+    type: string
+    description: The OpenAlex ID for this publisher.
+    example: "https://openalex.org/P4310320990"
+
+  ids:
+    type: object
+    properties:
+      openalex:
+        type: string
+        description: This publisher's OpenAlex ID
+      ror:
+        type: string
+        description: This publisher's ROR ID
+      wikidata:
+        type: string
+        description: This publisher's Wikidata ID
+    example:
+      openalex: "https://openalex.org/P4310320990"
+      ror: "https://ror.org/02scfj030"
+      wikidata: "https://www.wikidata.org/entity/Q746413"
+
+  image_thumbnail_url:
+    type: string
+    description: URL for a smaller version of the image representing this publisher.
+    example: "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/MIT%20Press%20logo.svg&width=300"
+
+  image_url:
+    type: string
+    description: URL where you can get an image representing this publisher.
+    example: "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/MIT%20Press%20logo.svg"
+
+  lineage:
+    type: array
+    items:
+      type: string
+    description: OpenAlex IDs of publishers, including this publisher's ID and any parent publishers.
+    example:
+      - "https://openalex.org/P4310321285"
+      - "https://openalex.org/P4310319900"
+      - "https://openalex.org/P4310319965"
+
+  parent_publisher:
+    type: string
+    description: An OpenAlex ID linking to the direct parent of the publisher. This will be null if the publisher's hierarchy_level is 0.
+    example: "https://openalex.org/P4310311775"
+
+  roles:
+    type: array
+    items:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [institution, funder, publisher]
+        id:
+          type: string
+        works_count:
+          type: integer
+    description: List of role objects, which include the role, the id, and the works_count.
+    example:
+      - role: "funder"
+        id: "https://openalex.org/F4320308380"
+        works_count: 1004
+      - role: "publisher"
+        id: "https://openalex.org/P4310315589"
+        works_count: 13986
+      - role: "institution"
+        id: "https://openalex.org/I32971472"
+        works_count: 250031
+
+  sources_api_url:
+    type: string
+    description: An URL that will get you a list of all the sources published by this publisher.
+    example: "https://api.openalex.org/sources?filter=host_organization.id:P4310319965"
+
+  summary_stats:
+    type: object
+    properties:
+      2yr_mean_citedness:
+        type: number
+        description: The 2-year mean citedness for this source.
+      h_index:
+        type: integer
+        description: The h-index for this publisher.
+      i10_index:
+        type: integer
+        description: The i-10 index for this publisher.
+    description: Citation metrics for this publisher
+    example:
+      2yr_mean_citedness: 5.065784263815827
+      h_index: 985
+      i10_index: 176682
+
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this publisher object changed, expressed as an ISO 8601 date string.
+    example: "2021-12-25T14:04:30.578837"
+
+  works_count:
+    type: integer
+    description: The number of works published by this publisher.
+    example: 13789818

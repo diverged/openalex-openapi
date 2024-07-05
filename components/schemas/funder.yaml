@@ -1,0 +1,135 @@
+type: object
+properties:
+  alternate_titles:
+    type: array
+    items:
+      type: string
+    description: A list of alternate titles for this funder.
+    example: ["US National Institutes of Health", "Institutos Nacionales de la Salud", "NIH"]
+  cited_by_count:
+    type: integer
+    description: The total number of Works that cite a work linked to this funder.
+    example: 7823467
+  country_code:
+    type: string
+    description: The country where this funder is located, represented as an ISO two-letter country code.
+    example: "US"
+  counts_by_year:
+    type: array
+    items:
+      type: object
+      properties:
+        year:
+          type: integer
+        works_count:
+          type: integer
+        cited_by_count:
+          type: integer
+    description: The values of works_count and cited_by_count for each of the last ten years, binned by year.
+    example:
+      - year: 2021
+        works_count: 4211
+        cited_by_count: 120939
+      - year: 2020
+        works_count: 4363
+        cited_by_count: 119531
+  created_date:
+    type: string
+    format: date
+    description: The date this Funder object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
+    example: "2023-02-13"
+  description:
+    type: string
+    description: A short description of this funder, taken from Wikidata.
+    example: "medical research organization in the United States"
+  display_name:
+    type: string
+    description: The primary name of the funder.
+    example: "National Institutes of Health"
+  grants_count:
+    type: integer
+    description: The number of grants linked to this funder.
+    example: 7109
+  homepage_url:
+    type: string
+    description: The URL for this funder's primary homepage.
+    example: "http://www.nih.gov/"
+  id:
+    type: string
+    description: The OpenAlex ID for this funder.
+    example: "https://openalex.org/F4320332161"
+  ids:
+    type: object
+    properties:
+      openalex:
+        type: string
+      ror:
+        type: string
+      wikidata:
+        type: string
+      crossref:
+        type: string
+      doi:
+        type: string
+    description: All the external identifiers that we know about for this funder.
+    example:
+      openalex: "https://openalex.org/F4320332161"
+      ror: "https://ror.org/01cwqze88"
+      wikidata: "https://www.wikidata.org/entity/Q390551"
+      crossref: "100000002"
+      doi: "https://doi.org/10.13039/100000002"
+  image_thumbnail_url:
+    type: string
+    description: Same as image_url, but it's a smaller image.
+    example: "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/NIH 2013 logo vertical.svg&width=300"
+  image_url:
+    type: string
+    description: URL where you can get an image representing this funder.
+    example: "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/NIH 2013 logo vertical.svg"
+  roles:
+    type: array
+    items:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [institution, funder, publisher]
+        id:
+          type: string
+        works_count:
+          type: integer
+    description: List of role objects, which include the role, the id, and the works_count.
+    example:
+      - role: "funder"
+        id: "https://openalex.org/F4320308380"
+        works_count: 1004
+      - role: "publisher"
+        id: "https://openalex.org/P4310315589"
+        works_count: 13986
+      - role: "institution"
+        id: "https://openalex.org/I32971472"
+        works_count: 250031
+  summary_stats:
+    type: object
+    properties:
+      2yr_mean_citedness:
+        type: number
+        format: float
+      h_index:
+        type: integer
+      i10_index:
+        type: integer
+    description: Citation metrics for this funder
+    example:
+      2yr_mean_citedness: 5.065784263815827
+      h_index: 985
+      i10_index: 176682
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this funder object changed, expressed as an ISO 8601 date string.
+    example: "2023-04-21T16:54:19.012138"
+  works_count:
+    type: integer
+    description: The number of works linked to this funder.
+    example: 260210
