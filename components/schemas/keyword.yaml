@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this keyword.
+  display_name:
+    type: string
+    description: The name of the keyword.
+  score:
+    type: number
+    format: float
+    description: The similarity score of the keyword to the work's title and abstract text.
+required:
+  - id
+  - display_name
+  - score
