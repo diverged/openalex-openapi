@@ -9,7 +9,7 @@ properties:
     type: array
     items:
       type: string
-    description: Alternate titles for this source, as obtained from the ISSN Centre and individual work records.
+    description: Alternate titles for this source, as obtained from the ISSN Centre and individual work records, like Crossref DOIs, that carry the source name as a string. These are commonly abbreviations or translations of the source's canonical name.
     example: ["ACRJ"]
 
   apc_prices:
@@ -28,7 +28,7 @@ properties:
 
   apc_usd:
     type: integer
-    description: The source's article processing charge in US Dollars, if available from DOAJ.
+    description: The source's article processing charge in US Dollars, if available from DOAJ. The apc_usd value is calculated by taking the APC price with a currency of USD if it is available. If it's not available, we convert the first available value from apc_prices into USD, using recent exchange rates.
     example: 5200
 
   cited_by_count:
@@ -52,7 +52,7 @@ properties:
           type: integer
         cited_by_count:
           type: integer
-    description: works_count and cited_by_count for each of the last ten years, binned by year.
+    description: works_count and cited_by_count for each of the last ten years, binned by year. If the source was founded less than ten years ago, there will naturally be fewer than ten years in this list. Years with zero citations and zero works have been removed.
     example:
       - year: 2021
         works_count: 4338
@@ -61,7 +61,7 @@ properties:
   created_date:
     type: string
     format: date
-    description: The date this Source object was created in the OpenAlex dataset.
+    description: The date this Source object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
     example: "2017-08-08"
 
   display_name:
@@ -77,14 +77,14 @@ properties:
 
   host_organization:
     type: string
-    description: The host organization for this source as an OpenAlex ID.
+    description: The host organization for this source as an OpenAlex ID. This will be an Institution.id if the source is a repository, and a Publisher.id if the source is a journal, conference, or eBook platform (based on the type field).
     example: "https://openalex.org/P4310320595"
 
   host_organization_lineage:
     type: array
     items:
       type: string
-    description: OpenAlex IDs of the host organization's lineage.
+    description: OpenAlex IDs of the host organization's lineage. This will only be included if the host_organization is a publisher (and not if the host_organization is an institution).
     example:
       - "https://openalex.org/P4310321285"
       - "https://openalex.org/P4310319900"
@@ -117,7 +117,7 @@ properties:
         type: string
       wikidata:
         type: string
-    description: All the external identifiers that we know about for this source.
+    description: All the external identifiers that we know about for this source. IDs are expressed as URIs whenever possible.
     example:
       openalex: "https://openalex.org/S1983995261"
       issn_l: "2167-8359"
@@ -133,19 +133,19 @@ properties:
 
   is_oa:
     type: boolean
-    description: Whether this is currently fully-open-access source.
+    description: Whether this is currently fully-open-access source. This could be true for a preprint repository where everything uploaded is free to read, or for a Gold or Diamond open access journal, where all newly published Works are available for free under an open license.
     example: true
 
   issn:
     type: array
     items:
       type: string
-    description: The ISSNs used by this source.
+    description: The ISSNs used by this source. Many publications have multiple ISSNs, so ISSN-L should be used when possible.
     example: ["2167-8359"]
 
   issn_l:
     type: string
-    description: The ISSN-L identifying this source.
+    description: The ISSN-L identifying this source. This is the Canonical External ID for sources. ISSN-L or Linking ISSN solves the problem by designating a single canonical ISSN for all media versions of the title. It's usually the same as the print ISSN.
     example: "2167-8359"
 
   societies:
@@ -157,7 +157,7 @@ properties:
           type: string
         organization:
           type: string
-    description: Societies on whose behalf the source is published and maintained.
+    description: Societies on whose behalf the source is published and maintained, obtained from our crowdsourced list.
     example:
       - url: "http://www.counseling.org/"
         organization: "American Counseling Association on behalf of the American College Counseling Association"
@@ -167,11 +167,14 @@ properties:
     properties:
       2yr_mean_citedness:
         type: number
+        description: The 2-year mean citedness for this source. Also known as impact factor. We use the year prior to the current year for the citations (the numerator) and the two years prior to that for the citation-receiving publications (the denominator).
       h_index:
         type: integer
+        description: The h-index for this source.
       i10_index:
         type: integer
-    description: Citation metrics for this source
+        description: The i-10 index for this source.
+    description: Citation metrics for this source.
     example:
       2yr_mean_citedness: 1.5295340589458237
       h_index: 105
@@ -186,13 +189,13 @@ properties:
   updated_date:
     type: string
     format: date-time
-    description: The last time anything in this Source object changed.
+    description: The last time anything in this Source object changed, expressed as an ISO 8601 date string. This date is updated for any change at all, including increases in various counts.
     example: "2022-01-02T00:00:00"
 
   works_api_url:
     type: string
     format: uri
-    description: A URL that will get you a list of all this source's Works.
+    description: A URL that will get you a list of all this source's Works. We express this as an API URL (instead of just listing the works themselves) because sometimes a source's publication list is too long to reasonably fit into a single Source object.
     example: "https://api.openalex.org/works?filter=primary_location.source.id:S1983995261"
 
   works_count:
@@ -203,20 +206,8 @@ properties:
   x_concepts:
     type: array
     items:
-      type: object
-      properties:
-        id:
-          type: string
-        wikidata:
-          type: string
-          nullable: true
-        display_name:
-          type: string
-        level:
-          type: integer
-        score:
-          type: number
-    description: The Concepts most frequently applied to works hosted by this source.
+      $ref: './dehydrated_concept.yaml'
+    description: The Concepts most frequently applied to works hosted by this source. Each is represented as a dehydrated Concept object, with one additional attribute - score (Float) The strength of association between this source and the listed concept, from 0-100.
     example:
       - id: "https://openalex.org/C86803240"
         wikidata: null
