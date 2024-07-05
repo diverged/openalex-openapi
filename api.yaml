@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: OpenAlex API
+  description: An OpenAPI specification for the OpenAlex API
+  version: 1.0.0
+servers:
+  - url: https://api.openalex.org/
+paths:
+  /works:
+    $ref: './paths/works.yaml'
+  /authors:
+    $ref: './paths/authors.yaml'
+  /funders:
+    $ref: './paths/funders.yaml'
+  /institutions:
+    $ref: './paths/institutions.yaml'
+  /publishers:
+    $ref: './paths/publishers.yaml'
+  /topics:
+    $ref: './paths/topics.yaml'
+  /sources:
+    $ref: './paths/sources.yaml'
+  /keywords:
+    $ref: './paths/keywords.yaml'
+  
+components:
+  schemas:
+    Work:
+      $ref: './schemas/work.yaml'
+    Author:
+      $ref: './schemas/author.yaml'
+    Funder:
+      $ref: './schemas/funder.yaml'
+    Institution:
+      $ref: './schemas/institution.yaml'
+    Publisher:
+      $ref: './schemas/publisher.yaml'
+    Topic:
+      $ref: './schemas/topic.yaml'
+    Source:
+      $ref: './schemas/source.yaml'
+    Keyword:
+      $ref: './schemas/keyword.yaml'
