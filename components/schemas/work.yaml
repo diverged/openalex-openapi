@@ -226,8 +226,25 @@ properties:
     type: string
     example: "https://api.openalex.org/works/W2023271753/ngrams"
   open_access:
-    $ref: ./open_access.yaml
+    type: object
     description: Information about the open access status of the work.
+    properties:
+      is_oa:
+        type: boolean
+        description: True if this work is Open Access (OA).
+      oa_status:
+        type: string
+        enum: [gold, green, hybrid, bronze, closed]
+        description: The Open Access (OA) status of this work.
+      oa_url:
+        type: string
+        description: The best Open Access (OA) URL for this work.
+      any_repository_has_fulltext:
+        type: boolean
+        description: True if any of this work's locations has is_oa=true and source.type=repository. This indicates that a full-text version of the work is available in an open access repository.
+    required:
+      - is_oa
+      - oa_status
   primary_location:
     $ref: ./location.yaml
     description: The primary location where this work can be found, typically the publisher's site.
@@ -260,9 +277,8 @@ properties:
     type: array
   sustainable_development_goals:
     description: The UN Sustainable Development Goals relevant to this work.
-    items:
-      $ref: ./sustainable_development_goal.yaml
     type: array
+    items:
     example:
       - id: "https://metadata.un.org/sdg/3"
         display_name: "Good health and well-being"

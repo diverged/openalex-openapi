@@ -31,8 +31,6 @@ schemas:
     $ref: ./schemas/mesh_tag.yaml
   Meta:
     $ref: ./schemas/meta.yaml
-  OpenAccess:
-    $ref: ./schemas/open_access.yaml
   Page:
     $ref: ./schemas/page.yaml
   Per_Page:
@@ -47,8 +45,6 @@ schemas:
     $ref: ./schemas/sort.yaml
   Source:
     $ref: ./schemas/source.yaml
-  SustainableDevelopmentGoal:
-    $ref: ./schemas/sustainable_development_goal.yaml
   Topic:
     $ref: ./schemas/topic.yaml
   Work:
