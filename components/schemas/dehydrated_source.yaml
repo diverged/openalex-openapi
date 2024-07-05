@@ -1,22 +1,50 @@
 type: object
 properties:
-  id:
-    type: string
-    description: The OpenAlex ID for this source.
   display_name:
-    type: string
     description: The name of the source.
-  issn_l:
+    example: PeerJ
     type: string
-    description: The ISSN-L for this source.
-  issn:
+  host_organization:
+    description: The host organization for this source as an OpenAlex ID.
+    example: https://openalex.org/P4310320595
+    type: string
+  host_organization_lineage:
+    description: OpenAlex IDs of the host organization's lineage.
     type: array
     items:
       type: string
-    description: The ISSNs for this source.
-  host_organization:
+    example:
+      - "https://openalex.org/P4310321285"
+      - "https://openalex.org/P4310319900"
+      - "https://openalex.org/P4310319965"
+  host_organization_name:
+    description: The display_name from the host_organization, shown for convenience.
+    example: Elsevier BV
     type: string
-    description: The host organization for this source.
+  id:
+    description: The OpenAlex ID for this source.
+    example: https://openalex.org/S1983995261
+    type: string
+  is_in_doaj:
+    description: Whether this is a journal listed in the Directory of Open Access Journals (DOAJ).
+    example: true
+    type: boolean
+  is_oa:
+    description: Whether this is currently fully-open-access source.
+    example: true
+    type: boolean
+  issn:
+    description: The ISSNs used by this source.
+    example: ["2167-8359"]
+    items:
+      type: string
+    type: array
+  issn_l:
+    description: The ISSN-L identifying this source.
+    example: 2167-8359
+    type: string
   type:
+    description: The type of source.
+    enum: [journal, repository, conference, ebook platform, book series, metadata, other]
+    example: journal
     type: string
-    description: The type of the source.
