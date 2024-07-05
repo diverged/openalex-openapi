@@ -1,0 +1,16 @@
+- name: sort
+  in: query
+  description: |
+    Specify the property to sort the results by. Multiple sort keys can be provided, separated by commas.
+    Append ':desc' to sort in descending order. Default sort direction is ascending.
+  required: false
+  schema:
+    $ref: '../schemas/sort.yaml'
+  example: cited_by_count:desc
+  examples:
+    single_sort:
+      summary: Sort by cited_by_count in descending order
+      value: cited_by_count:desc
+    multiple_sort:
+      summary: Sort by publication year (descending) then by relevance score (descending)
+      value: publication_year:desc,relevance_score:desc

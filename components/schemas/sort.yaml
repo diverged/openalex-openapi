@@ -1,0 +1,10 @@
+type: string
+description: |
+  Comma-separated list of fields to sort by. Append ':desc' for descending order.
+  Available sort properties (where they exist):
+  * display_name
+  * cited_by_count
+  * works_count
+  * publication_date
+  * relevance_score (only when a search filter is active)
+example: cited_by_count:desc,publication_date

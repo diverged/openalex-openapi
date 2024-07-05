@@ -31,6 +31,8 @@ schemas:
     $ref: ./schemas/publisher.yaml
   Select:
     $ref: ./schemas/select.yaml
+  Sort:
+    $ref: ./schemas/sort.yaml
   Source:
     $ref: ./schemas/source.yaml
   SustainableDevelopmentGoal:
