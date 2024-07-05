@@ -1,0 +1,148 @@
+type: object
+properties:
+  affiliations:
+    type: array
+    description: List of objects representing the affiliations this author has claimed in their publications.
+    items:
+      type: object
+      properties:
+        institution:
+          $ref: './dehydrated_institution.yaml'
+        years:
+          type: array
+          items:
+            type: integer
+    example:
+      - institution:
+          id: "https://openalex.org/I201448701"
+          ror: "https://ror.org/00cvxb145"
+        years: [2018, 2019, 2020]
+      - institution:
+          id: "https://openalex.org/I74973139"
+          ror: "https://ror.org/05x2bcf33"
+        years: [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+  cited_by_count:
+    type: integer
+    description: The total number of Works that cite a work this author has created.
+    example: 38
+  counts_by_year:
+    type: array
+    description: Works_count and cited_by_count for each of the last ten years, binned by year.
+    items:
+      type: object
+      properties:
+        year:
+          type: integer
+        works_count:
+          type: integer
+        cited_by_count:
+          type: integer
+    example:
+      - year: 2022
+        works_count: 0
+        cited_by_count: 8
+      - year: 2021
+        works_count: 1
+        cited_by_count: 252
+      - year: 2012
+        works_count: 7
+        cited_by_count: 79
+  created_date:
+    type: string
+    format: date
+    description: The date this Author object was created in the OpenAlex dataset.
+    example: "2017-08-08"
+  display_name:
+    type: string
+    description: The name of the author as a single string.
+    example: "Jason Priem"
+  display_name_alternatives:
+    type: array
+    description: Other ways that we've found this author's name displayed.
+    items:
+      type: string
+    example: ["Jason R Priem"]
+  id:
+    type: string
+    description: The OpenAlex ID for this author.
+    example: "https://openalex.org/A5023888391"
+  ids:
+    type: object
+    description: All the external identifiers that we know about for this author.
+    properties:
+      openalex:
+        type: string
+      orcid:
+        type: string
+      scopus:
+        type: string
+      twitter:
+        type: string
+      wikipedia:
+        type: string
+    example:
+      openalex: "https://openalex.org/A5023888391"
+      orcid: "https://orcid.org/0000-0001-6187-6610"
+      scopus: "http://www.scopus.com/inward/authorDetails.url?authorID=36455008000&partnerID=MN8TOARS"
+  last_known_institution:
+    $ref: './dehydrated_institution.yaml'
+    description: This author's last known institutional affiliation (deprecated).
+  last_known_institutions:
+    type: array
+    description: This author's last known institutional affiliations.
+    items:
+      $ref: './dehydrated_institution.yaml'
+  orcid:
+    type: string
+    description: The ORCID ID for this author.
+    example: "https://orcid.org/0000-0001-6187-6610"
+  summary_stats:
+    type: object
+    description: Citation metrics for this author.
+    properties:
+      2yr_mean_citedness:
+        type: number
+        format: float
+      h_index:
+        type: integer
+      i10_index:
+        type: integer
+    example:
+      2yr_mean_citedness: 1.5295340589458237
+      h_index: 45
+      i10_index: 205
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this author object changed.
+    example: "2022-01-02T00:00:00"
+  works_api_url:
+    type: string
+    description: A URL that will get you a list of all this author's works.
+    example: "https://api.openalex.org/works?filter=author.id:A5023888391"
+  works_count:
+    type: integer
+    description: The number of Works this author has created.
+    example: 38
+  x_concepts:
+    type: array
+    description: The concepts most frequently applied to works created by this author (deprecated).
+    items:
+      allOf:
+        - $ref: './dehydrated_concept.yaml'
+        - type: object
+          properties:
+            score:
+              type: number
+              format: float
+    example:
+      - id: "https://openalex.org/C41008148"
+        wikidata: null
+        display_name: "Computer science"
+        level: 0
+        score: 97.4
+      - id: "https://openalex.org/C17744445"
+        wikidata: null
+        display_name: "Political science"
+        level: 0
+        score: 78.9

@@ -142,6 +142,11 @@ properties:
         description: The PubMed ID for this work.
         type: string
     type: object
+    example:
+      openalex: "https://openalex.org/W2741809807"
+      doi: "https://doi.org/10.7717/peerj.4375"
+      mag: 2741809807
+      pmid: "https://pubmed.ncbi.nlm.nih.gov/29456894"
   indexed_in:
     description: The sources this work is indexed in.
     items:

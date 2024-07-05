@@ -1,0 +1,220 @@
+type: object
+properties:
+  associated_institutions:
+    type: array
+    items:
+      $ref: './dehydrated_institution.yaml'
+    description: List of institutions related to this one, represented as dehydrated Institution objects with an additional 'relationship' property.
+    example:
+      - id: "https://openalex.org/I2802101240"
+        ror: "https://ror.org/0483mr804"
+        display_name: "Carolinas Medical Center"
+        country_code: "US"
+        type: "healthcare"
+        relationship: "related"
+  cited_by_count:
+    type: integer
+    description: The total number of works that cite a work created by an author affiliated with this institution.
+    example: 21199844
+  country_code:
+    type: string
+    description: The country where this institution is located, represented as an ISO two-letter country code.
+  counts_by_year:
+    type: array
+    items:
+      type: object
+      properties:
+        year:
+          type: integer
+        works_count:
+          type: integer
+        cited_by_count:
+          type: integer
+    description: Works count and cited by count for each of the last ten years, binned by year.
+    example:
+      - year: 2022
+        works_count: 133
+        cited_by_count: 32731
+      - year: 2021
+        works_count: 12565
+        cited_by_count: 2180827
+  created_date:
+    type: string
+    format: date
+    description: The date this Institution object was created in the OpenAlex dataset.
+    example: "2017-08-08"
+  display_name:
+    type: string
+    description: The primary name of the institution.
+    example: "University of North Carolina at Chapel Hill"
+  display_name_acronyms:
+    type: array
+    items:
+      type: string
+    description: Acronyms or initialisms that people sometimes use instead of the full display name.
+    example: ["UNC"]
+  display_name_alternatives:
+    type: array
+    items:
+      type: string
+    description: Other names people may use for this institution.
+    example: ["UNC-Chapel Hill"]
+  geo:
+    type: object
+    properties:
+      city:
+        type: string
+      geonames_city_id:
+        type: string
+      region:
+        type: string
+      country_code:
+        type: string
+      country:
+        type: string
+      latitude:
+        type: number
+        format: float
+      longitude:
+        type: number
+        format: float
+    description: Geographic information about the institution's location.
+    example:
+      city: "Chapel Hill"
+      geonames_city_id: "4460162"
+      region: "North Carolina"
+      country_code: "US"
+      country: "United States"
+      latitude: 35.9083
+      longitude: -79.0492
+  homepage_url:
+    type: string
+    description: The URL for institution's primary homepage.
+    example: "http://www.unc.edu/"
+  id:
+    type: string
+    description: The OpenAlex ID for this institution.
+    example: "https://openalex.org/I114027177"
+  ids:
+    type: object
+    properties:
+      openalex:
+        type: string
+      ror:
+        type: string
+      grid:
+        type: string
+      wikipedia:
+        type: string
+      wikidata:
+        type: string
+      mag:
+        type: integer
+    description: External identifiers for this institution.
+    example:
+      openalex: "https://openalex.org/I114027177"
+      ror: "https://ror.org/0130frc33"
+      grid: "grid.10698.36"
+      wikipedia: "https://en.wikipedia.org/wiki/University%20of%20North%20Carolina%20at%20Chapel%20Hill"
+      wikidata: "https://www.wikidata.org/wiki/Q192334"
+      mag: 114027177
+  image_thumbnail_url:
+    type: string
+    description: URL for a thumbnail image representing this institution.
+    example: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg/100px-University_of_North_Carolina_at_Chapel_Hill_seal.svg.png"
+  image_url:
+    type: string
+    description: URL for an image representing this institution.
+    example: "https://upload.wikimedia.org/wikipedia/en/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg"
+  international:
+    type: object
+    properties:
+      display_name:
+        type: object
+        additionalProperties:
+          type: string
+    description: The institution's display name in different languages.
+  lineage:
+    type: array
+    items:
+      type: string
+    description: OpenAlex IDs of this institution and its parent institutions.
+  repositories:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        host_organization:
+          type: string
+        host_organization_name:
+          type: string
+        host_organization_lineage:
+          type: array
+          items:
+            type: string
+    description: Repositories that have this institution as their host organization.
+  roles:
+    type: array
+    items:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [institution, funder, publisher]
+        id:
+          type: string
+        works_count:
+          type: integer
+    description: List of roles this institution plays, including itself and potentially funder and publisher roles.
+  ror:
+    type: string
+    description: The ROR ID for this institution.
+    example: "https://ror.org/0130frc33"
+  summary_stats:
+    type: object
+    properties:
+      2yr_mean_citedness:
+        type: number
+        format: float
+      h_index:
+        type: integer
+      i10_index:
+        type: integer
+    description: Citation metrics for this institution.
+    example:
+      2yr_mean_citedness: 5.065784263815827
+      h_index: 985
+      i10_index: 176682
+  type:
+    type: string
+    enum: [Education, Healthcare, Company, Archive, Nonprofit, Government, Facility, Other]
+    description: The institution's primary type, using the ROR "type" controlled vocabulary.
+    example: "education"
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this Institution changed.
+    example: "2022-01-02T00:27:23.088909"
+  works_api_url:
+    type: string
+    description: A URL that will get you a list of all the Works affiliated with this institution.
+    example: "https://api.openalex.org/works?filter=institutions.id:I114027177"
+  works_count:
+    type: integer
+    description: The number of Works created by authors affiliated with this institution.
+    example: 202704
+  x_concepts:
+    type: array
+    items:
+      allOf:
+        - $ref: './dehydrated_concept.yaml'
+        - type: object
+          properties:
+            score:
+              type: number
+              format: float
+    description: The Concepts most frequently applied to works affiliated with this institution.
