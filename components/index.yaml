@@ -27,8 +27,14 @@ schemas:
     $ref: ./schemas/mesh_tag.yaml
   OpenAccess:
     $ref: ./schemas/open_access.yaml
+  Page:
+    $ref: ./schemas/page.yaml
+  Per_Page:
+    $ref: ./schemas/per_page.yaml
   Publisher:
     $ref: ./schemas/publisher.yaml
+  Search:
+    $ref: ./schemas/search.yaml
   Select:
     $ref: ./schemas/select.yaml
   Sort:

@@ -1,0 +1,5 @@
+type: integer
+description: The page number of results to return. Used for basic paging.
+minimum: 1
+default: 1
+example: 2
