@@ -11,6 +11,8 @@ schemas:
     $ref: ./schemas/dehydrated_institution.yaml
   DehydratedSource:
     $ref: ./schemas/dehydrated_source.yaml
+  Filter:
+    $ref: ./schemas/filter.yaml
   Funder:
     $ref: ./schemas/funder.yaml
   Grant:
@@ -27,6 +29,8 @@ schemas:
     $ref: ./schemas/open_access.yaml
   Publisher:
     $ref: ./schemas/publisher.yaml
+  Select:
+    $ref: ./schemas/select.yaml
   Source:
     $ref: ./schemas/source.yaml
   SustainableDevelopmentGoal:

@@ -1,0 +1,3 @@
+type: string
+description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
+example: id,doi,display_name

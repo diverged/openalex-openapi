@@ -1,0 +1,14 @@
+- name: select
+  in: query
+  description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
+  required: false
+  schema:
+    $ref: '../schemas/select.yaml'
+  example: id,doi,display_name
+  examples:
+    single_entity:
+      summary: Select fields for a single entity
+      value: id,display_name
+    list_of_entities:
+      summary: Select fields for a list of entities
+      value: id,doi,display_name

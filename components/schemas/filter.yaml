@@ -1,0 +1,5 @@
+type: string
+description: |
+  Filters narrow the list down to just entities that meet particular conditions.
+  Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
+example: type:book,cited_by_count:>1,is_oa:true
