@@ -1,0 +1,31 @@
+schemas:
+  Work:
+    $ref: './schemas/work.yaml'
+  Author:
+    $ref: './schemas/author.yaml'
+  Funder:
+    $ref: './schemas/funder.yaml'
+  Institution:
+    $ref: './schemas/institution.yaml'
+  Publisher:
+    $ref: './schemas/publisher.yaml'
+  Topic:
+    $ref: './schemas/topic.yaml'
+  Source:
+    $ref: './schemas/source.yaml'
+  Keyword:
+    $ref: './schemas/keyword.yaml'
+  Authorship:
+    $ref: './schemas/authorship.yaml'
+  Concept:
+    $ref: './schemas/concept.yaml'
+  MeshTag:
+    $ref: './schemas/mesh_tag.yaml'
+  Location:
+    $ref: './schemas/location.yaml'
+  OpenAccess:
+    $ref: './schemas/open_access.yaml'
+  SustainableDevelopmentGoal:
+    $ref: './schemas/sustainable_development_goal.yaml'
+  Grant:
+    $ref: './schemas/grant.yaml'
