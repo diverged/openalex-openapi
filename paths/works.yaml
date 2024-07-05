@@ -1,0 +1,93 @@
+get:
+  summary: List Works
+  description: Returns a list of works.
+  parameters:
+    - name: filter
+      in: query
+      description: Filter the results
+      schema:
+        type: string
+    - name: search
+      in: query
+      description: Search the results
+      schema:
+        type: string
+    - name: sort
+      in: query
+      description: Sort the results
+      schema:
+        type: string
+    - name: page
+      in: query
+      description: Page number for pagination
+      schema:
+        type: integer
+    - name: per_page
+      in: query
+      description: Number of results per page
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              meta:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of results
+                  db_response_time_ms:
+                    type: integer
+                    description: Database response time in milliseconds
+                  page:
+                    type: integer
+                    description: Current page number
+                  per_page:
+                    type: integer
+                    description: Number of results per page
+                  count_new:
+                    type: integer
+                    description: Number of new results since last update
+                  count_updated:
+                    type: integer
+                    description: Number of updated results since last update
+              results:
+                type: array
+                items:
+                  $ref: '../components/schemas/work.yaml'
+    '400':
+      description: Bad request
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests
+
+/{id}:
+  get:
+    summary: Get a single Work
+    description: Returns details for a single work.
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: OpenAlex ID of the work
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/work.yaml'
+      '404':
+        description: Work not found
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
