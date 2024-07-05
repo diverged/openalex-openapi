@@ -1,0 +1,243 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this work.
+  doi:
+    type: string
+    description: The DOI for the work.
+  title:
+    type: string
+    description: The title of this work.
+  display_name:
+    type: string
+    description: The title of this work (same as title).
+  publication_year:
+    type: integer
+    description: The year this work was published.
+  publication_date:
+    type: string
+    format: date
+    description: The day when this work was published, formatted as an ISO 8601 date.
+  type:
+    type: string
+    description: The type of the work.
+  cited_by_count:
+    type: integer
+    description: The number of citations to this work.
+  is_retracted:
+    type: boolean
+    description: True if we know this work has been retracted.
+  is_paratext:
+    type: boolean
+    description: True if we think this work is paratext.
+  cited_by_api_url:
+    type: string
+    description: A URL that displays a list of works that cite this work.
+  abstract_inverted_index:
+    type: object
+    description: The abstract of the work, as an inverted index.
+  language:
+    type: string
+    description: The language of the work in ISO 639-1 format.
+  authorships:
+    type: array
+    items:
+      $ref: '#/components/schemas/Authorship'
+  concepts:
+    type: array
+    items:
+      $ref: '#/components/schemas/Concept'
+  mesh:
+    type: array
+    items:
+      $ref: '#/components/schemas/MeshTag'
+  locations:
+    type: array
+    items:
+      $ref: '#/components/schemas/Location'
+  open_access:
+    $ref: '#/components/schemas/OpenAccess'
+  referenced_works:
+    type: array
+    items:
+      type: string
+    description: OpenAlex IDs for works that this work cites.
+  related_works:
+    type: array
+    items:
+      type: string
+    description: OpenAlex IDs for works related to this work.
+  primary_location:
+    $ref: '#/components/schemas/Location'
+  best_oa_location:
+    $ref: '#/components/schemas/Location'
+  keywords:
+    type: array
+    items:
+      $ref: '#/components/schemas/Keyword'
+  sustainable_development_goals:
+    type: array
+    items:
+      $ref: '#/components/schemas/SustainableDevelopmentGoal'
+  grants:
+    type: array
+    items:
+      $ref: '#/components/schemas/Grant'
+  created_date:
+    type: string
+    format: date
+    description: The date this Work object was created in the OpenAlex dataset.
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this Work object changed.
+
+components:
+  schemas:
+    Authorship:
+      type: object
+      properties:
+        author_position:
+          type: string
+          enum: [first, middle, last]
+        author:
+          $ref: '#/components/schemas/DehydratedAuthor'
+        institutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DehydratedInstitution'
+        is_corresponding:
+          type: boolean
+        raw_affiliation_string:
+          type: string
+        raw_author_name:
+          type: string
+
+    DehydratedAuthor:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        orcid:
+          type: string
+
+    DehydratedInstitution:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        ror:
+          type: string
+        country_code:
+          type: string
+        type:
+          type: string
+
+    Concept:
+      type: object
+      properties:
+        id:
+          type: string
+        wikidata:
+          type: string
+        display_name:
+          type: string
+        level:
+          type: integer
+        score:
+          type: number
+
+    MeshTag:
+      type: object
+      properties:
+        descriptor_ui:
+          type: string
+        descriptor_name:
+          type: string
+        qualifier_ui:
+          type: string
+        qualifier_name:
+          type: string
+        is_major_topic:
+          type: boolean
+
+    Location:
+      type: object
+      properties:
+        is_oa:
+          type: boolean
+        landing_page_url:
+          type: string
+        pdf_url:
+          type: string
+        source:
+          $ref: '#/components/schemas/DehydratedSource'
+        license:
+          type: string
+        version:
+          type: string
+          enum: [publishedVersion, acceptedVersion, submittedVersion]
+
+    DehydratedSource:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        issn_l:
+          type: string
+        issn:
+          type: array
+          items:
+            type: string
+        host_organization:
+          type: string
+        type:
+          type: string
+
+    OpenAccess:
+      type: object
+      properties:
+        is_oa:
+          type: boolean
+        oa_status:
+          type: string
+          enum: [gold, green, hybrid, bronze, closed]
+        oa_url:
+          type: string
+
+    Keyword:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        score:
+          type: number
+
+    SustainableDevelopmentGoal:
+      type: object
+      properties:
+        id:
+          type: string
+        display_name:
+          type: string
+        score:
+          type: number
+
+    Grant:
+      type: object
+      properties:
+        funder:
+          type: string
+        funder_display_name:
+          type: string
+        award_id:
+          type: string

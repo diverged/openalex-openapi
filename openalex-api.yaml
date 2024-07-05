@@ -24,20 +24,4 @@ paths:
     $ref: './paths/keywords.yaml'
   
 components:
-  schemas:
-    Work:
-      $ref: './schemas/work.yaml'
-    Author:
-      $ref: './schemas/author.yaml'
-    Funder:
-      $ref: './schemas/funder.yaml'
-    Institution:
-      $ref: './schemas/institution.yaml'
-    Publisher:
-      $ref: './schemas/publisher.yaml'
-    Topic:
-      $ref: './schemas/topic.yaml'
-    Source:
-      $ref: './schemas/source.yaml'
-    Keyword:
-      $ref: './schemas/keyword.yaml'
+  $ref: './components/index.yaml'
