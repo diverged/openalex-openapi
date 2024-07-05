@@ -1,37 +1,37 @@
 schemas:
-  Work:
-    $ref: './schemas/work.yaml'
   Author:
-    $ref: './schemas/author.yaml'
-  Funder:
-    $ref: './schemas/funder.yaml'
-  Institution:
-    $ref: './schemas/institution.yaml'
-  Publisher:
-    $ref: './schemas/publisher.yaml'
-  Topic:
-    $ref: './schemas/topic.yaml'
-  Source:
-    $ref: './schemas/source.yaml'
-  Keyword:
-    $ref: './schemas/keyword.yaml'
+    $ref: ./schemas/author.yaml
   Authorship:
-    $ref: './schemas/authorship.yaml'
+    $ref: ./schemas/authorship.yaml
   Concept:
-    $ref: './schemas/concept.yaml'
-  MeshTag:
-    $ref: './schemas/mesh_tag.yaml'
-  Location:
-    $ref: './schemas/location.yaml'
-  OpenAccess:
-    $ref: './schemas/open_access.yaml'
-  SustainableDevelopmentGoal:
-    $ref: './schemas/sustainable_development_goal.yaml'
-  Grant:
-    $ref: './schemas/grant.yaml'
+    $ref: ./schemas/concept.yaml
   DehydratedAuthor:
-    $ref: './schemas/dehydrated_author.yaml'
+    $ref: ./schemas/dehydrated_author.yaml
   DehydratedInstitution:
-    $ref: './schemas/dehydrated_institution.yaml'
+    $ref: ./schemas/dehydrated_institution.yaml
   DehydratedSource:
-    $ref: './schemas/dehydrated_source.yaml'
+    $ref: ./schemas/dehydrated_source.yaml
+  Funder:
+    $ref: ./schemas/funder.yaml
+  Grant:
+    $ref: ./schemas/grant.yaml
+  Institution:
+    $ref: ./schemas/institution.yaml
+  Keyword:
+    $ref: ./schemas/keyword.yaml
+  Location:
+    $ref: ./schemas/location.yaml
+  MeshTag:
+    $ref: ./schemas/mesh_tag.yaml
+  OpenAccess:
+    $ref: ./schemas/open_access.yaml
+  Publisher:
+    $ref: ./schemas/publisher.yaml
+  Source:
+    $ref: ./schemas/source.yaml
+  SustainableDevelopmentGoal:
+    $ref: ./schemas/sustainable_development_goal.yaml
+  Topic:
+    $ref: ./schemas/topic.yaml
+  Work:
+    $ref: ./schemas/work.yaml

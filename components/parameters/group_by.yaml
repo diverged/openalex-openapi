@@ -1,0 +1,22 @@
+name: group_by
+in: query
+description: |
+  Groups the results by a specified property. The response will include a `group_by` object with counts for each group.
+
+  You can group by most of the same properties that you can filter by.
+
+  To include the "unknown" group in the response, add `:include_unknown` after the group-by parameter.
+
+  Example: `group_by=authorships.institutions.id` or `group_by=authorships.institutions.id:include_unknown`
+
+  The response will contain:
+  - `key`: The OpenAlex ID or raw value of the `group_by` parameter for members of this group.
+  - `key_display_name`: The `display_name` or raw value of the `group_by` parameter for members of this group.
+  - `count`: The number of entities in the group.
+schema:
+  type: string
+  pattern: '^[a-z_.]+(:[a-z_]+)?$'
+  description: |
+    The property to group by. Can be any filterable property.
+    Optionally followed by `:include_unknown` to include the "unknown" group.
+example: authorships.institutions.id
