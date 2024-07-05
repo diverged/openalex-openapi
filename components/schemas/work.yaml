@@ -65,6 +65,7 @@ properties:
   cited_by_count:
     description: The number of citations to this work.
     type: integer
+    example: 382
   concepts:
     description: List of concepts (research topics) associated with the work.
     items:
@@ -103,6 +104,8 @@ properties:
   doi:
     description: The DOI for the work.
     type: string
+    pattern: '^https://doi.org/10\.\d{4,9}/[-._;()/:A-Z0-9]+$'
+    example: 'https://doi.org/10.7717/peerj.4375'
   fulltext_origin:
     description: If a work's full text is searchable in OpenAlex, this tells you how we got the text.
     enum: [pdf, ngrams]
@@ -118,6 +121,8 @@ properties:
   id:
     description: The OpenAlex ID for this work.
     type: string
+    pattern: '^https://openalex.org/W\d+$'
+    example: 'https://openalex.org/W2741809807'
   ids:
     description: All the external identifiers that we know about for this work. IDs are expressed as URIs whenever possible.
     properties:
@@ -189,12 +194,15 @@ properties:
     $ref: ./topic.yaml
     description: The top ranked Topic for this work.
   publication_date:
-    description: The day and time when this work was published, formatted as an ISO 8601 date-time.
+    description: The day when this work was published, formatted as an ISO 8601 date.
     format: date
     type: string
+    pattern: '^\d{4}-\d{2}-\d{2}$'
+    example: '2018-02-13'
   publication_year:
     description: The year this work was published.
     type: integer
+    example: 2018
   referenced_works:
     description: OpenAlex IDs for works that this work cites.
     items:
@@ -213,6 +221,7 @@ properties:
   title:
     description: The title of this work.
     type: string
+    example: 'The state of OA: a large-scale analysis of the prevalence and impact of Open Access articles'
   topics:
     description: The top ranked Topics for this work.
     items:
