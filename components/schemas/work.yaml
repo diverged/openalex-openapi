@@ -3,6 +3,38 @@ properties:
   abstract_inverted_index:
     description: The abstract of the work, as an inverted index.
     type: object
+  apc_list:
+    description: Information about this work's APC (article processing charge) list price.
+    properties:
+      currency:
+        description: The currency of the APC.
+        type: string
+      provenance:
+        description: The source of this APC information.
+        type: string
+      value:
+        description: The amount of the APC.
+        type: integer
+      value_usd:
+        description: The APC converted into USD.
+        type: integer
+    type: object
+  apc_paid:
+    description: Information about the paid APC (article processing charge) for this work.
+    properties:
+      currency:
+        description: The currency of the paid APC.
+        type: string
+      provenance:
+        description: The source of this paid APC information.
+        type: string
+      value:
+        description: The amount of the paid APC.
+        type: integer
+      value_usd:
+        description: The paid APC converted into USD.
+        type: integer
+    type: object
   authorships:
     description: List of authorship information for the work, including authors and their institutions.
     items:
@@ -11,6 +43,22 @@ properties:
   best_oa_location:
     $ref: ./location.yaml
     description: The best available open access location for this work.
+  biblio:
+    description: Old-timey bibliographic info for this work.
+    properties:
+      first_page:
+        description: The first page number for this work.
+        type: string
+      issue:
+        description: The issue number for this work.
+        type: string
+      last_page:
+        description: The last page number for this work.
+        type: string
+      volume:
+        description: The volume number for this work.
+        type: string
+    type: object
   cited_by_api_url:
     description: A URL that displays a list of works that cite this work.
     type: string
@@ -112,6 +160,9 @@ properties:
   language:
     description: The language of the work in ISO 639-1 format.
     type: string
+  license:
+    description: The license applied to this work at this host. Most toll-access works don't have an explicit license (they're under "all rights reserved" copyright), so this field generally has content only if is_oa is true.
+    type: string
   locations:
     description: List of locations where the work can be found, including various versions and sources.
     items:
@@ -134,6 +185,9 @@ properties:
   primary_location:
     $ref: ./location.yaml
     description: The primary location where this work can be found, typically the publisher's site.
+  primary_topic:
+    $ref: ./topic.yaml
+    description: The top ranked Topic for this work.
   publication_date:
     description: The day and time when this work was published, formatted as an ISO 8601 date-time.
     format: date
@@ -159,8 +213,47 @@ properties:
   title:
     description: The title of this work.
     type: string
+  topics:
+    description: The top ranked Topics for this work.
+    items:
+      properties:
+        display_name:
+          description: The name of the topic.
+          type: string
+        domain:
+          properties:
+            display_name:
+              type: string
+            id:
+              type: integer
+          type: object
+        field:
+          properties:
+            display_name:
+              type: string
+            id:
+              type: integer
+          type: object
+        id:
+          description: The OpenAlex ID for this topic.
+          type: string
+        score:
+          description: The strength of the connection between the work and this topic.
+          type: number
+        subfield:
+          properties:
+            display_name:
+              type: string
+            id:
+              type: integer
+          type: object
+      type: object
+    type: array
   type:
     description: The type of the work.
+    type: string
+  type_crossref:
+    description: Legacy type information, using Crossref's "type" controlled vocabulary.
     type: string
   updated_date:
     description: The last time anything in this Work object changed, including counts, formatted as an ISO 8601 date-time. This date is updated for any change at all, including increases in various counts.
