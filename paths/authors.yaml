@@ -1,0 +1,109 @@
+get:
+  summary: List Authors
+  description: Returns a list of authors.
+  parameters:
+    - $ref: '../components/parameters/filter_parameter.yaml'
+    - $ref: '../components/parameters/search_parameter.yaml'
+    - $ref: '../components/parameters/sort_parameter.yaml'
+    - $ref: '../components/parameters/page_parameter.yaml'
+    - $ref: '../components/parameters/per_page_parameter.yaml'
+    - $ref: '../components/parameters/select_parameter.yaml'
+    - $ref: '../components/parameters/group_by_parameter.yaml'
+    - name: sample
+      in: query
+      description: Get a random sample of results
+      schema:
+        type: integer
+      example: 25
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: '../components/schemas/meta.yaml'
+              results:
+                type: array
+                items:
+                  $ref: '../components/schemas/author.yaml'
+              group_by:
+                type: array
+                items:
+                  $ref: '../components/schemas/group_by.yaml'
+    '400':
+      description: Bad request
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests
+
+/{id}:
+  get:
+    summary: Get a single Author
+    description: Returns details for a single author. Any ID supported in the `ids` object will successfully return a single entity.
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: OpenAlex ID or any supported external ID (ORCID, Scopus, Twitter, Wikipedia) of the author
+        schema:
+          type: string
+      - $ref: '../components/parameters/select_parameter.yaml'
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/author.yaml'
+      '404':
+        description: Author not found
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
+
+/autocomplete:
+  get:
+    summary: Autocomplete Authors
+    description: Returns a list of authors for autocomplete functionality.
+    parameters:
+      - name: q
+        in: query
+        description: The search query for autocomplete
+        required: true
+        schema:
+          type: string
+      - $ref: '../components/parameters/filter_parameter.yaml'
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/autocomplete.yaml'
+      '400':
+        description: Bad request
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
+
+/random:
+  get:
+    summary: Get a random Author
+    description: Returns a random author.
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/author.yaml'
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
