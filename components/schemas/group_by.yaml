@@ -1,0 +1,16 @@
+type: object
+description: A group of entities and their count
+properties:
+  key:
+    type: string
+    description: The OpenAlex ID or raw value of the group_by parameter for members of this group
+  key_display_name:
+    type: string
+    description: The display_name or raw value of the group_by parameter for members of this group
+  count:
+    type: integer
+    description: The number of entities in the group
+example:
+  key: "article"
+  key_display_name: "article"
+  count: 202814957

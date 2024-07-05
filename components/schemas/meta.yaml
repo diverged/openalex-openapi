@@ -1,0 +1,25 @@
+type: object
+description: Metadata about the API response
+properties:
+  count:
+    type: integer
+    description: The total number of entities (this will be all entities if no filter is applied)
+  db_response_time_ms:
+    type: integer
+    description: The time taken by the database to respond, in milliseconds
+  page:
+    type: integer
+    description: The current page number
+  per_page:
+    type: integer
+    description: The number of results per page
+  groups_count:
+    type: integer
+    nullable: true
+    description: The count of groups in the current page (null if there are no groups in the response)
+example:
+  count: 246136992
+  db_response_time_ms: 271
+  page: 1
+  per_page: 200
+  groups_count: 15
