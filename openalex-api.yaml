@@ -23,4 +23,5 @@ paths:
   /keywords:
     $ref: './paths/keywords.yaml'
   
-
+components:
+  $ref: './components/index.yaml'

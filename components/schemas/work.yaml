@@ -1,105 +1,168 @@
 type: object
 properties:
-  id:
-    type: string
-    description: The OpenAlex ID for this work.
-  doi:
-    type: string
-    description: The DOI for the work.
-  title:
-    type: string
-    description: The title of this work.
-  display_name:
-    type: string
-    description: The title of this work (same as title).
-  publication_year:
-    type: integer
-    description: The year this work was published.
-  publication_date:
-    type: string
-    format: date-time
-    description: The day and time when this work was published, formatted as an ISO 8601 date-time.
-  type:
-    type: string
-    description: The type of the work.
-  cited_by_count:
-    type: integer
-    description: The number of citations to this work.
-  is_retracted:
-    type: boolean
-    description: True if we know this work has been retracted.
-  is_paratext:
-    type: boolean
-    description: True if we think this work is paratext.
-  cited_by_api_url:
-    type: string
-    description: A URL that displays a list of works that cite this work.
   abstract_inverted_index:
-    type: object
     description: The abstract of the work, as an inverted index.
-  language:
-    type: string
-    description: The language of the work in ISO 639-1 format.
+    type: object
   authorships:
-    type: array
-    items:
-      $ref: './authorship.yaml'
     description: List of authorship information for the work, including authors and their institutions.
-  concepts:
-    type: array
     items:
-      $ref: './concept.yaml'
-    description: List of concepts (research topics) associated with the work.
-  mesh:
+      $ref: ./authorship.yaml
     type: array
-    items:
-      $ref: './mesh_tag.yaml'
-    description: List of Medical Subject Headings (MeSH) associated with the work, if applicable.
-  locations:
-    type: array
-    items:
-      $ref: './location.yaml'
-    description: List of locations where the work can be found, including various versions and sources.
-  open_access:
-    $ref: './open_access.yaml'
-    description: Information about the open access status of the work.
-  referenced_works:
-    type: array
-    items:
-      type: string
-    description: OpenAlex IDs for works that this work cites.
-  related_works:
-    type: array
-    items:
-      type: string
-    description: OpenAlex IDs for works related to this work. These are computed algorithmically based on shared concepts.
-  primary_location:
-    $ref: './location.yaml'
-    description: The primary location where this work can be found, typically the publisher's site.
   best_oa_location:
-    $ref: './location.yaml'
+    $ref: ./location.yaml
     description: The best available open access location for this work.
-  keywords:
-    type: array
+  cited_by_api_url:
+    description: A URL that displays a list of works that cite this work.
+    type: string
+  cited_by_count:
+    description: The number of citations to this work.
+    type: integer
+  concepts:
+    description: List of concepts (research topics) associated with the work.
     items:
-      $ref: './keyword.yaml'
-    description: A list of keywords associated with this work.
-  sustainable_development_goals:
+      $ref: ./dehydrated_concept.yaml
     type: array
+  corresponding_author_ids:
+    description: OpenAlex IDs of any authors for which authorships.is_corresponding is true.
     items:
-      $ref: './sustainable_development_goal.yaml'
-    description: The UN Sustainable Development Goals relevant to this work.
-  grants:
+      type: string
     type: array
+  corresponding_institution_ids:
+    description: OpenAlex IDs of any institutions found within an authorship for which authorships.is_corresponding is true.
     items:
-      $ref: './grant.yaml'
-    description: Information about grants that funded this work.
+      type: string
+    type: array
+  countries_distinct_count:
+    description: Number of distinct country_codes among the authorships for this work.
+    type: integer
+  counts_by_year:
+    description: Cited_by_count for each of the last ten years, binned by year.
+    items:
+      properties:
+        cited_by_count:
+          type: integer
+        year:
+          type: integer
+      type: object
+    type: array
   created_date:
-    type: string
-    format: date-time
     description: The date and time this Work object was created in the OpenAlex dataset.
-  updated_date:
+    format: date
     type: string
+  display_name:
+    description: The title of this work (same as title).
+    type: string
+  doi:
+    description: The DOI for the work.
+    type: string
+  fulltext_origin:
+    description: If a work's full text is searchable in OpenAlex, this tells you how we got the text.
+    enum: [pdf, ngrams]
+    type: string
+  grants:
+    description: Information about grants that funded this work.
+    items:
+      $ref: ./grant.yaml
+    type: array
+  has_fulltext:
+    description: Set to true if the work's full text is searchable in OpenAlex.
+    type: boolean
+  id:
+    description: The OpenAlex ID for this work.
+    type: string
+  ids:
+    description: All the external identifiers that we know about for this work. IDs are expressed as URIs whenever possible.
+    properties:
+      doi:
+        description: The DOI for this work.
+        type: string
+      mag:
+        description: The Microsoft Academic Graph ID for this work.
+        type: integer
+      openalex:
+        description: The OpenAlex ID for this work.
+        type: string
+      pmcid:
+        description: The PubMed Central ID for this work.
+        type: string
+      pmid:
+        description: The PubMed ID for this work.
+        type: string
+    type: object
+  indexed_in:
+    description: The sources this work is indexed in.
+    items:
+      enum: [arxiv, crossref, doaj, pubmed]
+      type: string
+    type: array
+  institutions_distinct_count:
+    description: Number of distinct institutions among the authorships for this work.
+    type: integer
+  is_paratext:
+    description: True if we think this work is paratext.
+    type: boolean
+  is_retracted:
+    description: True if we know this work has been retracted.
+    type: boolean
+  keywords:
+    description: A list of keywords associated with this work.
+    items:
+      $ref: ./keyword.yaml
+    type: array
+  language:
+    description: The language of the work in ISO 639-1 format.
+    type: string
+  locations:
+    description: List of locations where the work can be found, including various versions and sources.
+    items:
+      $ref: ./location.yaml
+    type: array
+  locations_count:
+    description: Number of locations for this work.
+    type: integer
+  mesh:
+    description: List of Medical Subject Headings (MeSH) associated with the work, if applicable.
+    items:
+      $ref: ./mesh_tag.yaml
+    type: array
+  ngrams_url:
+    description: URL to retrieve n-grams for this work.
+    type: string
+  open_access:
+    $ref: ./open_access.yaml
+    description: Information about the open access status of the work.
+  primary_location:
+    $ref: ./location.yaml
+    description: The primary location where this work can be found, typically the publisher's site.
+  publication_date:
+    description: The day and time when this work was published, formatted as an ISO 8601 date-time.
+    format: date
+    type: string
+  publication_year:
+    description: The year this work was published.
+    type: integer
+  referenced_works:
+    description: OpenAlex IDs for works that this work cites.
+    items:
+      type: string
+    type: array
+  related_works:
+    description: OpenAlex IDs for works related to this work. These are computed algorithmically based on shared concepts.
+    items:
+      type: string
+    type: array
+  sustainable_development_goals:
+    description: The UN Sustainable Development Goals relevant to this work.
+    items:
+      $ref: ./sustainable_development_goal.yaml
+    type: array
+  title:
+    description: The title of this work.
+    type: string
+  type:
+    description: The type of the work.
+    type: string
+  updated_date:
+    description: The last time anything in this Work object changed, including counts, formatted as an ISO 8601 date-time. This date is updated for any change at all, including increases in various counts.
     format: date-time
-    description: The last time anything in this Work object changed, including counts.
-
+    type: string
