@@ -249,6 +249,10 @@ properties:
     items:
       type: string
     type: array
+    example:
+      - "https://openalex.org/W2741809807"
+      - "https://openalex.org/W2741809808"
+      - "https://openalex.org/W2741809809"
   related_works:
     description: OpenAlex IDs for works related to this work. These are computed algorithmically based on shared concepts.
     items:
@@ -259,6 +263,13 @@ properties:
     items:
       $ref: ./sustainable_development_goal.yaml
     type: array
+    example:
+      - id: "https://metadata.un.org/sdg/3"
+        display_name: "Good health and well-being"
+        score: 0.95
+      - id: "https://metadata.un.org/sdg/13"
+        display_name: "Climate action"
+        score: 0.85
   title:
     description: The title of this work.
     type: string

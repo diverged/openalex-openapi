@@ -2,31 +2,19 @@ get:
   summary: List Works
   description: Returns a list of works.
   parameters:
-    - name: filter
+    - $ref: '../components/parameters/filter_parameter.yaml'
+    - $ref: '../components/parameters/search_parameter.yaml'
+    - $ref: '../components/parameters/sort_parameter.yaml'
+    - $ref: '../components/parameters/page_parameter.yaml'
+    - $ref: '../components/parameters/per_page_parameter.yaml'
+    - $ref: '../components/parameters/select_parameter.yaml'
+    - $ref: '../components/parameters/group_by_parameter.yaml'
+    - name: sample
       in: query
-      description: Filter the results
-      schema:
-        type: string
-    - name: search
-      in: query
-      description: Search the results
-      schema:
-        type: string
-    - name: sort
-      in: query
-      description: Sort the results
-      schema:
-        type: string
-    - name: page
-      in: query
-      description: Page number for pagination
+      description: Get a random sample of results
       schema:
         type: integer
-    - name: per_page
-      in: query
-      description: Number of results per page
-      schema:
-        type: integer
+      example: 10
   responses:
     '200':
       description: Successful response
@@ -70,12 +58,12 @@ get:
 /{id}:
   get:
     summary: Get a single Work
-    description: Returns details for a single work.
+    description: Returns details for a single work. Any ID supported in the `ids` object will successfully return a single entity.
     parameters:
       - name: id
         in: path
         required: true
-        description: OpenAlex ID of the work
+        description: OpenAlex ID or any supported external ID (DOI, MAG, PMID, PMCID) of the work
         schema:
           type: string
     responses:

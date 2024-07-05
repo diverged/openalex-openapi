@@ -1,0 +1,67 @@
+get:
+  summary: List Topics
+  description: Returns a list of topics.
+  parameters:
+    - $ref: '../components/parameters/filter_parameter.yaml'
+    - $ref: '../components/parameters/search_parameter.yaml'
+    - $ref: '../components/parameters/sort_parameter.yaml'
+    - $ref: '../components/parameters/page_parameter.yaml'
+    - $ref: '../components/parameters/per_page_parameter.yaml'
+    - $ref: '../components/parameters/select_parameter.yaml'
+    - $ref: '../components/parameters/group_by_parameter.yaml'
+    - name: sample
+      in: query
+      description: Get a random sample of results
+      schema:
+        type: integer
+      example: 10
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: '../components/schemas/meta.yaml'
+              results:
+                type: array
+                items:
+                  $ref: '../components/schemas/topic.yaml'
+              group_by:
+                type: array
+                items:
+                  $ref: '../components/schemas/group_by.yaml'
+    '400':
+      description: Bad request
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests
+
+/{id}:
+  get:
+    summary: Get a single Topic
+    description: Returns details for a single topic.
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: OpenAlex ID of the topic
+        schema:
+          type: string
+      - $ref: '../components/parameters/select_parameter.yaml'
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/topic.yaml'
+      '404':
+        description: Topic not found
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
