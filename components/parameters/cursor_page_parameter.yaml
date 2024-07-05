@@ -1,0 +1,17 @@
+- name: cursor
+  in: query
+  description: |
+    A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
+
+    Warning: Don't use cursor paging to download the whole dataset. It's inefficient and puts a massive load on the servers. Instead, use the OpenAlex snapshot for downloading all data at once.
+  required: false
+  schema:
+    $ref: '../schemas/cursor.yaml'
+  example: "*"
+  examples:
+    start_cursor:
+      summary: Start cursor pagination
+      value: "*"
+    next_page:
+      summary: Get the next page of results
+      value: "IlsxNjA5MzcyODAwMDAwLCAnaHR0cHM6Ly9vcGVuYWxleC5vcmcvVzI0ODg0OTk3NjQnXSI="

@@ -47,3 +47,5 @@ schemas:
     $ref: ./schemas/topic.yaml
   Work:
     $ref: ./schemas/work.yaml
+  Cursor:
+    $ref: ./schemas/cursor.yaml
