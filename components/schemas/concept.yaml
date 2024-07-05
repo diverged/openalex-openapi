@@ -1,0 +1,17 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this concept.
+  wikidata:
+    type: string
+    description: The Wikidata ID for this concept.
+  display_name:
+    type: string
+    description: The human-readable name of the concept.
+  level:
+    type: integer
+    description: The hierarchical level of the concept.
+  score:
+    type: number
+    description: The relevance score of this concept to the work.

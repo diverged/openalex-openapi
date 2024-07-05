@@ -1,0 +1,23 @@
+type: object
+properties:
+  author_position:
+    type: string
+    enum: [first, middle, last]
+    description: The position of the author in the author list.
+  author:
+    $ref: './dehydrated_author.yaml'
+    description: The author of this work.
+  institutions:
+    type: array
+    items:
+      $ref: './dehydrated_institution.yaml'
+    description: The institutions affiliated with this author for this work.
+  is_corresponding:
+    type: boolean
+    description: Indicates if this author is the corresponding author.
+  raw_affiliation_string:
+    type: string
+    description: The raw, unparsed affiliation string for this author.
+  raw_author_name:
+    type: string
+    description: The raw, unparsed name of the author.

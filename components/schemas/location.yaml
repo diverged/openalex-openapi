@@ -1,0 +1,21 @@
+type: object
+properties:
+  is_oa:
+    type: boolean
+    description: Indicates if this location provides open access to the work.
+  landing_page_url:
+    type: string
+    description: The URL of the landing page for this location.
+  pdf_url:
+    type: string
+    description: The URL of the PDF for this location, if available.
+  source:
+    $ref: './dehydrated_source.yaml'
+    description: The source (e.g., journal, repository) for this location.
+  license:
+    type: string
+    description: The license under which the work is available at this location.
+  version:
+    type: string
+    enum: [publishedVersion, acceptedVersion, submittedVersion]
+    description: The version of the work available at this location.

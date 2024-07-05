@@ -1,0 +1,17 @@
+type: object
+properties:
+  descriptor_ui:
+    type: string
+    description: The unique identifier for the MeSH descriptor.
+  descriptor_name:
+    type: string
+    description: The name of the MeSH descriptor.
+  qualifier_ui:
+    type: string
+    description: The unique identifier for the MeSH qualifier.
+  qualifier_name:
+    type: string
+    description: The name of the MeSH qualifier.
+  is_major_topic:
+    type: boolean
+    description: Indicates if this MeSH tag is a major topic for the work.

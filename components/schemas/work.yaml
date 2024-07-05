@@ -43,21 +43,21 @@ properties:
   authorships:
     type: array
     items:
-      $ref: '#/components/schemas/Authorship'
+      $ref: './authorship.yaml'
   concepts:
     type: array
     items:
-      $ref: '#/components/schemas/Concept'
+      $ref: './concept.yaml'
   mesh:
     type: array
     items:
-      $ref: '#/components/schemas/MeshTag'
+      $ref: './mesh_tag.yaml'
   locations:
     type: array
     items:
-      $ref: '#/components/schemas/Location'
+      $ref: './location.yaml'
   open_access:
-    $ref: '#/components/schemas/OpenAccess'
+    $ref: './open_access.yaml'
   referenced_works:
     type: array
     items:
@@ -69,21 +69,21 @@ properties:
       type: string
     description: OpenAlex IDs for works related to this work.
   primary_location:
-    $ref: '#/components/schemas/Location'
+    $ref: './location.yaml'
   best_oa_location:
-    $ref: '#/components/schemas/Location'
+    $ref: './location.yaml'
   keywords:
     type: array
     items:
-      $ref: '#/components/schemas/Keyword'
+      $ref: './keyword.yaml'
   sustainable_development_goals:
     type: array
     items:
-      $ref: '#/components/schemas/SustainableDevelopmentGoal'
+      $ref: './sustainable_development_goal.yaml'
   grants:
     type: array
     items:
-      $ref: '#/components/schemas/Grant'
+      $ref: './grant.yaml'
   created_date:
     type: string
     format: date
@@ -93,151 +93,3 @@ properties:
     format: date-time
     description: The last time anything in this Work object changed.
 
-components:
-  schemas:
-    Authorship:
-      type: object
-      properties:
-        author_position:
-          type: string
-          enum: [first, middle, last]
-        author:
-          $ref: '#/components/schemas/DehydratedAuthor'
-        institutions:
-          type: array
-          items:
-            $ref: '#/components/schemas/DehydratedInstitution'
-        is_corresponding:
-          type: boolean
-        raw_affiliation_string:
-          type: string
-        raw_author_name:
-          type: string
-
-    DehydratedAuthor:
-      type: object
-      properties:
-        id:
-          type: string
-        display_name:
-          type: string
-        orcid:
-          type: string
-
-    DehydratedInstitution:
-      type: object
-      properties:
-        id:
-          type: string
-        display_name:
-          type: string
-        ror:
-          type: string
-        country_code:
-          type: string
-        type:
-          type: string
-
-    Concept:
-      type: object
-      properties:
-        id:
-          type: string
-        wikidata:
-          type: string
-        display_name:
-          type: string
-        level:
-          type: integer
-        score:
-          type: number
-
-    MeshTag:
-      type: object
-      properties:
-        descriptor_ui:
-          type: string
-        descriptor_name:
-          type: string
-        qualifier_ui:
-          type: string
-        qualifier_name:
-          type: string
-        is_major_topic:
-          type: boolean
-
-    Location:
-      type: object
-      properties:
-        is_oa:
-          type: boolean
-        landing_page_url:
-          type: string
-        pdf_url:
-          type: string
-        source:
-          $ref: '#/components/schemas/DehydratedSource'
-        license:
-          type: string
-        version:
-          type: string
-          enum: [publishedVersion, acceptedVersion, submittedVersion]
-
-    DehydratedSource:
-      type: object
-      properties:
-        id:
-          type: string
-        display_name:
-          type: string
-        issn_l:
-          type: string
-        issn:
-          type: array
-          items:
-            type: string
-        host_organization:
-          type: string
-        type:
-          type: string
-
-    OpenAccess:
-      type: object
-      properties:
-        is_oa:
-          type: boolean
-        oa_status:
-          type: string
-          enum: [gold, green, hybrid, bronze, closed]
-        oa_url:
-          type: string
-
-    Keyword:
-      type: object
-      properties:
-        id:
-          type: string
-        display_name:
-          type: string
-        score:
-          type: number
-
-    SustainableDevelopmentGoal:
-      type: object
-      properties:
-        id:
-          type: string
-        display_name:
-          type: string
-        score:
-          type: number
-
-    Grant:
-      type: object
-      properties:
-        funder:
-          type: string
-        funder_display_name:
-          type: string
-        award_id:
-          type: string

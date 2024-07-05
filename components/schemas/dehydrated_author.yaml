@@ -1,0 +1,11 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this author.
+  display_name:
+    type: string
+    description: The name of the author.
+  orcid:
+    type: string
+    description: The ORCID for this author.

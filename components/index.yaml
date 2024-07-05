@@ -29,3 +29,9 @@ schemas:
     $ref: './schemas/sustainable_development_goal.yaml'
   Grant:
     $ref: './schemas/grant.yaml'
+  DehydratedAuthor:
+    $ref: './schemas/dehydrated_author.yaml'
+  DehydratedInstitution:
+    $ref: './schemas/dehydrated_institution.yaml'
+  DehydratedSource:
+    $ref: './schemas/dehydrated_source.yaml'

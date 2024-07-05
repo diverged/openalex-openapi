@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this institution.
+  display_name:
+    type: string
+    description: The name of the institution.
+  ror:
+    type: string
+    description: The ROR ID for this institution.
+  country_code:
+    type: string
+    description: The country code of the institution.
+  type:
+    type: string
+    description: The type of the institution.
+  lineage:
+    type: array
+    items:
+      type: string
+    description: The lineage of the institution.
