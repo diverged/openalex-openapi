@@ -3,14 +3,31 @@ properties:
   id:
     type: string
     description: The OpenAlex ID for this keyword.
+    example: "https://openalex.org/K1234567890"
   display_name:
     type: string
     description: The name of the keyword.
+    example: "machine learning"
   score:
     type: number
     format: float
-    description: The similarity score of the keyword to the work's title and abstract text.
+    description: The similarity score of the keyword to the work's title and abstract text. Higher scores indicate greater relevance.
+    example: 0.85
+  works_count:
+    type: integer
+    description: The number of works in OpenAlex that have this keyword.
+    example: 12345
+  cited_by_count:
+    type: integer
+    description: The total number of citations received by all works with this keyword.
+    example: 98765
 required:
   - id
   - display_name
   - score
+example:
+  id: "https://openalex.org/K1234567890"
+  display_name: "machine learning"
+  score: 0.85
+  works_count: 12345
+  cited_by_count: 98765

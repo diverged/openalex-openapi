@@ -3,21 +3,51 @@ properties:
   author_position:
     type: string
     enum: [first, middle, last]
-    description: The position of the author in the author list.
+    description: A summarized description of this author's position in the work's author list.
+    example: "first"
   author:
     $ref: './dehydrated_author.yaml'
-    description: The author of this work.
+    description: An author of this work, as a dehydrated Author object.
+    example:
+      id: "https://openalex.org/A5085171399"
+      display_name: "Juan Pablo Alperin"
+      orcid: "https://orcid.org/0000-0002-9344-7439"
   institutions:
     type: array
     items:
       $ref: './dehydrated_institution.yaml'
-    description: The institutions affiliated with this author for this work.
+    description: The institutional affiliations this author claimed in the context of this work, as dehydrated Institution objects.
+    example:
+      - id: "https://openalex.org/I18014758"
+        display_name: "Simon Fraser University"
+        ror: "https://ror.org/0213rcc28"
+        country_code: "CA"
+        type: "education"
+        lineage: ["https://openalex.org/I18014758"]
   is_corresponding:
     type: boolean
-    description: Indicates if this author is the corresponding author.
-  raw_affiliation_string:
-    type: string
-    description: The raw, unparsed affiliation string for this author.
+    description: If true, this is a corresponding author for this work.
+    example: false
+  raw_affiliation_strings:
+    type: array
+    items:
+      type: string
+    description: This author's affiliation as it originally came to us, as a list of raw unformatted strings.
+    example: 
+      - "Canadian Institute for Studies in Publishing, Simon Fraser University"
   raw_author_name:
     type: string
-    description: The raw, unparsed name of the author.
+    description: This author's name as it originally came to us, as a raw unformatted string.
+    example: "Juan Pablo Alperin"
+  countries:
+    type: array
+    items:
+      type: string
+    description: The country or countries for this author, determined using a combination of matched institutions and parsing of the raw affiliation strings.
+    example: ["CA"]
+required:
+  - author_position
+  - author
+  - institutions
+  - raw_affiliation_strings
+  - raw_author_name
