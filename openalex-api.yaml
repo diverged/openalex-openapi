@@ -24,6 +24,22 @@ paths:
     $ref: ./paths/topics.yaml
   /works:
     $ref: ./paths/works.yaml
+  /autocomplete/authors:
+    $ref: ./paths/autocomplete_authors.yaml
+  /autocomplete/concepts:
+    $ref: ./paths/autocomplete_concepts.yaml
+  /autocomplete/funders:
+    $ref: ./paths/autocomplete_funders.yaml
+  /autocomplete/institutions:
+    $ref: ./paths/autocomplete_institutions.yaml
+  /autocomplete/publishers:
+    $ref: ./paths/autocomplete_publishers.yaml
+  /autocomplete/sources:
+    $ref: ./paths/autocomplete_sources.yaml
+  /autocomplete/topics:
+    $ref: ./paths/autocomplete_topics.yaml
+  /autocomplete/works:
+    $ref: ./paths/autocomplete_works.yaml
   
 components:
   $ref: './components/index.yaml'
