@@ -1,0 +1,136 @@
+type: object
+properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this concept.
+    example: "https://openalex.org/C2778407487"
+  wikidata:
+    type: string
+    description: The Wikidata ID for this concept. This is the Canonical External ID for concepts.
+    example: "https://www.wikidata.org/wiki/Q14565201"
+  display_name:
+    type: string
+    description: The English-language label of the concept.
+    example: "Altmetrics"
+  level:
+    type: integer
+    description: The level in the concept tree where this concept lives. Lower-level concepts are more general, and higher-level concepts are more specific.
+    example: 2
+  description:
+    type: string
+    description: A brief description of this concept.
+    example: "study of alternative metrics for analyzing and informing scholarship"
+  works_count:
+    type: integer
+    description: The number of works tagged with this concept.
+    example: 3078
+  cited_by_count:
+    type: integer
+    description: The number citations to works that have been tagged with this concept.
+    example: 20248
+  ids:
+    type: object
+    description: All the external identifiers that we know about for this concept.
+    properties:
+      openalex:
+        type: string
+        description: This concept's OpenAlex ID.
+      wikidata:
+        type: string
+        description: This concept's Wikidata ID.
+      wikipedia:
+        type: string
+        description: This concept's Wikipedia page URL.
+      mag:
+        type: integer
+        description: This concept's Microsoft Academic Graph (MAG) ID.
+    example:
+      openalex: "https://openalex.org/C2778407487"
+      wikidata: "https://www.wikidata.org/wiki/Q14565201"
+      wikipedia: "https://en.wikipedia.org/wiki/Altmetrics"
+      mag: 2778407487
+  image_url:
+    type: string
+    description: URL where you can get an image representing this concept, where available.
+    example: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Altmetrics.svg"
+  image_thumbnail_url:
+    type: string
+    description: Same as image_url, but it's a smaller image.
+    example: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Altmetrics.svg/100px-Altmetrics.svg.png"
+  international:
+    type: object
+    description: This concept's display name in many languages, derived from article titles on each language's wikipedia.
+    properties:
+      display_name:
+        type: object
+        additionalProperties:
+          type: string
+    example:
+      display_name:
+        ca: "Altmetrics"
+  ancestors:
+    type: array
+    description: List of concepts that this concept descends from, as dehydrated Concept objects.
+    items:
+      $ref: '#/components/schemas/DehydratedConcept'
+  related_concepts:
+    type: array
+    description: Concepts that are similar to this one.
+    items:
+      allOf:
+        - $ref: '#/components/schemas/DehydratedConcept'
+        - type: object
+          properties:
+            score:
+              type: number
+              description: The strength of association between this concept and the listed concept, on a scale of 0-100.
+  counts_by_year:
+    type: array
+    description: The values of works_count and cited_by_count for each of the last ten years, binned by year.
+    items:
+      type: object
+      properties:
+        year:
+          type: integer
+        works_count:
+          type: integer
+        cited_by_count:
+          type: integer
+    example:
+      - year: 2021
+        works_count: 4211
+        cited_by_count: 120939
+      - year: 2020
+        works_count: 4363
+        cited_by_count: 119531
+  works_api_url:
+    type: string
+    description: An URL that will get you a list of all the works tagged with this concept.
+    example: "https://api.openalex.org/works?filter=concept.id:C2778407487"
+  updated_date:
+    type: string
+    format: date-time
+    description: The last time anything in this concept object changed, expressed as an ISO 8601 date string.
+    example: "2021-12-25T14:04:30.578837"
+  created_date:
+    type: string
+    format: date
+    description: The date this Concept object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
+    example: "2017-08-08"
+  summary_stats:
+    type: object
+    description: Citation metrics for this concept
+    properties:
+      2yr_mean_citedness:
+        type: number
+        description: The 2-year mean citedness for this source. Also known as impact factor.
+      h_index:
+        type: integer
+        description: The h-index for this concept.
+      i10_index:
+        type: integer
+        description: The i-10 index for this concept.
+    example:
+      2yr_mean_citedness: 1.5295340589458237
+      h_index: 105
+      i10_index: 5045

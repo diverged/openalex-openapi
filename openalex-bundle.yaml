@@ -1,0 +1,2851 @@
+openapi: 3.0.0
+info:
+  title: OpenAlex API
+  description: An OpenAPI specification for the OpenAlex API
+  version: 1.0.0
+servers:
+  - url: https://api.openalex.org/
+paths:
+  /authors:
+    get:
+      summary: List Authors
+      description: Returns a list of authors.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/author'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Author
+        description: Returns details for a single author. Any ID supported in the `ids` object will successfully return a single entity.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID or any supported external ID (ORCID, Scopus, Twitter, Wikipedia) of the author
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/author.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Author not found
+          '429':
+            description: Too many requests
+    /autocomplete:
+      get:
+        summary: Autocomplete Authors
+        description: Returns a list of authors for autocomplete functionality.
+        parameters:
+          - name: q
+            in: query
+            description: The search query for autocomplete
+            required: true
+            schema:
+              type: string
+          - $ref: ../components/parameters/filter_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/autocomplete.yaml
+          '400':
+            description: Bad request
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+    /random:
+      get:
+        summary: Get a random Author
+        description: Returns a random author.
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/author.yaml
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+  /concepts:
+    $ref: ./paths/concepts.yaml
+  /funders:
+    get:
+      summary: List Funders
+      description: Returns a list of funders.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/funder'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Funder
+        description: Returns details for a single funder. Any ID supported in the `ids` object will successfully return a single entity.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID or any supported external ID (ROR, Wikidata) of the funder
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/funder.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Funder not found
+          '429':
+            description: Too many requests
+    /autocomplete:
+      get:
+        summary: Autocomplete Funders
+        description: Returns a list of funders for autocomplete functionality.
+        parameters:
+          - name: q
+            in: query
+            description: The search query for autocomplete
+            required: true
+            schema:
+              type: string
+          - $ref: ../components/parameters/filter_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/autocomplete.yaml
+          '400':
+            description: Bad request
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+  /institutions:
+    get:
+      summary: List Institutions
+      description: Returns a list of institutions.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/institution'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Institution
+        description: Returns details for a single institution. Any ID supported in the `ids` object will successfully return a single entity.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID or any supported external ID (ROR, GRID, Wikidata) of the institution
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/institution.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Institution not found
+          '429':
+            description: Too many requests
+    /autocomplete:
+      get:
+        summary: Autocomplete Institutions
+        description: Returns a list of institutions matching the given query string, useful for creating type-ahead style search functions.
+        parameters:
+          - name: q
+            in: query
+            description: The search query
+            required: true
+            schema:
+              type: string
+          - $ref: ../components/parameters/filter_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/autocomplete.yaml
+          '400':
+            description: Bad request
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+  /keywords:
+    get:
+      summary: List Keywords
+      description: Returns a list of keywords.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/keyword'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Keyword
+        description: Returns details for a single keyword.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID of the keyword
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/keyword.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Keyword not found
+          '429':
+            description: Too many requests
+    /autocomplete:
+      get:
+        summary: Autocomplete Keywords
+        description: Returns a list of keywords matching the given query string, useful for creating type-ahead style search functions.
+        parameters:
+          - name: q
+            in: query
+            description: The search query
+            required: true
+            schema:
+              type: string
+          - $ref: ../components/parameters/filter_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/autocomplete.yaml
+          '400':
+            description: Bad request
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+  /publishers:
+    get:
+      summary: List Publishers
+      description: Returns a list of publishers.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/publisher'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Publisher
+        description: Returns details for a single publisher. Any ID supported in the `ids` object will successfully return a single entity.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID or any supported external ID (ROR, Wikidata) of the publisher
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/publisher.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Publisher not found
+          '429':
+            description: Too many requests
+    /autocomplete:
+      get:
+        summary: Autocomplete Publishers
+        description: Returns a list of publishers matching the given query string, useful for creating type-ahead style search functions.
+        parameters:
+          - name: q
+            in: query
+            description: The search query
+            required: true
+            schema:
+              type: string
+          - $ref: ../components/parameters/filter_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/autocomplete.yaml
+          '400':
+            description: Bad request
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+  /sources:
+    get:
+      summary: List Sources
+      description: Returns a list of sources. Sources are where works are hosted, including journals, conferences, preprint repositories, and institutional repositories.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/source'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Source
+        description: Returns details for a single source. Any ID supported in the `ids` object will successfully return a single entity.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID or any supported external ID (ISSN, ISSN-L, MAG, Wikidata) of the source
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/source.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Source not found
+          '429':
+            description: Too many requests
+    /autocomplete:
+      get:
+        summary: Autocomplete Sources
+        description: Returns a list of sources for autocomplete functionality.
+        parameters:
+          - name: q
+            in: query
+            description: The search query for autocomplete
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: The OpenAlex ID for this source
+                          display_name:
+                            type: string
+                            description: The name of the source
+                          hint:
+                            type: string
+                            description: Additional information (usually the publisher)
+                          cited_by_count:
+                            type: integer
+                            description: The number of citations to works in this source
+                          works_count:
+                            type: integer
+                            description: The number of works in this source
+                          entity_type:
+                            type: string
+                            enum:
+                              - source
+                          external_id:
+                            type: string
+                            description: An external identifier for this source (usually ISSN)
+                  example:
+                    results:
+                      - id: https://openalex.org/S5555990
+                        display_name: The Journal of Neuroscience
+                        hint: Society for Neuroscience
+                        cited_by_count: 4274712
+                        works_count: 40376
+                        entity_type: source
+                        external_id: 0270-6474
+          '400':
+            description: Bad request
+          '403':
+            description: Forbidden
+          '429':
+            description: Too many requests
+  /topics:
+    get:
+      summary: List Topics
+      description: Returns a list of topics.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/meta'
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/topic'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Topic
+        description: Returns details for a single topic.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID of the topic
+            schema:
+              type: string
+          - $ref: ../components/parameters/select_parameter.yaml
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/topic.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Topic not found
+          '429':
+            description: Too many requests
+  /works:
+    get:
+      summary: List Works
+      description: Returns a list of works.
+      parameters:
+        - $ref: '#/components/parameters/filter_parameter'
+        - $ref: '#/components/parameters/search_parameter'
+        - $ref: '#/components/parameters/sort_parameter'
+        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/per_page_parameter'
+        - $ref: '#/components/parameters/select_parameter'
+        - $ref: '#/components/parameters/group_by_parameter'
+        - name: sample
+          in: query
+          description: Get a random sample of results
+          schema:
+            type: integer
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: Total number of results
+                      db_response_time_ms:
+                        type: integer
+                        description: Database response time in milliseconds
+                      page:
+                        type: integer
+                        description: Current page number
+                      per_page:
+                        type: integer
+                        description: Number of results per page
+                      count_new:
+                        type: integer
+                        description: Number of new results since last update
+                      count_updated:
+                        type: integer
+                        description: Number of updated results since last update
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/work'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '429':
+          description: Too many requests
+    /{id}:
+      get:
+        summary: Get a single Work
+        description: Returns details for a single work. Any ID supported in the `ids` object will successfully return a single entity.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: OpenAlex ID or any supported external ID (DOI, MAG, PMID, PMCID) of the work
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: ../components/schemas/work.yaml
+          '403':
+            description: Forbidden
+          '404':
+            description: Work not found
+          '429':
+            description: Too many requests
+  /autocomplete/authors:
+    $ref: ./paths/autocomplete_authors.yaml
+  /autocomplete/concepts:
+    $ref: ./paths/autocomplete_concepts.yaml
+  /autocomplete/funders:
+    $ref: ./paths/autocomplete_funders.yaml
+  /autocomplete/institutions:
+    $ref: ./paths/autocomplete_institutions.yaml
+  /autocomplete/publishers:
+    $ref: ./paths/autocomplete_publishers.yaml
+  /autocomplete/sources:
+    $ref: ./paths/autocomplete_sources.yaml
+  /autocomplete/topics:
+    $ref: ./paths/autocomplete_topics.yaml
+  /autocomplete/works:
+    $ref: ./paths/autocomplete_works.yaml
+components:
+  parameters:
+    filter_parameter:
+      - name: filter
+        in: query
+        description: |
+          Filters narrow the list down to just entities that meet particular conditions.
+          Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
+        required: false
+        schema:
+          $ref: ../schemas/filter.yaml
+        example: type:book,cited_by_count:>1,is_oa:true
+        examples:
+          single_filter:
+            summary: Filter works by type
+            value: type:book
+          multiple_filters:
+            summary: Filter works by type and citation count
+            value: type:book,cited_by_count:>1
+          negation:
+            summary: Filter institutions not in the US
+            value: country_code:!us
+          intersection:
+            summary: Filter works with authors from France and UK
+            value: institutions.country_code:fr+gb
+          addition:
+            summary: Filter works with authors from France or UK
+            value: institutions.country_code:fr|gb
+    search_parameter:
+      - name: search
+        in: query
+        description: Text search query string to find entities that match the given text.
+        required: false
+        schema:
+          type: string
+        example: dna
+        examples:
+          simple_search:
+            summary: Simple search query
+            value: dna
+          boolean_search:
+            summary: Boolean search query
+            value: (elmo AND "sesame street") NOT (cookie OR monster)
+          exact_phrase:
+            summary: Exact phrase search
+            value: fierce creatures
+    sort_parameter:
+      - name: sort
+        in: query
+        description: |
+          Specify the property to sort the results by. Multiple sort keys can be provided, separated by commas.
+          Append ':desc' to sort in descending order. Default sort direction is ascending.
+        required: false
+        schema:
+          $ref: ../schemas/sort.yaml
+        example: cited_by_count:desc
+        examples:
+          single_sort:
+            summary: Sort by cited_by_count in descending order
+            value: cited_by_count:desc
+          multiple_sort:
+            summary: Sort by publication year (descending) then by relevance score (descending)
+            value: publication_year:desc,relevance_score:desc
+    page_parameter:
+      - name: page
+        in: query
+        description: The page number of results to return. Used for basic paging.
+        required: false
+        schema:
+          $ref: ../schemas/page.yaml
+        example: 2
+        examples:
+          default_page:
+            summary: Default first page
+            value: 1
+          second_page:
+            summary: Second page of results
+            value: 2
+    per_page_parameter:
+      - name: per-page
+        in: query
+        description: The number of results to return per page. Minimum is 1, maximum is 200, default is 25.
+        required: false
+        schema:
+          $ref: ../schemas/per_page.yaml
+        example: 50
+        examples:
+          default:
+            summary: Default number of results per page
+            value: 25
+          maximum:
+            summary: Maximum number of results per page
+            value: 200
+    select_parameter:
+      - name: select
+        in: query
+        description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
+        required: false
+        schema:
+          $ref: ../schemas/select.yaml
+        example: id,doi,display_name
+        examples:
+          single_entity:
+            summary: Select fields for a single entity
+            value: id,display_name
+          list_of_entities:
+            summary: Select fields for a list of entities
+            value: id,doi,display_name
+    group_by_parameter:
+      name: group_by
+      in: query
+      description: |
+        Groups the results by a specified property. The response will include a `group_by` object with counts for each group.
+
+        You can group by most of the same properties that you can filter by.
+
+        To include the "unknown" group in the response, add `:include_unknown` after the group-by parameter.
+
+        Example: `group_by=authorships.institutions.id` or `group_by=authorships.institutions.id:include_unknown`
+
+        The response will contain:
+        - `key`: The OpenAlex ID or raw value of the `group_by` parameter for members of this group.
+        - `key_display_name`: The `display_name` or raw value of the `group_by` parameter for members of this group.
+        - `count`: The number of entities in the group.
+      schema:
+        type: string
+        pattern: ^[a-z_.]+(:[a-z_]+)?$
+        description: |
+          The property to group by. Can be any filterable property.
+          Optionally followed by `:include_unknown` to include the "unknown" group.
+      example: authorships.institutions.id
+    cursor_page_parameter:
+      - name: cursor
+        in: query
+        description: |
+          A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
+
+          Warning: Don't use cursor paging to download the whole dataset. It's inefficient and puts a massive load on the servers. Instead, use the OpenAlex snapshot for downloading all data at once.
+        required: false
+        schema:
+          $ref: ../schemas/cursor.yaml
+        example: '*'
+        examples:
+          start_cursor:
+            summary: Start cursor pagination
+            value: '*'
+          next_page:
+            summary: Get the next page of results
+            value: IlsxNjA5MzcyODAwMDAwLCAnaHR0cHM6Ly9vcGVuYWxleC5vcmcvVzI0ODg0OTk3NjQnXSI=
+    autocomplete_parameter:
+      - name: q
+        in: query
+        description: The search string supplied by the user for autocomplete suggestions.
+        required: true
+        schema:
+          type: string
+        example: flori
+      - name: filter
+        in: query
+        description: Optional filter to apply to the autocomplete results. Uses the same syntax as entity filters.
+        required: false
+        schema:
+          type: string
+        example: publication_year:2010
+      - name: search
+        in: query
+        description: Optional search query to apply to the autocomplete results. Uses the same syntax as entity search.
+        required: false
+        schema:
+          type: string
+        example: frogs
+  schemas:
+    meta:
+      type: object
+      description: Metadata about the API response
+      properties:
+        count:
+          type: integer
+          description: The total number of entities (this will be all entities if no filter is applied)
+        db_response_time_ms:
+          type: integer
+          description: The time taken by the database to respond, in milliseconds
+        page:
+          type: integer
+          description: The current page number
+        per_page:
+          type: integer
+          description: The number of results per page
+        groups_count:
+          type: integer
+          nullable: true
+          description: The count of groups in the current page (null if there are no groups in the response)
+      example:
+        count: 246136992
+        db_response_time_ms: 271
+        page: 1
+        per_page: 200
+        groups_count: 15
+    dehydrated_institution:
+      type: object
+      description: A simplified representation of an institution, used when an institution is referenced by another entity.
+      properties:
+        id:
+          type: string
+          description: The OpenAlex ID for this institution.
+          example: https://openalex.org/I114027177
+        display_name:
+          type: string
+          description: The primary name of the institution.
+          example: University of North Carolina at Chapel Hill
+        ror:
+          type: string
+          description: The ROR ID for this institution.
+          example: https://ror.org/00jmfr291
+        country_code:
+          type: string
+          description: The country where this institution is located, represented as an ISO two-letter country code.
+          example: US
+        type:
+          type: string
+          description: The institution's primary type, using the ROR "type" controlled vocabulary.
+          enum:
+            - education
+            - healthcare
+            - company
+            - archive
+            - nonprofit
+            - government
+            - facility
+            - other
+          example: education
+        lineage:
+          type: array
+          items:
+            type: string
+          description: OpenAlex IDs of this institution and its parent institutions.
+          example:
+            - https://openalex.org/I114027177
+      required:
+        - id
+        - display_name
+        - type
+    dehydrated_concept:
+      type: object
+      description: A simplified representation of a concept, used when a concept is referenced by another entity.
+      properties:
+        id:
+          type: string
+          description: The OpenAlex ID for this concept.
+          example: https://openalex.org/C41008148
+        wikidata:
+          type: string
+          description: The Wikidata ID for this concept.
+          example: https://www.wikidata.org/wiki/Q5
+        display_name:
+          type: string
+          description: The human-readable name of the concept.
+          example: Human
+        level:
+          type: integer
+          description: The hierarchical level of the concept. Level 0 is the most general, and level 5 is the most specific.
+          example: 1
+        score:
+          type: number
+          description: The relevance score of this concept to the work. Higher scores indicate greater relevance.
+          example: 0.8534
+      required:
+        - id
+        - display_name
+        - level
+        - score
+    author:
+      type: object
+      properties:
+        affiliations:
+          type: array
+          description: List of objects representing the affiliations this author has claimed in their publications.
+          items:
+            type: object
+            properties:
+              institution:
+                $ref: '#/components/schemas/dehydrated_institution'
+              years:
+                type: array
+                items:
+                  type: integer
+          example:
+            - institution:
+                id: https://openalex.org/I201448701
+                ror: https://ror.org/00cvxb145
+              years:
+                - 2018
+                - 2019
+                - 2020
+            - institution:
+                id: https://openalex.org/I74973139
+                ror: https://ror.org/05x2bcf33
+              years:
+                - 2011
+                - 2012
+                - 2013
+                - 2014
+                - 2015
+                - 2016
+                - 2017
+                - 2018
+                - 2019
+        cited_by_count:
+          type: integer
+          description: The total number of Works that cite a work this author has created.
+          example: 38
+        counts_by_year:
+          type: array
+          description: Works_count and cited_by_count for each of the last ten years, binned by year.
+          items:
+            type: object
+            properties:
+              year:
+                type: integer
+              works_count:
+                type: integer
+              cited_by_count:
+                type: integer
+          example:
+            - year: 2022
+              works_count: 0
+              cited_by_count: 8
+            - year: 2021
+              works_count: 1
+              cited_by_count: 252
+            - year: 2012
+              works_count: 7
+              cited_by_count: 79
+        created_date:
+          type: string
+          format: date
+          description: The date this Author object was created in the OpenAlex dataset.
+          example: '2017-08-08'
+        display_name:
+          type: string
+          description: The name of the author as a single string.
+          example: Jason Priem
+        display_name_alternatives:
+          type: array
+          description: Other ways that we've found this author's name displayed.
+          items:
+            type: string
+          example:
+            - Jason R Priem
+        id:
+          type: string
+          description: The OpenAlex ID for this author.
+          example: https://openalex.org/A5023888391
+        ids:
+          type: object
+          description: All the external identifiers that we know about for this author.
+          properties:
+            openalex:
+              type: string
+            orcid:
+              type: string
+            scopus:
+              type: string
+            twitter:
+              type: string
+            wikipedia:
+              type: string
+          example:
+            openalex: https://openalex.org/A5023888391
+            orcid: https://orcid.org/0000-0001-6187-6610
+            scopus: http://www.scopus.com/inward/authorDetails.url?authorID=36455008000&partnerID=MN8TOARS
+        last_known_institution:
+          $ref: '#/components/schemas/dehydrated_institution'
+          description: This author's last known institutional affiliation (deprecated).
+        last_known_institutions:
+          type: array
+          description: This author's last known institutional affiliations.
+          items:
+            $ref: '#/components/schemas/dehydrated_institution'
+        orcid:
+          type: string
+          description: The ORCID ID for this author.
+          example: https://orcid.org/0000-0001-6187-6610
+        summary_stats:
+          type: object
+          description: Citation metrics for this author.
+          properties:
+            2yr_mean_citedness:
+              type: number
+              format: float
+            h_index:
+              type: integer
+            i10_index:
+              type: integer
+          example:
+            2yr_mean_citedness: 1.5295340589458237
+            h_index: 45
+            i10_index: 205
+        updated_date:
+          type: string
+          format: date-time
+          description: The last time anything in this author object changed.
+          example: '2022-01-02T00:00:00'
+        works_api_url:
+          type: string
+          description: A URL that will get you a list of all this author's works.
+          example: https://api.openalex.org/works?filter=author.id:A5023888391
+        works_count:
+          type: integer
+          description: The number of Works this author has created.
+          example: 38
+        x_concepts:
+          type: array
+          description: The concepts most frequently applied to works created by this author (deprecated).
+          items:
+            allOf:
+              - $ref: '#/components/schemas/dehydrated_concept'
+              - type: object
+                properties:
+                  score:
+                    type: number
+                    format: float
+          example:
+            - id: https://openalex.org/C41008148
+              wikidata: null
+              display_name: Computer science
+              level: 0
+              score: 97.4
+            - id: https://openalex.org/C17744445
+              wikidata: null
+              display_name: Political science
+              level: 0
+              score: 78.9
+    group_by:
+      type: object
+      description: A group of entities and their count
+      properties:
+        key:
+          type: string
+          description: The OpenAlex ID or raw value of the group_by parameter for members of this group
+        key_display_name:
+          type: string
+          description: The display_name or raw value of the group_by parameter for members of this group
+        count:
+          type: integer
+          description: The number of entities in the group
+      example:
+        key: article
+        key_display_name: article
+        count: 202814957
+    funder:
+      type: object
+      properties:
+        alternate_titles:
+          type: array
+          items:
+            type: string
+          description: A list of alternate titles for this funder.
+          example:
+            - US National Institutes of Health
+            - Institutos Nacionales de la Salud
+            - NIH
+        cited_by_count:
+          type: integer
+          description: The total number of Works that cite a work linked to this funder.
+          example: 7823467
+        country_code:
+          type: string
+          description: The country where this funder is located, represented as an ISO two-letter country code.
+          example: US
+        counts_by_year:
+          type: array
+          items:
+            type: object
+            properties:
+              year:
+                type: integer
+              works_count:
+                type: integer
+              cited_by_count:
+                type: integer
+          description: The values of works_count and cited_by_count for each of the last ten years, binned by year.
+          example:
+            - year: 2021
+              works_count: 4211
+              cited_by_count: 120939
+            - year: 2020
+              works_count: 4363
+              cited_by_count: 119531
+        created_date:
+          type: string
+          format: date
+          description: The date this Funder object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
+          example: '2023-02-13'
+        description:
+          type: string
+          description: A short description of this funder, taken from Wikidata.
+          example: medical research organization in the United States
+        display_name:
+          type: string
+          description: The primary name of the funder.
+          example: National Institutes of Health
+        grants_count:
+          type: integer
+          description: The number of grants linked to this funder.
+          example: 7109
+        homepage_url:
+          type: string
+          description: The URL for this funder's primary homepage.
+          example: http://www.nih.gov/
+        id:
+          type: string
+          description: The OpenAlex ID for this funder.
+          example: https://openalex.org/F4320332161
+        ids:
+          type: object
+          properties:
+            openalex:
+              type: string
+            ror:
+              type: string
+            wikidata:
+              type: string
+            crossref:
+              type: string
+            doi:
+              type: string
+          description: All the external identifiers that we know about for this funder.
+          example:
+            openalex: https://openalex.org/F4320332161
+            ror: https://ror.org/01cwqze88
+            wikidata: https://www.wikidata.org/entity/Q390551
+            crossref: '100000002'
+            doi: https://doi.org/10.13039/100000002
+        image_thumbnail_url:
+          type: string
+          description: Same as image_url, but it's a smaller image.
+          example: https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/NIH 2013 logo vertical.svg&width=300
+        image_url:
+          type: string
+          description: URL where you can get an image representing this funder.
+          example: https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/NIH 2013 logo vertical.svg
+        roles:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                  - institution
+                  - funder
+                  - publisher
+              id:
+                type: string
+              works_count:
+                type: integer
+          description: List of role objects, which include the role, the id, and the works_count.
+          example:
+            - role: funder
+              id: https://openalex.org/F4320308380
+              works_count: 1004
+            - role: publisher
+              id: https://openalex.org/P4310315589
+              works_count: 13986
+            - role: institution
+              id: https://openalex.org/I32971472
+              works_count: 250031
+        summary_stats:
+          type: object
+          properties:
+            2yr_mean_citedness:
+              type: number
+              format: float
+            h_index:
+              type: integer
+            i10_index:
+              type: integer
+          description: Citation metrics for this funder
+          example:
+            2yr_mean_citedness: 5.065784263815827
+            h_index: 985
+            i10_index: 176682
+        updated_date:
+          type: string
+          format: date-time
+          description: The last time anything in this funder object changed, expressed as an ISO 8601 date string.
+          example: '2023-04-21T16:54:19.012138'
+        works_count:
+          type: integer
+          description: The number of works linked to this funder.
+          example: 260210
+    institution:
+      type: object
+      properties:
+        associated_institutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dehydrated_institution'
+          description: List of institutions related to this one, represented as dehydrated Institution objects with an additional 'relationship' property.
+          example:
+            - id: https://openalex.org/I2802101240
+              ror: https://ror.org/0483mr804
+              display_name: Carolinas Medical Center
+              country_code: US
+              type: healthcare
+              relationship: related
+        cited_by_count:
+          type: integer
+          description: The total number of works that cite a work created by an author affiliated with this institution.
+          example: 21199844
+        country_code:
+          type: string
+          description: The country where this institution is located, represented as an ISO two-letter country code.
+        counts_by_year:
+          type: array
+          items:
+            type: object
+            properties:
+              year:
+                type: integer
+              works_count:
+                type: integer
+              cited_by_count:
+                type: integer
+          description: Works count and cited by count for each of the last ten years, binned by year.
+          example:
+            - year: 2022
+              works_count: 133
+              cited_by_count: 32731
+            - year: 2021
+              works_count: 12565
+              cited_by_count: 2180827
+        created_date:
+          type: string
+          format: date
+          description: The date this Institution object was created in the OpenAlex dataset.
+          example: '2017-08-08'
+        display_name:
+          type: string
+          description: The primary name of the institution.
+          example: University of North Carolina at Chapel Hill
+        display_name_acronyms:
+          type: array
+          items:
+            type: string
+          description: Acronyms or initialisms that people sometimes use instead of the full display name.
+          example:
+            - UNC
+        display_name_alternatives:
+          type: array
+          items:
+            type: string
+          description: Other names people may use for this institution.
+          example:
+            - UNC-Chapel Hill
+        geo:
+          type: object
+          properties:
+            city:
+              type: string
+            geonames_city_id:
+              type: string
+            region:
+              type: string
+            country_code:
+              type: string
+            country:
+              type: string
+            latitude:
+              type: number
+              format: float
+            longitude:
+              type: number
+              format: float
+          description: Geographic information about the institution's location.
+          example:
+            city: Chapel Hill
+            geonames_city_id: '4460162'
+            region: North Carolina
+            country_code: US
+            country: United States
+            latitude: 35.9083
+            longitude: -79.0492
+        homepage_url:
+          type: string
+          description: The URL for institution's primary homepage.
+          example: http://www.unc.edu/
+        id:
+          type: string
+          description: The OpenAlex ID for this institution.
+          example: https://openalex.org/I114027177
+        ids:
+          type: object
+          properties:
+            openalex:
+              type: string
+            ror:
+              type: string
+            grid:
+              type: string
+            wikipedia:
+              type: string
+            wikidata:
+              type: string
+            mag:
+              type: integer
+          description: External identifiers for this institution.
+          example:
+            openalex: https://openalex.org/I114027177
+            ror: https://ror.org/0130frc33
+            grid: grid.10698.36
+            wikipedia: https://en.wikipedia.org/wiki/University%20of%20North%20Carolina%20at%20Chapel%20Hill
+            wikidata: https://www.wikidata.org/wiki/Q192334
+            mag: 114027177
+        image_thumbnail_url:
+          type: string
+          description: URL for a thumbnail image representing this institution.
+          example: https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg/100px-University_of_North_Carolina_at_Chapel_Hill_seal.svg.png
+        image_url:
+          type: string
+          description: URL for an image representing this institution.
+          example: https://upload.wikimedia.org/wikipedia/en/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg
+        international:
+          type: object
+          properties:
+            display_name:
+              type: object
+              additionalProperties:
+                type: string
+          description: The institution's display name in different languages.
+        lineage:
+          type: array
+          items:
+            type: string
+          description: OpenAlex IDs of this institution and its parent institutions.
+        repositories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              display_name:
+                type: string
+              host_organization:
+                type: string
+              host_organization_name:
+                type: string
+              host_organization_lineage:
+                type: array
+                items:
+                  type: string
+          description: Repositories that have this institution as their host organization.
+        roles:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                  - institution
+                  - funder
+                  - publisher
+              id:
+                type: string
+              works_count:
+                type: integer
+          description: List of roles this institution plays, including itself and potentially funder and publisher roles.
+        ror:
+          type: string
+          description: The ROR ID for this institution.
+          example: https://ror.org/0130frc33
+        summary_stats:
+          type: object
+          properties:
+            2yr_mean_citedness:
+              type: number
+              format: float
+            h_index:
+              type: integer
+            i10_index:
+              type: integer
+          description: Citation metrics for this institution.
+          example:
+            2yr_mean_citedness: 5.065784263815827
+            h_index: 985
+            i10_index: 176682
+        type:
+          type: string
+          enum:
+            - Education
+            - Healthcare
+            - Company
+            - Archive
+            - Nonprofit
+            - Government
+            - Facility
+            - Other
+          description: The institution's primary type, using the ROR "type" controlled vocabulary.
+          example: education
+        updated_date:
+          type: string
+          format: date-time
+          description: The last time anything in this Institution changed.
+          example: '2022-01-02T00:27:23.088909'
+        works_api_url:
+          type: string
+          description: A URL that will get you a list of all the Works affiliated with this institution.
+          example: https://api.openalex.org/works?filter=institutions.id:I114027177
+        works_count:
+          type: integer
+          description: The number of Works created by authors affiliated with this institution.
+          example: 202704
+        x_concepts:
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/dehydrated_concept'
+              - type: object
+                properties:
+                  score:
+                    type: number
+                    format: float
+          description: The Concepts most frequently applied to works affiliated with this institution.
+    keyword:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The OpenAlex ID for this keyword.
+          example: https://openalex.org/K1234567890
+        display_name:
+          type: string
+          description: The name of the keyword.
+          example: machine learning
+        score:
+          type: number
+          format: float
+          description: The similarity score of the keyword to the work's title and abstract text. Higher scores indicate greater relevance.
+          example: 0.85
+        works_count:
+          type: integer
+          description: The number of works in OpenAlex that have this keyword.
+          example: 12345
+        cited_by_count:
+          type: integer
+          description: The total number of citations received by all works with this keyword.
+          example: 98765
+      required:
+        - id
+        - display_name
+        - score
+      example:
+        id: https://openalex.org/K1234567890
+        display_name: machine learning
+        score: 0.85
+        works_count: 12345
+        cited_by_count: 98765
+    publisher:
+      type: object
+      properties:
+        alternate_titles:
+          type: array
+          items:
+            type: string
+          description: A list of alternate titles for this publisher.
+          example:
+            - Elsevier
+            - elsevier.com
+            - Elsevier Science
+            - Uitg. Elsevier
+            - السفیر
+            - السویر
+            - انتشارات الزویر
+            - لودویک السفیر
+            - 爱思唯尔
+        cited_by_count:
+          type: integer
+          description: The number of citations to works that are linked to this publisher through journals or other sources.
+          example: 407508754
+        country_codes:
+          type: array
+          items:
+            type: string
+          description: The countries where the publisher is primarily located, as an ISO two-letter country code.
+          example:
+            - DE
+        counts_by_year:
+          type: array
+          items:
+            type: object
+            properties:
+              year:
+                type: integer
+              works_count:
+                type: integer
+              cited_by_count:
+                type: integer
+          description: The values of works_count and cited_by_count for each of the last ten years, binned by year.
+          example:
+            - year: 2021
+              works_count: 4211
+              cited_by_count: 120939
+            - year: 2020
+              works_count: 4363
+              cited_by_count: 119531
+        created_date:
+          type: string
+          format: date
+          description: The date this Publisher object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
+          example: '2017-08-08'
+        display_name:
+          type: string
+          description: The primary name of the publisher.
+          example: Elsevier BV
+        hierarchy_level:
+          type: integer
+          description: The hierarchy level for this publisher. A publisher with hierarchy level 0 has no parent publishers.
+          example: 1
+        id:
+          type: string
+          description: The OpenAlex ID for this publisher.
+          example: https://openalex.org/P4310320990
+        ids:
+          type: object
+          properties:
+            openalex:
+              type: string
+              description: This publisher's OpenAlex ID
+            ror:
+              type: string
+              description: This publisher's ROR ID
+            wikidata:
+              type: string
+              description: This publisher's Wikidata ID
+          example:
+            openalex: https://openalex.org/P4310320990
+            ror: https://ror.org/02scfj030
+            wikidata: https://www.wikidata.org/entity/Q746413
+        image_thumbnail_url:
+          type: string
+          description: URL for a smaller version of the image representing this publisher.
+          example: https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/MIT%20Press%20logo.svg&width=300
+        image_url:
+          type: string
+          description: URL where you can get an image representing this publisher.
+          example: https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/MIT%20Press%20logo.svg
+        lineage:
+          type: array
+          items:
+            type: string
+          description: OpenAlex IDs of publishers, including this publisher's ID and any parent publishers.
+          example:
+            - https://openalex.org/P4310321285
+            - https://openalex.org/P4310319900
+            - https://openalex.org/P4310319965
+        parent_publisher:
+          type: string
+          description: An OpenAlex ID linking to the direct parent of the publisher. This will be null if the publisher's hierarchy_level is 0.
+          example: https://openalex.org/P4310311775
+        roles:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                  - institution
+                  - funder
+                  - publisher
+              id:
+                type: string
+              works_count:
+                type: integer
+          description: List of role objects, which include the role, the id, and the works_count.
+          example:
+            - role: funder
+              id: https://openalex.org/F4320308380
+              works_count: 1004
+            - role: publisher
+              id: https://openalex.org/P4310315589
+              works_count: 13986
+            - role: institution
+              id: https://openalex.org/I32971472
+              works_count: 250031
+        sources_api_url:
+          type: string
+          description: An URL that will get you a list of all the sources published by this publisher.
+          example: https://api.openalex.org/sources?filter=host_organization.id:P4310319965
+        summary_stats:
+          type: object
+          properties:
+            2yr_mean_citedness:
+              type: number
+              description: The 2-year mean citedness for this source.
+            h_index:
+              type: integer
+              description: The h-index for this publisher.
+            i10_index:
+              type: integer
+              description: The i-10 index for this publisher.
+          description: Citation metrics for this publisher
+          example:
+            2yr_mean_citedness: 5.065784263815827
+            h_index: 985
+            i10_index: 176682
+        updated_date:
+          type: string
+          format: date-time
+          description: The last time anything in this publisher object changed, expressed as an ISO 8601 date string.
+          example: '2021-12-25T14:04:30.578837'
+        works_count:
+          type: integer
+          description: The number of works published by this publisher.
+          example: 13789818
+    source:
+      type: object
+      properties:
+        abbreviated_title:
+          type: string
+          description: An abbreviated title obtained from the ISSN Centre.
+          example: J. addict. med. ther. sci.
+        alternate_titles:
+          type: array
+          items:
+            type: string
+          description: Alternate titles for this source, as obtained from the ISSN Centre and individual work records, like Crossref DOIs, that carry the source name as a string. These are commonly abbreviations or translations of the source's canonical name.
+          example:
+            - ACRJ
+        apc_prices:
+          type: array
+          items:
+            type: object
+            properties:
+              price:
+                type: integer
+              currency:
+                type: string
+          description: Article processing charge information, taken directly from DOAJ.
+          example:
+            - price: 3920
+              currency: GBP
+        apc_usd:
+          type: integer
+          description: The source's article processing charge in US Dollars, if available from DOAJ. The apc_usd value is calculated by taking the APC price with a currency of USD if it is available. If it's not available, we convert the first available value from apc_prices into USD, using recent exchange rates.
+          example: 5200
+        cited_by_count:
+          type: integer
+          description: The total number of Works that cite a Work hosted in this source.
+          example: 133702
+        country_code:
+          type: string
+          description: The country that this source is associated with, represented as an ISO two-letter country code.
+          example: GB
+        counts_by_year:
+          type: array
+          items:
+            type: object
+            properties:
+              year:
+                type: integer
+              works_count:
+                type: integer
+              cited_by_count:
+                type: integer
+          description: works_count and cited_by_count for each of the last ten years, binned by year. If the source was founded less than ten years ago, there will naturally be fewer than ten years in this list. Years with zero citations and zero works have been removed.
+          example:
+            - year: 2021
+              works_count: 4338
+              cited_by_count: 127268
+        created_date:
+          type: string
+          format: date
+          description: The date this Source object was created in the OpenAlex dataset, expressed as an ISO 8601 date string.
+          example: '2017-08-08'
+        display_name:
+          type: string
+          description: The name of the source.
+          example: PeerJ
+        homepage_url:
+          type: string
+          format: uri
+          description: The starting page for navigating the contents of this source; the homepage for this source's website.
+          example: http://www.peerj.com/
+        host_organization:
+          type: string
+          description: The host organization for this source as an OpenAlex ID. This will be an Institution.id if the source is a repository, and a Publisher.id if the source is a journal, conference, or eBook platform (based on the type field).
+          example: https://openalex.org/P4310320595
+        host_organization_lineage:
+          type: array
+          items:
+            type: string
+          description: OpenAlex IDs of the host organization's lineage. This will only be included if the host_organization is a publisher (and not if the host_organization is an institution).
+          example:
+            - https://openalex.org/P4310321285
+            - https://openalex.org/P4310319900
+            - https://openalex.org/P4310319965
+        host_organization_name:
+          type: string
+          description: The display_name from the host_organization, shown for convenience.
+          example: Elsevier BV
+        id:
+          type: string
+          description: The OpenAlex ID for this source.
+          example: https://openalex.org/S1983995261
+        ids:
+          type: object
+          properties:
+            openalex:
+              type: string
+            issn_l:
+              type: string
+            issn:
+              type: array
+              items:
+                type: string
+            mag:
+              type: integer
+            fatcat:
+              type: string
+            wikidata:
+              type: string
+          description: All the external identifiers that we know about for this source. IDs are expressed as URIs whenever possible.
+          example:
+            openalex: https://openalex.org/S1983995261
+            issn_l: 2167-8359
+            issn:
+              - 2167-8359
+            mag: 1983995261
+            fatcat: https://fatcat.wiki/container/z3ijzhu7zzey3f7jwws7rzopoq
+            wikidata: https://www.wikidata.org/entity/Q96326029
+        is_in_doaj:
+          type: boolean
+          description: Whether this is a journal listed in the Directory of Open Access Journals (DOAJ).
+          example: true
+        is_oa:
+          type: boolean
+          description: Whether this is currently fully-open-access source. This could be true for a preprint repository where everything uploaded is free to read, or for a Gold or Diamond open access journal, where all newly published Works are available for free under an open license.
+          example: true
+        issn:
+          type: array
+          items:
+            type: string
+          description: The ISSNs used by this source. Many publications have multiple ISSNs, so ISSN-L should be used when possible.
+          example:
+            - 2167-8359
+        issn_l:
+          type: string
+          description: The ISSN-L identifying this source. This is the Canonical External ID for sources. ISSN-L or Linking ISSN solves the problem by designating a single canonical ISSN for all media versions of the title. It's usually the same as the print ISSN.
+          example: 2167-8359
+        societies:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              organization:
+                type: string
+          description: Societies on whose behalf the source is published and maintained, obtained from our crowdsourced list.
+          example:
+            - url: http://www.counseling.org/
+              organization: American Counseling Association on behalf of the American College Counseling Association
+        summary_stats:
+          type: object
+          properties:
+            2yr_mean_citedness:
+              type: number
+              description: The 2-year mean citedness for this source. Also known as impact factor. We use the year prior to the current year for the citations (the numerator) and the two years prior to that for the citation-receiving publications (the denominator).
+            h_index:
+              type: integer
+              description: The h-index for this source.
+            i10_index:
+              type: integer
+              description: The i-10 index for this source.
+          description: Citation metrics for this source.
+          example:
+            2yr_mean_citedness: 1.5295340589458237
+            h_index: 105
+            i10_index: 5045
+        type:
+          type: string
+          enum:
+            - journal
+            - repository
+            - conference
+            - ebook platform
+            - book series
+            - metadata
+            - other
+          description: The type of source.
+          example: journal
+        updated_date:
+          type: string
+          format: date-time
+          description: The last time anything in this Source object changed, expressed as an ISO 8601 date string. This date is updated for any change at all, including increases in various counts.
+          example: '2022-01-02T00:00:00'
+        works_api_url:
+          type: string
+          format: uri
+          description: A URL that will get you a list of all this source's Works. We express this as an API URL (instead of just listing the works themselves) because sometimes a source's publication list is too long to reasonably fit into a single Source object.
+          example: https://api.openalex.org/works?filter=primary_location.source.id:S1983995261
+        works_count:
+          type: integer
+          description: The number of Works this source hosts.
+          example: 20184
+        x_concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/dehydrated_concept'
+          description: The Concepts most frequently applied to works hosted by this source. Each is represented as a dehydrated Concept object, with one additional attribute - score (Float) The strength of association between this source and the listed concept, from 0-100.
+          example:
+            - id: https://openalex.org/C86803240
+              wikidata: null
+              display_name: Biology
+              level: 0
+              score: 86.7
+    topic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The OpenAlex ID for this topic.
+          example: https://openalex.org/T11636
+        display_name:
+          type: string
+          description: The English-language label of the topic.
+          example: Artificial Intelligence in Medicine
+        description:
+          type: string
+          description: A description of this topic, generated by AI.
+          example: This cluster of papers explores the intersection of artificial intelligence and medicine, focusing on applications in healthcare, medical imaging, clinical decision support, and the ethical challenges associated with AI implementation. It delves into topics such as machine learning, big data, precision medicine, and the potential impact of AI on health equity.
+        score:
+          type: number
+          format: float
+          description: The strength of the connection between the work and this topic.
+          example: 0.95
+        subfield:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the subfield.
+              example: 2718
+            display_name:
+              type: string
+              description: The name of the subfield.
+              example: Health Informatics
+        field:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the field.
+              example: 27
+            display_name:
+              type: string
+              description: The name of the field.
+              example: Medicine
+        domain:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the domain.
+              example: 4
+            display_name:
+              type: string
+              description: The name of the domain.
+              example: Health Sciences
+        ids:
+          type: object
+          description: All the external identifiers that we know about for this topic. IDs are expressed as URIs whenever possible.
+          properties:
+            openalex:
+              type: string
+              description: This topic's OpenAlex ID. Same as Topic.id.
+              example: https://openalex.org/T11636
+            wikipedia:
+              type: string
+              description: This topic's Wikipedia page URL.
+              example: https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare
+        keywords:
+          type: array
+          description: Keywords consisting of one or several words each, meant to represent the content of the papers in the topic.
+          items:
+            type: string
+          example:
+            - Artificial Intelligence
+            - Machine Learning
+            - Healthcare
+            - Medical Imaging
+            - Clinical Decision Support
+        works_count:
+          type: integer
+          description: The number of works tagged with this topic.
+          example: 21737
+        updated_date:
+          type: string
+          format: date-time
+          description: The last time anything in this topic object changed, expressed as an ISO 8601 date string. This date is updated for any change at all, including increases in various counts.
+          example: '2024-02-05T05:00:03.798420'
+        cited_by_count:
+          type: integer
+          description: The number of citations to works tagged with this topic.
+          example: 382
+        works_api_url:
+          type: string
+          description: URL to retrieve works tagged with this topic.
+          example: https://api.openalex.org/works?filter=topics.id:T11636
+        created_date:
+          type: string
+          format: date
+          description: The date this topic was created in the OpenAlex database, expressed as an ISO 8601 date string.
+          example: '2022-01-01'
+      required:
+        - id
+        - display_name
+    dehydrated_author:
+      type: object
+      description: A simplified representation of an author, used when an author is referenced by another entity.
+      properties:
+        id:
+          type: string
+          description: The OpenAlex ID for this author.
+          example: https://openalex.org/A2208157607
+        display_name:
+          type: string
+          description: The name of the author as a single string.
+          example: John M. Doe
+        orcid:
+          type: string
+          description: The ORCID for this author, if known.
+          example: https://orcid.org/0000-0002-1825-0097
+      required:
+        - id
+        - display_name
+    authorship:
+      type: object
+      properties:
+        author_position:
+          type: string
+          enum:
+            - first
+            - middle
+            - last
+          description: A summarized description of this author's position in the work's author list.
+          example: first
+        author:
+          $ref: '#/components/schemas/dehydrated_author'
+          description: An author of this work, as a dehydrated Author object.
+          example:
+            id: https://openalex.org/A5085171399
+            display_name: Juan Pablo Alperin
+            orcid: https://orcid.org/0000-0002-9344-7439
+        institutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/dehydrated_institution'
+          description: The institutional affiliations this author claimed in the context of this work, as dehydrated Institution objects.
+          example:
+            - id: https://openalex.org/I18014758
+              display_name: Simon Fraser University
+              ror: https://ror.org/0213rcc28
+              country_code: CA
+              type: education
+              lineage:
+                - https://openalex.org/I18014758
+        is_corresponding:
+          type: boolean
+          description: If true, this is a corresponding author for this work.
+          example: false
+        raw_affiliation_strings:
+          type: array
+          items:
+            type: string
+          description: This author's affiliation as it originally came to us, as a list of raw unformatted strings.
+          example:
+            - Canadian Institute for Studies in Publishing, Simon Fraser University
+        raw_author_name:
+          type: string
+          description: This author's name as it originally came to us, as a raw unformatted string.
+          example: Juan Pablo Alperin
+        countries:
+          type: array
+          items:
+            type: string
+          description: The country or countries for this author, determined using a combination of matched institutions and parsing of the raw affiliation strings.
+          example:
+            - CA
+      required:
+        - author_position
+        - author
+        - institutions
+        - raw_affiliation_strings
+        - raw_author_name
+    dehydrated_source:
+      type: object
+      description: A simplified representation of a source, used when a source is referenced by another entity.
+      properties:
+        id:
+          type: string
+          description: The OpenAlex ID for this source.
+          example: https://openalex.org/S1983995261
+        display_name:
+          type: string
+          description: The name of the source.
+          example: PeerJ
+        host_organization:
+          type: string
+          description: The OpenAlex ID of the host organization for this source.
+          example: https://openalex.org/P4310320595
+        host_organization_lineage:
+          type: array
+          description: OpenAlex IDs of the host organization's lineage, from most specific to most general.
+          items:
+            type: string
+          example:
+            - https://openalex.org/P4310321285
+            - https://openalex.org/P4310319900
+            - https://openalex.org/P4310319965
+        host_organization_name:
+          type: string
+          description: The display_name of the host organization, shown for convenience.
+          example: PeerJ
+        is_in_doaj:
+          type: boolean
+          description: Whether this source is listed in the Directory of Open Access Journals (DOAJ).
+          example: true
+        is_oa:
+          type: boolean
+          description: Whether this is currently a fully open-access source.
+          example: true
+        issn:
+          type: array
+          description: The ISSNs (International Standard Serial Numbers) used by this source.
+          items:
+            type: string
+          example:
+            - 2167-8359
+        issn_l:
+          type: string
+          description: The ISSN-L (linking ISSN) identifying this source.
+          example: 2167-8359
+        type:
+          type: string
+          description: The type of source.
+          enum:
+            - journal
+            - repository
+            - conference
+            - ebook platform
+            - book series
+            - metadata
+            - other
+          example: journal
+      required:
+        - id
+        - display_name
+        - type
+    location:
+      type: object
+      description: The Location object describes the location of a given work. It's only found as part of the Work object.
+      properties:
+        is_accepted:
+          type: boolean
+          description: True if this location's version is either acceptedVersion or publishedVersion; otherwise false.
+          example: true
+        is_oa:
+          type: boolean
+          description: True if an Open Access (OA) version of this work is available at this location. OA is defined as having a URL where you can read the fulltext of this work without needing to pay money or log in.
+          example: true
+        is_published:
+          type: boolean
+          description: True if this location's version is publishedVersion; otherwise false.
+          example: true
+        landing_page_url:
+          type: string
+          description: The landing page URL for this location.
+          example: https://doi.org/10.1590/s1678-77572010000100010
+        license:
+          type: string
+          description: The location's publishing license. This can be a Creative Commons license such as cc0 or cc-by, a publisher-specific license, or null which means we are not able to determine a license for this location.
+          example: cc-by
+        source:
+          $ref: '#/components/schemas/dehydrated_source'
+          description: Information about the source of this location, as a DehydratedSource object.
+        pdf_url:
+          type: string
+          description: A URL where you can find this location as a PDF.
+          example: http://www.scielo.br/pdf/jaos/v18n1/a10v18n1.pdf
+        version:
+          type: string
+          enum:
+            - publishedVersion
+            - acceptedVersion
+            - submittedVersion
+          description: The version of the work, based on the DRIVER Guidelines versioning scheme.
+          example: publishedVersion
+    work:
+      type: object
+      properties:
+        abstract_inverted_index:
+          description: The abstract of the work, as an inverted index. This format allows for efficient searching and analysis of the abstract text.
+          type: object
+          example:
+            Despite:
+              - 0
+            growing:
+              - 1
+            interest:
+              - 2
+            in:
+              - 3
+              - 57
+              - 73
+              - 110
+              - 122
+            Open:
+              - 4
+              - 201
+            Access:
+              - 5
+              - 202
+            OA:
+              - 6
+            citation:
+              - 7
+            advantage:
+              - 8
+            and:
+              - 9
+              - 58
+              - 111
+            its:
+              - 10
+            implications:
+              - 11
+            for:
+              - 12
+              - 74
+            research:
+              - 13
+        apc_list:
+          description: Information about this work's APC (article processing charge) list price.
+          properties:
+            currency:
+              description: The currency of the APC.
+              type: string
+            provenance:
+              description: The source of this APC information.
+              type: string
+            value:
+              description: The amount of the APC.
+              type: integer
+            value_usd:
+              description: The APC converted into USD.
+              type: integer
+          type: object
+          example:
+            value: 3200
+            currency: USD
+            value_usd: 3200
+            provenance: doaj
+        apc_paid:
+          description: Information about the paid APC (article processing charge) for this work.
+          properties:
+            currency:
+              description: The currency of the paid APC.
+              type: string
+            provenance:
+              description: The source of this paid APC information.
+              type: string
+            value:
+              description: The amount of the paid APC.
+              type: integer
+            value_usd:
+              description: The paid APC converted into USD.
+              type: integer
+          type: object
+          example:
+            value: 2250
+            currency: EUR
+            value_usd: 2426
+            provenance: openapc
+        authorships:
+          description: List of authorship information for the work, including authors and their institutions.
+          items:
+            $ref: '#/components/schemas/authorship'
+          type: array
+        best_oa_location:
+          $ref: '#/components/schemas/location'
+          description: The best available open access location for this work.
+        biblio:
+          description: Old-timey bibliographic info for this work.
+          properties:
+            first_page:
+              description: The first page number for this work.
+              type: string
+            issue:
+              description: The issue number for this work.
+              type: string
+            last_page:
+              description: The last page number for this work.
+              type: string
+            volume:
+              description: The volume number for this work.
+              type: string
+          type: object
+        cited_by_api_url:
+          description: A URL that displays a list of works that cite this work.
+          type: string
+        cited_by_count:
+          description: The number of citations to this work.
+          type: integer
+          example: 382
+        concepts:
+          description: List of concepts (research topics) associated with the work. These are algorithmically inferred based on the work's content.
+          items:
+            $ref: '#/components/schemas/dehydrated_concept'
+          type: array
+          example:
+            - id: https://openalex.org/C41008148
+              wikidata: https://www.wikidata.org/wiki/Q5
+              display_name: Human
+              level: 1
+              score: 0.8534
+            - id: https://openalex.org/C86803240
+              wikidata: https://www.wikidata.org/wiki/Q420
+              display_name: Biology
+              level: 0
+              score: 0.7981
+        corresponding_author_ids:
+          description: OpenAlex IDs of any authors for which authorships.is_corresponding is true.
+          items:
+            type: string
+          type: array
+        corresponding_institution_ids:
+          description: OpenAlex IDs of any institutions found within an authorship for which authorships.is_corresponding is true.
+          items:
+            type: string
+          type: array
+        countries_distinct_count:
+          description: Number of distinct country_codes among the authorships for this work.
+          type: integer
+        counts_by_year:
+          description: Cited_by_count for each of the last ten years, binned by year.
+          items:
+            properties:
+              cited_by_count:
+                type: integer
+              year:
+                type: integer
+            type: object
+          type: array
+          example:
+            - year: 2022
+              cited_by_count: 8
+            - year: 2021
+              cited_by_count: 252
+            - year: 2012
+              cited_by_count: 79
+        created_date:
+          description: The date and time this Work object was created in the OpenAlex dataset.
+          format: date
+          type: string
+          example: '2017-08-08'
+        display_name:
+          description: The title of this work (same as title).
+          type: string
+          example: 'The state of OA: a large-scale analysis of the prevalence and impact of Open Access articles'
+        doi:
+          description: The DOI for the work.
+          type: string
+          pattern: ^https://doi.org/10\.\d{4,9}/[-._;()/:A-Z0-9]+$
+          example: https://doi.org/10.7717/peerj.4375
+        fulltext_origin:
+          description: If a work's full text is searchable in OpenAlex, this tells you how we got the text.
+          enum:
+            - pdf
+            - ngrams
+          type: string
+          example: pdf
+        grants:
+          description: Information about grants that funded this work.
+          type: array
+          items:
+            type: object
+            properties:
+              funder:
+                type: string
+                description: The OpenAlex ID for the funder of this grant.
+                example: https://openalex.org/F4320332161
+              funder_display_name:
+                type: string
+                description: The display name of the funder.
+                example: National Science Foundation
+              award_id:
+                type: string
+                description: The identifier for this specific grant, as given by the funder.
+                example: CBET-1647474
+            required:
+              - funder
+              - funder_display_name
+          example:
+            - funder: https://openalex.org/F4320332161
+              funder_display_name: National Science Foundation
+              award_id: CBET-1647474
+            - funder: https://openalex.org/F4320332161
+              funder_display_name: National Science Foundation
+              award_id: '1758606'
+        has_fulltext:
+          description: Set to true if the work's full text is searchable in OpenAlex.
+          type: boolean
+          example: true
+        id:
+          description: The OpenAlex ID for this work.
+          type: string
+          pattern: ^https://openalex.org/W\d+$
+          example: https://openalex.org/W2741809807
+        ids:
+          description: All the external identifiers that we know about for this work. IDs are expressed as URIs whenever possible.
+          properties:
+            doi:
+              description: The DOI for this work.
+              type: string
+            mag:
+              description: The Microsoft Academic Graph ID for this work.
+              type: integer
+            openalex:
+              description: The OpenAlex ID for this work.
+              type: string
+            pmcid:
+              description: The PubMed Central ID for this work.
+              type: string
+            pmid:
+              description: The PubMed ID for this work.
+              type: string
+          type: object
+          example:
+            openalex: https://openalex.org/W2741809807
+            doi: https://doi.org/10.7717/peerj.4375
+            mag: 2741809807
+            pmid: https://pubmed.ncbi.nlm.nih.gov/29456894
+        indexed_in:
+          description: The sources this work is indexed in.
+          items:
+            enum:
+              - arxiv
+              - crossref
+              - doaj
+              - pubmed
+            type: string
+          type: array
+          example:
+            - arxiv
+            - crossref
+            - pubmed
+        institutions_distinct_count:
+          description: Number of distinct institutions among the authorships for this work.
+          type: integer
+          example: 4
+        is_paratext:
+          description: True if we think this work is paratext.
+          type: boolean
+          example: false
+        is_retracted:
+          description: True if we know this work has been retracted.
+          type: boolean
+          example: false
+        keywords:
+          description: A list of keywords associated with this work.
+          items:
+            $ref: '#/components/schemas/keyword'
+          type: array
+        language:
+          description: The language of the work in ISO 639-1 format.
+          type: string
+          example: en
+        license:
+          description: The license applied to this work at this host. Most toll-access works don't have an explicit license (they're under "all rights reserved" copyright), so this field generally has content only if is_oa is true.
+          type: string
+          example: cc-by
+        locations:
+          description: List of locations where the work can be found, including various versions and sources.
+          items:
+            $ref: '#/components/schemas/location'
+          type: array
+        locations_count:
+          description: Number of locations for this work.
+          type: integer
+          example: 3
+        mesh:
+          description: List of Medical Subject Headings (MeSH) associated with the work, if applicable. MeSH terms are used to index and categorize biomedical literature.
+          type: array
+          items:
+            type: object
+            properties:
+              descriptor_ui:
+                type: string
+                description: The unique identifier for the MeSH descriptor, starting with the letter D.
+                example: D000086382
+              descriptor_name:
+                type: string
+                description: The name of the MeSH descriptor.
+                example: COVID-19
+              qualifier_ui:
+                type: string
+                description: The unique identifier for the MeSH qualifier, starting with the letter Q.
+                example: Q000517
+              qualifier_name:
+                type: string
+                description: The name of the MeSH qualifier.
+                example: epidemiology
+              is_major_topic:
+                type: boolean
+                description: Indicates if this MeSH tag is a major topic for the work. Major topics are the main focus of the article.
+                example: true
+          example:
+            - descriptor_ui: D000086382
+              descriptor_name: COVID-19
+              qualifier_ui: Q000517
+              qualifier_name: epidemiology
+              is_major_topic: true
+            - descriptor_ui: D000293
+              descriptor_name: Adolescent
+              is_major_topic: false
+        ngrams_url:
+          description: URL to retrieve n-grams for this work.
+          type: string
+          example: https://api.openalex.org/works/W2023271753/ngrams
+        open_access:
+          type: object
+          description: Information about the open access status of the work.
+          properties:
+            is_oa:
+              type: boolean
+              description: True if this work is Open Access (OA).
+            oa_status:
+              type: string
+              enum:
+                - gold
+                - green
+                - hybrid
+                - bronze
+                - closed
+              description: The Open Access (OA) status of this work.
+            oa_url:
+              type: string
+              description: The best Open Access (OA) URL for this work.
+            any_repository_has_fulltext:
+              type: boolean
+              description: True if any of this work's locations has is_oa=true and source.type=repository. This indicates that a full-text version of the work is available in an open access repository.
+          required:
+            - is_oa
+            - oa_status
+        primary_location:
+          $ref: '#/components/schemas/location'
+          description: The primary location where this work can be found, typically the publisher's site.
+        primary_topic:
+          $ref: '#/components/schemas/topic'
+          description: The top ranked Topic for this work.
+        publication_date:
+          description: The day when this work was published, formatted as an ISO 8601 date.
+          format: date
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          example: '2018-02-13'
+        publication_year:
+          description: The year this work was published.
+          type: integer
+          example: 2018
+        referenced_works:
+          description: OpenAlex IDs for works that this work cites.
+          items:
+            type: string
+          type: array
+          example:
+            - https://openalex.org/W2741809807
+            - https://openalex.org/W2741809808
+            - https://openalex.org/W2741809809
+        related_works:
+          description: OpenAlex IDs for works related to this work. These are computed algorithmically based on shared concepts.
+          items:
+            type: string
+          type: array
+        sustainable_development_goals:
+          description: The UN Sustainable Development Goals relevant to this work.
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The OpenAlex ID for this sustainable development goal.
+              display_name:
+                type: string
+                description: The name of the sustainable development goal.
+              score:
+                type: number
+                description: The relevance score of this goal for the work.
+          example:
+            - id: https://metadata.un.org/sdg/3
+              display_name: Good health and well-being
+              score: 0.95
+            - id: https://metadata.un.org/sdg/13
+              display_name: Climate action
+              score: 0.85
+        title:
+          description: The title of this work.
+          type: string
+          example: 'The state of OA: a large-scale analysis of the prevalence and impact of Open Access articles'
+        topics:
+          description: The top ranked Topics for this work.
+          items:
+            properties:
+              display_name:
+                description: The name of the topic.
+                type: string
+              domain:
+                properties:
+                  display_name:
+                    type: string
+                  id:
+                    type: integer
+                type: object
+              field:
+                properties:
+                  display_name:
+                    type: string
+                  id:
+                    type: integer
+                type: object
+              id:
+                description: The OpenAlex ID for this topic.
+                type: string
+              score:
+                description: The strength of the connection between the work and this topic.
+                type: number
+              subfield:
+                properties:
+                  display_name:
+                    type: string
+                  id:
+                    type: integer
+                type: object
+            type: object
+          type: array
+        type:
+          description: The type of the work.
+          type: string
+          example: article
+        type_crossref:
+          description: Legacy type information, using Crossref's "type" controlled vocabulary.
+          type: string
+          example: journal-article
+        updated_date:
+          description: The last time anything in this Work object changed, including counts, formatted as an ISO 8601 date-time. This date is updated for any change at all, including increases in various counts.
+          format: date-time
+          type: string
+          example: '2022-01-02T00:22:35.180390'
+    autocomplete:
+      type: object
+      properties:
+        meta:
+          type: object
+          description: Information about the autocomplete request and response.
+          properties:
+            count:
+              type: integer
+              description: The total number of matching results.
+            db_response_time_ms:
+              type: integer
+              description: The time taken by the database to respond, in milliseconds.
+            page:
+              type: integer
+              description: The current page number (always 1 for autocomplete).
+            per_page:
+              type: integer
+              description: The number of results per page (always 10 for autocomplete).
+        results:
+          type: array
+          description: A list of up to ten autocomplete results for the query, sorted by citation count.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The OpenAlex ID for this result entity.
+              external_id:
+                type: string
+                description: The Canonical External ID for this result entity.
+              display_name:
+                type: string
+                description: The entity's display_name property.
+              entity_type:
+                type: string
+                description: The entity's type (author, concept, institution, source, publisher, funder, or work).
+                enum:
+                  - author
+                  - concept
+                  - institution
+                  - source
+                  - publisher
+                  - funder
+                  - work
+              cited_by_count:
+                type: integer
+                description: The entity's cited_by_count property. For works, this is the number of incoming citations. For other entities, it's the sum of incoming citations for all linked works.
+              works_count:
+                type: integer
+                description: The number of works associated with the entity. For entity type 'work' it's always null.
+              hint:
+                type: string
+                description: Extra information to help identify the right item. Content varies by entity type.
+      example:
+        meta:
+          count: 183
+          db_response_time_ms: 5
+          page: 1
+          per_page: 10
+        results:
+          - id: https://openalex.org/I33213144
+            display_name: University of Florida
+            hint: Gainesville, USA
+            cited_by_count: 17190001
+            entity_type: institution
+            external_id: https://ror.org/02y3ad647
+            works_count: 456789
+    cursor:
+      type: string
+      description: A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
+      example: '*'
+    filter:
+      type: string
+      description: |
+        Filters narrow the list down to just entities that meet particular conditions.
+        Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
+      example: type:book,cited_by_count:>1,is_oa:true
+    page:
+      type: integer
+      description: The page number of results to return. Used for basic paging.
+      minimum: 1
+      default: 1
+      example: 2
+    per_page:
+      type: integer
+      description: The number of results to return per page.
+      minimum: 1
+      maximum: 200
+      default: 25
+      example: 50
+    search:
+      type: string
+      description: Text search query string to find entities that match the given text. Supports boolean operators (AND, OR, NOT) and exact phrase matching with double quotes.
+      example: dna
+    select:
+      type: string
+      description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
+      example: id,doi,display_name
+    sort:
+      type: string
+      description: |
+        Comma-separated list of fields to sort by. Append ':desc' for descending order.
+        Available sort properties (where they exist):
+        * display_name
+        * cited_by_count
+        * works_count
+        * publication_date
+        * relevance_score (only when a search filter is active)
+      example: cited_by_count:desc,publication_date

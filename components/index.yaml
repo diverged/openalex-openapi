@@ -49,6 +49,19 @@ schemas:
     $ref: ./schemas/topic.yaml
   Work:
     $ref: ./schemas/work.yaml
+  Concept:
+    $ref: ./schemas/concept.yaml
+  DehydratedConcept:
+    type: object
+    properties:
+      id:
+        type: string
+      display_name:
+        type: string
+      level:
+        type: integer
+      wikidata:
+        type: string
 
 parameters:
   filter:

@@ -1,0 +1,545 @@
+---
+swagger: "2.0"
+info:
+  description: OpenAlex APIs
+  version: 0.0.1
+  title: OpenAlex
+  license:
+    name: MIT
+    url: https://github.com/ourresearch/openalex-guts/blob/main/LICENSE
+basePath: /
+tags:
+- name: work
+  description: An OpenAlex work
+- name: author
+  description: An OpenAlex author
+- name: institution
+  description: An OpenAlex institution
+- name: journal
+  description: An OpenAlex journal
+- name: concept
+  description: An OpenAlex concept
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /author/id/{author_id}:
+    get:
+      tags:
+      - author
+      description: An endpoint to get an author from the author_id
+      operationId: get_author_id
+      parameters:
+      - name: author_id
+        in: path
+        description: Author ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Author'
+        "404":
+          description: Not found
+  /author/orcid/{orcid}:
+    get:
+      tags:
+      - author
+      description: An endpoint to get an author from the orcid
+      operationId: get_author_orcid
+      parameters:
+      - name: orcid
+        in: path
+        description: ORCID of the author (eg 0000-0002-6133-2581)
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Author'
+        "404":
+          description: Not found
+  /concept/id/{concept_id}:
+    get:
+      tags:
+      - concept
+      description: An endpoint to get concept from the id
+      operationId: get_concept_id
+      parameters:
+      - name: concept_id
+        in: path
+        description: OpenAlex id of the concept
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Concept'
+        "404":
+          description: Not found
+  /institution/id/{institution_id}:
+    get:
+      tags:
+      - institution
+      description: An endpoint to get institution from the id
+      operationId: get_institution_id
+      parameters:
+      - name: institution_id
+        in: path
+        description: OpenAlex id of the institution
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Institution'
+        "404":
+          description: Not found
+  /institution/ror/{ror_id}:
+    get:
+      tags:
+      - institution
+      description: An endpoint to get institution from the ROR id
+      operationId: get_institution_ror
+      parameters:
+      - name: ror_id
+        in: path
+        description: ROR id of the institution
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Institution'
+        "404":
+          description: Not found
+  /journal/id/{journal_id}:
+    get:
+      tags:
+      - journal
+      description: An endpoint to get journal from the id
+      operationId: get_journal_id
+      parameters:
+      - name: journal_id
+        in: path
+        description: OpenAlex id of the journal
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Journal'
+        "404":
+          description: Not found
+  /journal/issn/{issn}:
+    get:
+      tags:
+      - journal
+      description: An endpoint to get journal from an ISSN
+      operationId: get_journal_issn
+      parameters:
+      - name: issn
+        in: path
+        description: ISSN of the journal
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Journal'
+        "404":
+          description: Not found
+  /work/doi/{doi}:
+    get:
+      tags:
+      - work
+      description: An endpoint to get work from the doi
+      operationId: get_work_doi
+      parameters:
+      - name: doi
+        in: path
+        description: DOI of the work (eg 10.7717/peerj.4375)
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Work'
+        "404":
+          description: Not found
+  /work/id/{work_id}:
+    get:
+      tags:
+      - work
+      description: An endpoint to get work from the id
+      operationId: get_work_id
+      parameters:
+      - name: work_id
+        in: path
+        description: OpenAlex id of the work (eg 2741809807)
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Work'
+        "404":
+          description: Not found
+  /work/pmid/{pmid}:
+    get:
+      tags:
+      - work
+      description: An endpoint to get work from the PubMed ID
+      operationId: get_work_pmid
+      parameters:
+      - name: pmid
+        in: path
+        description: PMID of the work (eg 21801268)
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Work'
+        "404":
+          description: Not found
+definitions:
+  AbstractInvertedIndex:
+    type: object
+    properties:
+      '*':
+        type: object
+  Affiliation:
+    type: object
+    properties:
+      author:
+        $ref: '#/definitions/Author'
+      author_sequence_number:
+        type: integer
+        description: author order
+      institution:
+        $ref: '#/definitions/InstitutionSmall'
+  AncestorConcept:
+    type: object
+    properties:
+      display_name:
+        type: string
+  Author:
+    type: object
+    properties:
+      all_institutions:
+        type: array
+      citation_count:
+        type: integer
+        description: number of times this author has been cited
+      created_date:
+        type: string
+        format: date
+      display_name:
+        type: string
+        format: author_display_name
+        example: Jane Calvo
+        description: full name of the author
+      last_known_institution:
+        $ref: '#/definitions/Institution'
+      orcid:
+        type: string
+        format: 0000-0000-0000-0000
+        example: 0000-0002-6133-2581
+      orcid_url:
+        type: string
+        format: url
+        example: https://orcid.org/0000-0002-6133-2581
+      paper_count:
+        type: integer
+        description: number of papers this author has published
+      updated_date:
+        type: string
+        format: date
+  Concept:
+    type: object
+    properties:
+      ancestors:
+        type: array
+        items:
+          $ref: '#/definitions/AncestorConcept'
+      citation_count:
+        type: integer
+        description: number of times papers with this tag have been cited
+      created_date:
+        type: string
+        format: date
+      display_name:
+        type: string
+        description: full name of the journal
+      main_type:
+        type: string
+      paper_count:
+        type: integer
+        description: number of papers associated with this concept
+  Institution:
+    type: object
+    properties:
+      city:
+        type: string
+        description: city of institution
+      country:
+        type: string
+        description: name of country
+      country_code:
+        type: string
+        description: 2-character country code
+      created_date:
+        type: string
+        format: date
+      display_name:
+        type: string
+        format: institution_display_name
+        example: University of Examples
+      grid_id:
+        type: string
+        description: GRID id (deprecated in favour of ROR id)
+      official_url:
+        type: string
+        description: url of institution
+      ror_id:
+        type: string
+        format: ror_id
+        example: 001ykb961
+      ror_url:
+        type: string
+        format: url
+        example: https://ror.org/001ykb961
+      wikipedia_url:
+        type: string
+        description: url of Wikipedia page of institution
+  InstitutionSmall:
+    type: object
+    properties:
+      original_affiliation:
+        type: string
+  Journal:
+    type: object
+    properties:
+      citation_count:
+        type: integer
+        description: number of times this author has been cited
+      created_date:
+        type: string
+        format: date
+      display_name:
+        type: string
+        description: full name of the journal
+      is_in_doaj:
+        type: boolean
+      is_oa:
+        type: boolean
+      issn_l:
+        type: string
+        format: 0000-0000
+        example: 0123-345X
+        description: linking ISSN for this journal
+      issns:
+        type: array
+        description: all ISSNs for this journal, print and electronic
+        items:
+          type: string
+          format: 0000-0000
+          example: 0123-345X
+      paper_count:
+        type: integer
+        description: number of papers this author has published
+      publisher:
+        type: string
+      updated_date:
+        type: string
+        format: date
+  Location:
+    type: object
+    properties:
+      host_type:
+        type: string
+        example: repository
+        description: Host type
+        enum:
+        - repository
+        - publisher
+      language_code:
+        type: string
+      license:
+        type: string
+      oai_pmh_id:
+        type: string
+      repository_institution:
+        type: string
+      source_description:
+        type: string
+        example: html
+        description: Type of resource at the Source URL
+        enum:
+        - html
+        - text
+        - pdf
+        - doc
+        - ppt
+        - xls
+        - ods
+        - rtf
+        - xml
+        - rss
+        - odp
+        - mp3
+        - odt
+        - swf
+        - zip
+        - ics
+        - pub
+      source_type:
+        type: integer
+      source_url:
+        type: string
+      url_for_landing_page:
+        type: string
+      url_for_pdf:
+        type: string
+      version:
+        type: string
+        example: submittedVersion
+        description: Version of the paper
+        enum:
+        - submittedVersion
+        - acceptedVersion
+        - publishedVersion
+  Mesh:
+    type: object
+    properties:
+      descriptor_name:
+        type: string
+      descriptor_ui:
+        type: string
+      qualifier_name:
+        type: string
+      qualifier_ui:
+        type: string
+  Work:
+    type: object
+    properties:
+      abstract_inverted_index:
+        $ref: '#/definitions/AbstractInvertedIndex'
+      affiliations:
+        type: array
+        items:
+          $ref: '#/definitions/Affiliation'
+      best_host_type:
+        type: string
+        example: repository
+        description: Host type
+        enum:
+        - repository
+        - publisher
+      best_license:
+        type: string
+      best_url:
+        type: string
+      best_version:
+        type: string
+        example: submittedVersion
+        description: Version of the paper
+        enum:
+        - submittedVersion
+        - acceptedVersion
+        - publishedVersion
+      citation_count:
+        type: integer
+        description: number of times this paper has been cited
+      citations:
+        type: array
+      concepts:
+        type: array
+        description: concepts
+        items:
+          $ref: '#/definitions/Concept'
+      created_date:
+        type: string
+        format: date
+      doc_type:
+        type: string
+        description: doc_type
+      first_page:
+        type: string
+      genre:
+        type: string
+        description: genre
+      ids:
+        $ref: '#/definitions/WorkExtraIds'
+      issue:
+        type: string
+      journal:
+        $ref: '#/definitions/Journal'
+      last_page:
+        type: string
+      locations:
+        type: array
+        items:
+          $ref: '#/definitions/Location'
+      mesh:
+        type: array
+        items:
+          $ref: '#/definitions/Mesh'
+      oa_status:
+        type: string
+        example: closed
+        description: Open Access status of the paper
+        enum:
+        - closed
+        - green
+        - gold
+        - hybrid
+        - bronze
+      paper_title:
+        type: string
+        description: title of the paper
+      publication_date:
+        type: string
+        format: date
+        description: date of publication
+      volume:
+        type: string
+      year:
+        type: integer
+        description: year of publication
+  WorkExtraIds:
+    type: object
+    properties:
+      doi:
+        type: string
+        format: 10.XXX/XXX
+        example: 10.123/abc.def
+      doi_url:
+        type: string
+        format: url
+        example: https://doi.org/10.123/abc.def
+      pmid:
+        type: string
+        format: pmid
+        example: "21801268"
+      pmid_url:
+        type: string
+responses:
+  MaskError:
+    description: When any error occurs on mask
+  NoResultFound:
+    description: Return a custom not found error message and 404 status code
+  ParseError:
+    description: When a mask can't be parsed
