@@ -1,7 +1,7 @@
 type: object
 properties:
   abstract_inverted_index:
-    description: The abstract of the work, as an inverted index.
+    description: The abstract of the work, as an inverted index. This format allows for efficient searching and analysis of the abstract text.
     type: object
     example:
       Despite: [0]
@@ -9,7 +9,15 @@ properties:
       interest: [2]
       in: [3, 57, 73, 110, 122]
       Open: [4, 201]
-      Access: [5]
+      Access: [5, 202]
+      OA: [6]
+      citation: [7]
+      advantage: [8]
+      and: [9, 58, 111]
+      its: [10]
+      implications: [11]
+      for: [12, 74]
+      research: [13]
   apc_list:
     description: Information about this work's APC (article processing charge) list price.
     properties:
@@ -84,10 +92,21 @@ properties:
     type: integer
     example: 382
   concepts:
-    description: List of concepts (research topics) associated with the work.
+    description: List of concepts (research topics) associated with the work. These are algorithmically inferred based on the work's content.
     items:
       $ref: ./dehydrated_concept.yaml
     type: array
+    example:
+      - id: "https://openalex.org/C41008148"
+        wikidata: "https://www.wikidata.org/wiki/Q5"
+        display_name: "Human"
+        level: 1
+        score: 0.8534
+      - id: "https://openalex.org/C86803240"
+        wikidata: "https://www.wikidata.org/wiki/Q420"
+        display_name: "Biology"
+        level: 0
+        score: 0.7981
   corresponding_author_ids:
     description: OpenAlex IDs of any authors for which authorships.is_corresponding is true.
     items:
@@ -217,10 +236,40 @@ properties:
     type: integer
     example: 3
   mesh:
-    description: List of Medical Subject Headings (MeSH) associated with the work, if applicable.
-    items:
-      $ref: ./mesh_tag.yaml
+    description: List of Medical Subject Headings (MeSH) associated with the work, if applicable. MeSH terms are used to index and categorize biomedical literature.
     type: array
+    items:
+      type: object
+      properties:
+        descriptor_ui:
+          type: string
+          description: The unique identifier for the MeSH descriptor, starting with the letter D.
+          example: "D000086382"
+        descriptor_name:
+          type: string
+          description: The name of the MeSH descriptor.
+          example: "COVID-19"
+        qualifier_ui:
+          type: string
+          description: The unique identifier for the MeSH qualifier, starting with the letter Q.
+          example: "Q000517"
+        qualifier_name:
+          type: string
+          description: The name of the MeSH qualifier.
+          example: "epidemiology"
+        is_major_topic:
+          type: boolean
+          description: Indicates if this MeSH tag is a major topic for the work. Major topics are the main focus of the article.
+          example: true
+    example:
+      - descriptor_ui: "D000086382"
+        descriptor_name: "COVID-19"
+        qualifier_ui: "Q000517"
+        qualifier_name: "epidemiology"
+        is_major_topic: true
+      - descriptor_ui: "D000293"
+        descriptor_name: "Adolescent"
+        is_major_topic: false
   ngrams_url:
     description: URL to retrieve n-grams for this work.
     type: string
