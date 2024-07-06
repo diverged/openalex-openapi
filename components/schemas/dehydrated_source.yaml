@@ -1,16 +1,21 @@
 type: object
+description: A simplified representation of a source, used when a source is referenced by another entity.
 properties:
+  id:
+    type: string
+    description: The OpenAlex ID for this source.
+    example: "https://openalex.org/S1983995261"
   display_name:
+    type: string
     description: The name of the source.
-    example: PeerJ
-    type: string
+    example: "PeerJ"
   host_organization:
-    description: The host organization for this source as an OpenAlex ID.
-    example: https://openalex.org/P4310320595
     type: string
+    description: The OpenAlex ID of the host organization for this source.
+    example: "https://openalex.org/P4310320595"
   host_organization_lineage:
-    description: OpenAlex IDs of the host organization's lineage.
     type: array
+    description: OpenAlex IDs of the host organization's lineage, from most specific to most general.
     items:
       type: string
     example:
@@ -18,33 +23,33 @@ properties:
       - "https://openalex.org/P4310319900"
       - "https://openalex.org/P4310319965"
   host_organization_name:
-    description: The display_name from the host_organization, shown for convenience.
-    example: Elsevier BV
     type: string
-  id:
-    description: The OpenAlex ID for this source.
-    example: https://openalex.org/S1983995261
-    type: string
+    description: The display_name of the host organization, shown for convenience.
+    example: "PeerJ"
   is_in_doaj:
-    description: Whether this is a journal listed in the Directory of Open Access Journals (DOAJ).
-    example: true
     type: boolean
+    description: Whether this source is listed in the Directory of Open Access Journals (DOAJ).
+    example: true
   is_oa:
-    description: Whether this is currently fully-open-access source.
-    example: true
     type: boolean
+    description: Whether this is currently a fully open-access source.
+    example: true
   issn:
-    description: The ISSNs used by this source.
-    example: ["2167-8359"]
+    type: array
+    description: The ISSNs (International Standard Serial Numbers) used by this source.
     items:
       type: string
-    type: array
+    example: ["2167-8359"]
   issn_l:
-    description: The ISSN-L identifying this source.
-    example: 2167-8359
     type: string
+    description: The ISSN-L (linking ISSN) identifying this source.
+    example: "2167-8359"
   type:
+    type: string
     description: The type of source.
     enum: [journal, repository, conference, ebook platform, book series, metadata, other]
-    example: journal
-    type: string
+    example: "journal"
+required:
+  - id
+  - display_name
+  - type

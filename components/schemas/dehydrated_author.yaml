@@ -1,11 +1,18 @@
 type: object
+description: A simplified representation of an author, used when an author is referenced by another entity.
 properties:
   id:
     type: string
     description: The OpenAlex ID for this author.
+    example: "https://openalex.org/A2208157607"
   display_name:
     type: string
-    description: The name of the author.
+    description: The name of the author as a single string.
+    example: "John M. Doe"
   orcid:
     type: string
-    description: The ORCID for this author.
+    description: The ORCID for this author, if known.
+    example: "https://orcid.org/0000-0002-1825-0097"
+required:
+  - id
+  - display_name

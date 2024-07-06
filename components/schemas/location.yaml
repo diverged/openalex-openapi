@@ -1,21 +1,35 @@
 type: object
+description: The Location object describes the location of a given work. It's only found as part of the Work object.
 properties:
+  is_accepted:
+    type: boolean
+    description: True if this location's version is either acceptedVersion or publishedVersion; otherwise false.
+    example: true
   is_oa:
     type: boolean
-    description: Indicates if this location provides open access to the work.
+    description: True if an Open Access (OA) version of this work is available at this location. OA is defined as having a URL where you can read the fulltext of this work without needing to pay money or log in.
+    example: true
+  is_published:
+    type: boolean
+    description: True if this location's version is publishedVersion; otherwise false.
+    example: true
   landing_page_url:
     type: string
-    description: The URL of the landing page for this location.
-  pdf_url:
-    type: string
-    description: The URL of the PDF for this location, if available.
-  source:
-    $ref: './dehydrated_source.yaml'
-    description: The source (e.g., journal, repository) for this location.
+    description: The landing page URL for this location.
+    example: "https://doi.org/10.1590/s1678-77572010000100010"
   license:
     type: string
-    description: The license under which the work is available at this location.
+    description: The location's publishing license. This can be a Creative Commons license such as cc0 or cc-by, a publisher-specific license, or null which means we are not able to determine a license for this location.
+    example: "cc-by"
+  source:
+    $ref: './dehydrated_source.yaml'
+    description: Information about the source of this location, as a DehydratedSource object.
+  pdf_url:
+    type: string
+    description: A URL where you can find this location as a PDF.
+    example: "http://www.scielo.br/pdf/jaos/v18n1/a10v18n1.pdf"
   version:
     type: string
     enum: [publishedVersion, acceptedVersion, submittedVersion]
-    description: The version of the work available at this location.
+    description: The version of the work, based on the DRIVER Guidelines versioning scheme.
+    example: "publishedVersion"
