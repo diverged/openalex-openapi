@@ -158,9 +158,32 @@ properties:
     example: "pdf"
   grants:
     description: Information about grants that funded this work.
-    items:
-      $ref: ./grant.yaml
     type: array
+    items:
+      type: object
+      properties:
+        funder:
+          type: string
+          description: The OpenAlex ID for the funder of this grant.
+          example: "https://openalex.org/F4320332161"
+        funder_display_name:
+          type: string
+          description: The display name of the funder.
+          example: "National Science Foundation"
+        award_id:
+          type: string
+          description: The identifier for this specific grant, as given by the funder.
+          example: "CBET-1647474"
+      required:
+        - funder
+        - funder_display_name
+    example:
+      - funder: "https://openalex.org/F4320332161"
+        funder_display_name: "National Science Foundation"
+        award_id: "CBET-1647474"
+      - funder: "https://openalex.org/F4320332161"
+        funder_display_name: "National Science Foundation"
+        award_id: "1758606"
   has_fulltext:
     description: Set to true if the work's full text is searchable in OpenAlex.
     type: boolean
