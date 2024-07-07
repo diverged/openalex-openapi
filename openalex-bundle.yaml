@@ -1,20 +1,26 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: OpenAlex API
   description: An OpenAPI specification for the OpenAlex API
   version: 1.0.0
+  license:
+    name: CC0 1.0 Universal
+    url: https://creativecommons.org/publicdomain/zero/1.0/
 servers:
-  - url: https://api.openalex.org/
+  - url: https://api.openalex.org
+security:
+  - PoliteEmail: []
 paths:
   /authors:
     get:
+      operationId: listAuthors
       summary: List Authors
       description: Returns a list of authors.
       parameters:
         - $ref: '#/components/parameters/filter_parameter'
         - $ref: '#/components/parameters/search_parameter'
         - $ref: '#/components/parameters/sort_parameter'
-        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/cursor_page_parameter'
         - $ref: '#/components/parameters/per_page_parameter'
         - $ref: '#/components/parameters/select_parameter'
         - $ref: '#/components/parameters/group_by_parameter'
@@ -48,73 +54,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Author
-        description: Returns details for a single author. Any ID supported in the `ids` object will successfully return a single entity.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (ORCID, Scopus, Twitter, Wikipedia) of the author
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/author.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Author not found
-          '429':
-            description: Too many requests
-    /autocomplete:
-      get:
-        summary: Autocomplete Authors
-        description: Returns a list of authors for autocomplete functionality.
-        parameters:
-          - name: q
-            in: query
-            description: The search query for autocomplete
-            required: true
-            schema:
-              type: string
-          - $ref: ../components/parameters/filter_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/autocomplete.yaml
-          '400':
-            description: Bad request
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
-    /random:
-      get:
-        summary: Get a random Author
-        description: Returns a random author.
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/author.yaml
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
   /concepts:
     get:
+      operationId: listConcepts
       summary: List Concepts
       description: Returns a list of concepts.
       parameters:
@@ -145,38 +87,19 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/concept'
+                  group_by:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/group_by'
         '400':
           description: Bad request
         '403':
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Concept
-        description: Returns details for a single concept.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (Wikidata, MAG) of the concept
-            schema:
-              type: string
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/concept.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Concept not found
-          '429':
-            description: Too many requests
   /funders:
     get:
+      operationId: listFunders
       summary: List Funders
       description: Returns a list of funders.
       parameters:
@@ -217,58 +140,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Funder
-        description: Returns details for a single funder. Any ID supported in the `ids` object will successfully return a single entity.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (ROR, Wikidata) of the funder
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/funder.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Funder not found
-          '429':
-            description: Too many requests
-    /autocomplete:
-      get:
-        summary: Autocomplete Funders
-        description: Returns a list of funders for autocomplete functionality.
-        parameters:
-          - name: q
-            in: query
-            description: The search query for autocomplete
-            required: true
-            schema:
-              type: string
-          - $ref: ../components/parameters/filter_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/autocomplete.yaml
-          '400':
-            description: Bad request
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
   /institutions:
     get:
+      operationId: listInstitutions
       summary: List Institutions
       description: Returns a list of institutions.
       parameters:
@@ -309,58 +183,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Institution
-        description: Returns details for a single institution. Any ID supported in the `ids` object will successfully return a single entity.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (ROR, GRID, Wikidata) of the institution
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/institution.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Institution not found
-          '429':
-            description: Too many requests
-    /autocomplete:
-      get:
-        summary: Autocomplete Institutions
-        description: Returns a list of institutions matching the given query string, useful for creating type-ahead style search functions.
-        parameters:
-          - name: q
-            in: query
-            description: The search query
-            required: true
-            schema:
-              type: string
-          - $ref: ../components/parameters/filter_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/autocomplete.yaml
-          '400':
-            description: Bad request
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
   /keywords:
     get:
+      operationId: listKeywords
       summary: List Keywords
       description: Returns a list of keywords.
       parameters:
@@ -401,58 +226,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Keyword
-        description: Returns details for a single keyword.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID of the keyword
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/keyword.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Keyword not found
-          '429':
-            description: Too many requests
-    /autocomplete:
-      get:
-        summary: Autocomplete Keywords
-        description: Returns a list of keywords matching the given query string, useful for creating type-ahead style search functions.
-        parameters:
-          - name: q
-            in: query
-            description: The search query
-            required: true
-            schema:
-              type: string
-          - $ref: ../components/parameters/filter_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/autocomplete.yaml
-          '400':
-            description: Bad request
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
   /publishers:
     get:
+      operationId: listPublishers
       summary: List Publishers
       description: Returns a list of publishers.
       parameters:
@@ -493,58 +269,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Publisher
-        description: Returns details for a single publisher. Any ID supported in the `ids` object will successfully return a single entity.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (ROR, Wikidata) of the publisher
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/publisher.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Publisher not found
-          '429':
-            description: Too many requests
-    /autocomplete:
-      get:
-        summary: Autocomplete Publishers
-        description: Returns a list of publishers matching the given query string, useful for creating type-ahead style search functions.
-        parameters:
-          - name: q
-            in: query
-            description: The search query
-            required: true
-            schema:
-              type: string
-          - $ref: ../components/parameters/filter_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/autocomplete.yaml
-          '400':
-            description: Bad request
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
   /sources:
     get:
+      operationId: listSources
       summary: List Sources
       description: Returns a list of sources. Sources are where works are hosted, including journals, conferences, preprint repositories, and institutional repositories.
       parameters:
@@ -585,94 +312,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Source
-        description: Returns details for a single source. Any ID supported in the `ids` object will successfully return a single entity.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (ISSN, ISSN-L, MAG, Wikidata) of the source
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/source.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Source not found
-          '429':
-            description: Too many requests
-    /autocomplete:
-      get:
-        summary: Autocomplete Sources
-        description: Returns a list of sources for autocomplete functionality.
-        parameters:
-          - name: q
-            in: query
-            description: The search query for autocomplete
-            required: true
-            schema:
-              type: string
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    results:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            description: The OpenAlex ID for this source
-                          display_name:
-                            type: string
-                            description: The name of the source
-                          hint:
-                            type: string
-                            description: Additional information (usually the publisher)
-                          cited_by_count:
-                            type: integer
-                            description: The number of citations to works in this source
-                          works_count:
-                            type: integer
-                            description: The number of works in this source
-                          entity_type:
-                            type: string
-                            enum:
-                              - source
-                          external_id:
-                            type: string
-                            description: An external identifier for this source (usually ISSN)
-                  example:
-                    results:
-                      - id: https://openalex.org/S5555990
-                        display_name: The Journal of Neuroscience
-                        hint: Society for Neuroscience
-                        cited_by_count: 4274712
-                        works_count: 40376
-                        entity_type: source
-                        external_id: 0270-6474
-          '400':
-            description: Bad request
-          '403':
-            description: Forbidden
-          '429':
-            description: Too many requests
   /topics:
     get:
+      operationId: listTopics
       summary: List Topics
       description: Returns a list of topics.
       parameters:
@@ -713,33 +355,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Topic
-        description: Returns details for a single topic.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID of the topic
-            schema:
-              type: string
-          - $ref: ../components/parameters/select_parameter.yaml
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/topic.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Topic not found
-          '429':
-            description: Too many requests
   /works:
     get:
+      operationId: listWorks
       summary: List Works
       description: Returns a list of works.
       parameters:
@@ -795,32 +413,9 @@ paths:
           description: Forbidden
         '429':
           description: Too many requests
-    /{id}:
-      get:
-        summary: Get a single Work
-        description: Returns details for a single work. Any ID supported in the `ids` object will successfully return a single entity.
-        parameters:
-          - name: id
-            in: path
-            required: true
-            description: OpenAlex ID or any supported external ID (DOI, MAG, PMID, PMCID) of the work
-            schema:
-              type: string
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                schema:
-                  $ref: ../components/schemas/work.yaml
-          '403':
-            description: Forbidden
-          '404':
-            description: Work not found
-          '429':
-            description: Too many requests
   /autocomplete/{entity_type}:
     get:
+      operationId: autocompleteEntities
       summary: Autocomplete entities
       description: Returns a list of entities that match the given query string for autocomplete suggestions.
       parameters:
@@ -846,7 +441,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/autocomplete'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message describing the bad request
 components:
+  securitySchemes:
+    PoliteEmail:
+      type: apiKey
+      name: email
+      in: header
+      description: Optional email address for polite requests
   schemas:
     Author:
       $ref: '#/components/schemas/author'
@@ -898,6 +509,38 @@ components:
       $ref: '#/components/schemas/topic'
     Work:
       $ref: '#/components/schemas/work'
+    filter:
+      type: string
+      description: |
+        Filters narrow the list down to just entities that meet particular conditions.
+        Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
+      example: type:book,cited_by_count:>1,is_oa:true
+    sort:
+      type: string
+      description: |
+        Comma-separated list of fields to sort by. Append ':desc' for descending order.
+        Available sort properties (where they exist):
+        * display_name
+        * cited_by_count
+        * works_count
+        * publication_date
+        * relevance_score (only when a search filter is active)
+      example: cited_by_count:desc,publication_date
+    cursor:
+      type: string
+      description: A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
+      example: '*'
+    per_page:
+      type: integer
+      description: The number of results to return per page.
+      minimum: 1
+      maximum: 200
+      default: 25
+      example: 50
+    select:
+      type: string
+      description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
+      example: id,doi,display_name
     meta:
       type: object
       description: Metadata about the API response
@@ -1176,6 +819,12 @@ components:
         key: article
         key_display_name: article
         count: 202814957
+    page:
+      type: integer
+      description: The page number of results to return. Used for basic paging.
+      minimum: 1
+      default: 1
+      example: 2
     concept:
       type: object
       properties:
@@ -2895,48 +2544,10 @@ components:
             entity_type: institution
             external_id: https://ror.org/02y3ad647
             works_count: 456789
-    cursor:
-      type: string
-      description: A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
-      example: '*'
-    filter:
-      type: string
-      description: |
-        Filters narrow the list down to just entities that meet particular conditions.
-        Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
-      example: type:book,cited_by_count:>1,is_oa:true
-    page:
-      type: integer
-      description: The page number of results to return. Used for basic paging.
-      minimum: 1
-      default: 1
-      example: 2
-    per_page:
-      type: integer
-      description: The number of results to return per page.
-      minimum: 1
-      maximum: 200
-      default: 25
-      example: 50
     search:
       type: string
       description: Text search query string to find entities that match the given text. Supports boolean operators (AND, OR, NOT) and exact phrase matching with double quotes.
       example: dna
-    select:
-      type: string
-      description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
-      example: id,doi,display_name
-    sort:
-      type: string
-      description: |
-        Comma-separated list of fields to sort by. Append ':desc' for descending order.
-        Available sort properties (where they exist):
-        * display_name
-        * cited_by_count
-        * works_count
-        * publication_date
-        * relevance_score (only when a search filter is active)
-      example: cited_by_count:desc,publication_date
   parameters:
     filter:
       $ref: '#/components/parameters/filter_parameter'
@@ -2945,7 +2556,7 @@ components:
     sort:
       $ref: '#/components/parameters/sort_parameter'
     page:
-      $ref: '#/components/parameters/cursor_page_parameter'
+      $ref: '#/components/parameters/page_parameter'
     per_page:
       $ref: '#/components/parameters/per_page_parameter'
     select:
@@ -2957,111 +2568,114 @@ components:
     cursor:
       $ref: '#/components/parameters/cursor_page_parameter'
     filter_parameter:
-      - name: filter
-        in: query
-        description: |
-          Filters narrow the list down to just entities that meet particular conditions.
-          Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
-        required: false
-        schema:
-          $ref: ../schemas/filter.yaml
-        example: type:book,cited_by_count:>1,is_oa:true
-        examples:
-          single_filter:
-            summary: Filter works by type
-            value: type:book
-          multiple_filters:
-            summary: Filter works by type and citation count
-            value: type:book,cited_by_count:>1
-          negation:
-            summary: Filter institutions not in the US
-            value: country_code:!us
-          intersection:
-            summary: Filter works with authors from France and UK
-            value: institutions.country_code:fr+gb
-          addition:
-            summary: Filter works with authors from France or UK
-            value: institutions.country_code:fr|gb
+      name: filter
+      in: query
+      description: |
+        Filters narrow the list down to just entities that meet particular conditions.
+        Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
+      required: false
+      schema:
+        $ref: '#/components/schemas/filter'
+      example: type:book,cited_by_count:>1,is_oa:true
+      examples:
+        single_filter:
+          summary: Filter works by type
+          value: type:book
+        multiple_filters:
+          summary: Filter works by type and citation count
+          value: type:book,cited_by_count:>1
+        negation:
+          summary: Filter institutions not in the US
+          value: country_code:!us
+        intersection:
+          summary: Filter works with authors from France and UK
+          value: institutions.country_code:fr+gb
+        addition:
+          summary: Filter works with authors from France or UK
+          value: institutions.country_code:fr|gb
     search_parameter:
-      - name: search
-        in: query
-        description: Text search query string to find entities that match the given text.
-        required: false
-        schema:
-          type: string
-        example: dna
-        examples:
-          simple_search:
-            summary: Simple search query
-            value: dna
-          boolean_search:
-            summary: Boolean search query
-            value: (elmo AND "sesame street") NOT (cookie OR monster)
-          exact_phrase:
-            summary: Exact phrase search
-            value: fierce creatures
+      name: search
+      in: query
+      description: Text search query string to find entities that match the given text.
+      required: false
+      schema:
+        type: string
+      example: dna
+      examples:
+        simple_search:
+          summary: Simple search query
+          value: dna
+        boolean_search:
+          summary: Boolean search query
+          value: (elmo AND "sesame street") NOT (cookie OR monster)
+        exact_phrase:
+          summary: Exact phrase search
+          value: fierce creatures
     sort_parameter:
-      - name: sort
-        in: query
-        description: |
-          Specify the property to sort the results by. Multiple sort keys can be provided, separated by commas.
-          Append ':desc' to sort in descending order. Default sort direction is ascending.
-        required: false
-        schema:
-          $ref: ../schemas/sort.yaml
-        example: cited_by_count:desc
-        examples:
-          single_sort:
-            summary: Sort by cited_by_count in descending order
-            value: cited_by_count:desc
-          multiple_sort:
-            summary: Sort by publication year (descending) then by relevance score (descending)
-            value: publication_year:desc,relevance_score:desc
-    page_parameter:
-      - name: page
-        in: query
-        description: The page number of results to return. Used for basic paging.
-        required: false
-        schema:
-          $ref: ../schemas/page.yaml
-        example: 2
-        examples:
-          default_page:
-            summary: Default first page
-            value: 1
-          second_page:
-            summary: Second page of results
-            value: 2
+      name: sort
+      in: query
+      description: |
+        Specify the property to sort the results by. Multiple sort keys can be provided, separated by commas.
+        Append ':desc' to sort in descending order. Default sort direction is ascending.
+      required: false
+      schema:
+        $ref: '#/components/schemas/sort'
+      example: cited_by_count:desc
+      examples:
+        single_sort:
+          summary: Sort by cited_by_count in descending order
+          value: cited_by_count:desc
+        multiple_sort:
+          summary: Sort by publication year (descending) then by relevance score (descending)
+          value: publication_year:desc,relevance_score:desc
+    cursor_page_parameter:
+      name: cursor
+      in: query
+      description: |
+        A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
+
+        Warning: Don't use cursor paging to download the whole dataset. It's inefficient and puts a massive load on the servers. Instead, use the OpenAlex snapshot for downloading all data at once.
+      required: false
+      schema:
+        $ref: '#/components/schemas/cursor'
+      example: '*'
+      examples:
+        start_cursor:
+          summary: Start cursor pagination
+          value: '*'
+        next_page:
+          summary: Get the next page of results
+          value: IlsxNjA5MzcyODAwMDAwLCAnaHR0cHM6Ly9vcGVuYWxleC5vcmcvVzI0ODg0OTk3NjQnXSI=
     per_page_parameter:
-      - name: per-page
-        in: query
-        description: The number of results to return per page. Minimum is 1, maximum is 200, default is 25.
-        required: false
-        schema:
-          $ref: ../schemas/per_page.yaml
-        example: 50
-        examples:
-          default:
-            summary: Default number of results per page
-            value: 25
-          maximum:
-            summary: Maximum number of results per page
-            value: 200
+      name: per-page
+      in: query
+      description: The number of results to return per page. Minimum is 1, maximum is 200, default is 25.
+      required: false
+      schema:
+        $ref: '#/components/schemas/per_page'
+      example: 50
+      examples:
+        default:
+          summary: Default number of results per page
+          value: 25
+        maximum:
+          summary: Maximum number of results per page
+          value: 200
     select_parameter:
-      - name: select
-        in: query
-        description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
-        required: false
-        schema:
-          $ref: ../schemas/select.yaml
-        example: id,doi,display_name
-        examples:
-          single_entity:
-            summary: Select fields for a single entity
-            value: id,display_name
-          list_of_entities:
-            summary: Select fields for a list of entities
-            value: id,doi,display_name
+      name: select
+      in: query
+      description: Comma-separated list of fields to return in the results. Only root-level fields can be selected.
+      required: false
+      schema:
+        $ref: '#/components/schemas/select'
+      example: id,doi,display_name
+      examples:
+        single_entity:
+          summary: Select fields for a single entity
+          value: id,display_name
+        list_of_entities:
+          summary: Select fields for a list of entities
+          value: id,doi,display_name
     group_by_parameter:
       name: group_by
       in: query
@@ -3085,43 +2699,41 @@ components:
           The property to group by. Can be any filterable property.
           Optionally followed by `:include_unknown` to include the "unknown" group.
       example: authorships.institutions.id
+    page_parameter:
+      name: page
+      in: query
+      description: The page number of results to return. Used for basic paging.
+      required: false
+      schema:
+        $ref: '#/components/schemas/page'
+      example: 2
+      examples:
+        default_page:
+          summary: Default first page
+          value: 1
+        second_page:
+          summary: Second page of results
+          value: 2
     autocomplete_parameter:
-      - name: q
-        in: query
-        description: The search string supplied by the user for autocomplete suggestions.
-        required: true
-        schema:
-          type: string
-        example: flori
-      - name: filter
-        in: query
-        description: Optional filter to apply to the autocomplete results. Uses the same syntax as entity filters.
-        required: false
-        schema:
-          type: string
-        example: publication_year:2010
-      - name: search
-        in: query
-        description: Optional search query to apply to the autocomplete results. Uses the same syntax as entity search.
-        required: false
-        schema:
-          type: string
-        example: frogs
-    cursor_page_parameter:
-      - name: cursor
-        in: query
-        description: |
-          A cursor value for paginating through results. Use '*' to start cursor pagination, or use the 'next_cursor' value from the previous response to get the next page.
+      name: q
+      in: query
+      description: |
+        The search string supplied by the user for autocomplete suggestions.
 
-          Warning: Don't use cursor paging to download the whole dataset. It's inefficient and puts a massive load on the servers. Instead, use the OpenAlex snapshot for downloading all data at once.
-        required: false
-        schema:
-          $ref: ../schemas/cursor.yaml
-        example: '*'
-        examples:
-          start_cursor:
-            summary: Start cursor pagination
-            value: '*'
-          next_page:
-            summary: Get the next page of results
-            value: IlsxNjA5MzcyODAwMDAwLCAnaHR0cHM6Ly9vcGVuYWxleC5vcmcvVzI0ODg0OTk3NjQnXSI=
+        Additional parameters:
+        - filter: Optional filter to apply to the autocomplete results. Uses the same syntax as entity filters.
+        - search: Optional search query to apply to the autocomplete results. Uses the same syntax as entity search.
+      required: true
+      schema:
+        type: string
+      example: flori
+      examples:
+        simple_query:
+          summary: Simple autocomplete query
+          value: flori
+        with_filter:
+          summary: Autocomplete query with filter
+          value: flori&filter=publication_year:2010
+        with_search:
+          summary: Autocomplete query with search
+          value: flori&search=frogs
