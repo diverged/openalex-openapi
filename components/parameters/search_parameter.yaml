@@ -1,17 +1,17 @@
-- name: search
-  in: query
-  description: Text search query string to find entities that match the given text.
-  required: false
-  schema:
-    type: string
-  example: dna
-  examples:
-    simple_search:
-      summary: Simple search query
-      value: dna
-    boolean_search:
-      summary: Boolean search query
-      value: (elmo AND "sesame street") NOT (cookie OR monster)
-    exact_phrase:
-      summary: Exact phrase search
-      value: "fierce creatures"
+name: search
+in: query
+description: Text search query string to find entities that match the given text.
+required: false
+schema:
+  type: string
+example: dna
+examples:
+  simple_search:
+    summary: Simple search query
+    value: dna
+  boolean_search:
+    summary: Boolean search query
+    value: (elmo AND "sesame street") NOT (cookie OR monster)
+  exact_phrase:
+    summary: Exact phrase search
+    value: "fierce creatures"

@@ -1,25 +1,25 @@
-- name: filter
-  in: query
-  description: |
-    Filters narrow the list down to just entities that meet particular conditions.
-    Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
-  required: false
-  schema:
-    $ref: '../schemas/filter.yaml'
-  example: type:book,cited_by_count:>1,is_oa:true
-  examples:
-    single_filter:
-      summary: Filter works by type
-      value: type:book
-    multiple_filters:
-      summary: Filter works by type and citation count
-      value: type:book,cited_by_count:>1
-    negation:
-      summary: Filter institutions not in the US
-      value: country_code:!us
-    intersection:
-      summary: Filter works with authors from France and UK
-      value: institutions.country_code:fr+gb
-    addition:
-      summary: Filter works with authors from France or UK
-      value: institutions.country_code:fr|gb
+name: filter
+in: query
+description: |
+  Filters narrow the list down to just entities that meet particular conditions.
+  Multiple filters can be combined using commas. Filters support logical expressions including inequality, negation, intersection, and addition.
+required: false
+schema:
+  $ref: '../schemas/filter.yaml'
+example: type:book,cited_by_count:>1,is_oa:true
+examples:
+  single_filter:
+    summary: Filter works by type
+    value: type:book
+  multiple_filters:
+    summary: Filter works by type and citation count
+    value: type:book,cited_by_count:>1
+  negation:
+    summary: Filter institutions not in the US
+    value: country_code:!us
+  intersection:
+    summary: Filter works with authors from France and UK
+    value: institutions.country_code:fr+gb
+  addition:
+    summary: Filter works with authors from France or UK
+    value: institutions.country_code:fr|gb
