@@ -3,6 +3,9 @@ info:
   title: OpenAlex API
   description: An OpenAPI specification for the OpenAlex API
   version: 1.0.0
+  license:
+    name: CC0 1.0 Universal
+    url: https://creativecommons.org/publicdomain/zero/1.0/
 servers:
   - url: https://api.openalex.org
 
@@ -110,6 +113,7 @@ paths:
     $ref: './paths/works.yaml'
   /autocomplete/{entity_type}:
     get:
+      operationId: autocompleteEntities
       summary: Autocomplete entities
       description: Returns a list of entities that match the given query string for autocomplete suggestions.
       parameters:

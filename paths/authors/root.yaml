@@ -1,4 +1,5 @@
 get:
+  operationId: listAuthors
   summary: List Authors
   description: Returns a list of authors.
   parameters:
