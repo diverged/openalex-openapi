@@ -7,23 +7,23 @@ servers:
   - url: https://api.openalex.org
 paths:
   /authors:
-    $ref: ./paths/authors.yaml
+    $ref: './paths/authors.yaml'
   /concepts:
-    $ref: ./paths/concepts.yaml
+    $ref: './paths/concepts.yaml'
   /funders:
-    $ref: ./paths/funders.yaml
+    $ref: './paths/funders.yaml'
   /institutions:
-    $ref: ./paths/institutions.yaml
+    $ref: './paths/institutions.yaml'
   /keywords:
-    $ref: ./paths/keywords.yaml
+    $ref: './paths/keywords.yaml'
   /publishers:
-    $ref: ./paths/publishers.yaml
+    $ref: './paths/publishers.yaml'
   /sources:
-    $ref: ./paths/sources.yaml
+    $ref: './paths/sources.yaml'
   /topics:
-    $ref: ./paths/topics.yaml
+    $ref: './paths/topics.yaml'
   /works:
-    $ref: ./paths/works.yaml
+    $ref: './paths/works.yaml'
   /autocomplete/{entity_type}:
     get:
       summary: Autocomplete entities

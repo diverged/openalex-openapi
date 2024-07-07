@@ -1,23 +1,22 @@
-- name: q
-  in: query
-  description: The search string supplied by the user for autocomplete suggestions.
-  required: true
-  schema:
-    type: string
-  example: flori
-
-- name: filter
-  in: query
-  description: Optional filter to apply to the autocomplete results. Uses the same syntax as entity filters.
-  required: false
-  schema:
-    type: string
-  example: publication_year:2010
-
-- name: search
-  in: query
-  description: Optional search query to apply to the autocomplete results. Uses the same syntax as entity search.
-  required: false
-  schema:
-    type: string
-  example: frogs
+name: q
+in: query
+description: |
+  The search string supplied by the user for autocomplete suggestions.
+  
+  Additional parameters:
+  - filter: Optional filter to apply to the autocomplete results. Uses the same syntax as entity filters.
+  - search: Optional search query to apply to the autocomplete results. Uses the same syntax as entity search.
+required: true
+schema:
+  type: string
+example: flori
+examples:
+  simple_query:
+    summary: Simple autocomplete query
+    value: flori
+  with_filter:
+    summary: Autocomplete query with filter
+    value: flori&filter=publication_year:2010
+  with_search:
+    summary: Autocomplete query with search
+    value: flori&search=frogs
