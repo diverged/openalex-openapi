@@ -1,6 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json": "file:///Users/aw/dev/src/github.com/openalex/openalex-openapi/components/index.yaml",
-        "https://json.schemastore.org/yamllint.json": "file:///Users/aw/dev/src/github.com/openalex/openalex-openapi/components/parameters/cursor_page_parameter.yaml"
-    }
-}
