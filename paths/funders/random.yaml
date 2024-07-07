@@ -1,0 +1,14 @@
+get:
+  summary: Get a random Funder
+  description: Returns a random funder.
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/funder.yaml'
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests

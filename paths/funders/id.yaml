@@ -1,0 +1,24 @@
+get:
+  summary: Get a single Funder
+  description: Returns details for a single funder. Any ID supported in the `ids` object will successfully return a single entity.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: OpenAlex ID or any supported external ID (ROR, Wikidata) of the funder
+      schema:
+        type: string
+    - $ref: '../../components/parameters/select_parameter.yaml'
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/funder.yaml'
+    '404':
+      description: Funder not found
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests
