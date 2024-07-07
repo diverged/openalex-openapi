@@ -14,8 +14,7 @@ properties:
     type: integer
     description: The number of results per page
   groups_count:
-    type: integer
-    nullable: true
+    type: [integer, "null"]
     description: The count of groups in the current page (null if there are no groups in the response)
 example:
   count: 246136992
