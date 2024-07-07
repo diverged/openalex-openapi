@@ -4,7 +4,7 @@ info:
   description: An OpenAPI specification for the OpenAlex API
   version: 1.0.0
 servers:
-  - url: https://api.openalex.org/
+  - url: https://api.openalex.org
 paths:
   /authors:
     $ref: ./paths/authors.yaml
