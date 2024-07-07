@@ -5,45 +5,7 @@ info:
   version: 1.0.0
 servers:
   - url: https://api.openalex.org
-paths:
-  /authors:
-    $ref: './paths/authors.yaml'
-  /concepts:
-    $ref: './paths/concepts.yaml'
-  /funders:
-    $ref: './paths/funders.yaml'
-  /institutions:
-    $ref: './paths/institutions.yaml'
-  /keywords:
-    $ref: './paths/keywords.yaml'
-  /publishers:
-    $ref: './paths/publishers.yaml'
-  /sources:
-    $ref: './paths/sources.yaml'
-  /topics:
-    $ref: './paths/topics.yaml'
-  /works:
-    $ref: './paths/works.yaml'
-  /autocomplete/{entity_type}:
-    get:
-      summary: Autocomplete entities
-      description: Returns a list of entities that match the given query string for autocomplete suggestions.
-      parameters:
-        - name: entity_type
-          in: path
-          required: true
-          schema:
-            type: string
-            enum: [authors, concepts, funders, institutions, publishers, sources, topics, works]
-        - $ref: '#/components/parameters/autocomplete'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Autocomplete'
-  
+
 components:
   schemas:
     Author:
@@ -96,8 +58,15 @@ components:
       $ref: './components/schemas/topic.yaml'
     Work:
       $ref: './components/schemas/work.yaml'
-
   parameters:
+    PoliteEmail:
+      name: email
+      in: header
+      description: Optional email address for polite requests
+      required: false
+      schema:
+        type: string
+        format: email
     filter:
       $ref: './components/parameters/filter_parameter.yaml'
     search:
@@ -116,3 +85,44 @@ components:
       $ref: './components/parameters/autocomplete_parameter.yaml'
     cursor:
       $ref: './components/parameters/cursor_page_parameter.yaml'
+
+
+
+paths:
+  /authors:
+    $ref: './paths/authors.yaml'
+  /concepts:
+    $ref: './paths/concepts.yaml'
+  /funders:
+    $ref: './paths/funders.yaml'
+  /institutions:
+    $ref: './paths/institutions.yaml'
+  /keywords:
+    $ref: './paths/keywords.yaml'
+  /publishers:
+    $ref: './paths/publishers.yaml'
+  /sources:
+    $ref: './paths/sources.yaml'
+  /topics:
+    $ref: './paths/topics.yaml'
+  /works:
+    $ref: './paths/works.yaml'
+  /autocomplete/{entity_type}:
+    get:
+      summary: Autocomplete entities
+      description: Returns a list of entities that match the given query string for autocomplete suggestions.
+      parameters:
+        - name: entity_type
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [authors, concepts, funders, institutions, publishers, sources, topics, works]
+        - $ref: '#/components/parameters/autocomplete'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Autocomplete'

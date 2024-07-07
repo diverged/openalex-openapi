@@ -2,6 +2,7 @@ get:
   summary: List Publishers
   description: Returns a list of publishers.
   parameters:
+    - $ref: '#/components/parameters/PoliteEmail'
     - $ref: '../../components/parameters/filter_parameter.yaml'
     - $ref: '../../components/parameters/search_parameter.yaml'
     - $ref: '../../components/parameters/sort_parameter.yaml'

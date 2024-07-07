@@ -1,15 +1,13 @@
 get:
-  summary: Get a random Author
-  description: Returns a random author.
-  parameters:
-  - $ref: '#/components/parameters/PoliteEmail'
+  summary: Get a random Work
+  description: Returns a random work.
   responses:
     '200':
       description: Successful response
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/author.yaml'
+            $ref: '../../components/schemas/work.yaml'
     '403':
       description: Forbidden
     '429':

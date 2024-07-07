@@ -1,6 +1,6 @@
 get:
-  summary: List Sources
-  description: Returns a list of sources. Sources are where works are hosted, including journals, conferences, preprint repositories, and institutional repositories.
+  summary: List Concepts
+  description: Returns a list of concepts.
   parameters:
     - $ref: '#/components/parameters/PoliteEmail'
     - $ref: '../../components/parameters/filter_parameter.yaml'
@@ -29,7 +29,7 @@ get:
               results:
                 type: array
                 items:
-                  $ref: '../../components/schemas/source.yaml'
+                  $ref: '../../components/schemas/concept.yaml'
               group_by:
                 type: array
                 items:

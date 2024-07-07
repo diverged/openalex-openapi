@@ -2,6 +2,7 @@ get:
   summary: List Authors
   description: Returns a list of authors.
   parameters:
+    - $ref: '#/components/parameters/PoliteEmail'
     - $ref: '../../components/parameters/filter_parameter.yaml'
     - $ref: '../../components/parameters/search_parameter.yaml'
     - $ref: '../../components/parameters/sort_parameter.yaml'

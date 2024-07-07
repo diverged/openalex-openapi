@@ -1,8 +1,7 @@
 get:
-  summary: Autocomplete Authors
-  description: Returns a list of authors for autocomplete functionality.
+  summary: Autocomplete Works
+  description: Returns a list of works for autocomplete functionality.
   parameters:
-    - $ref: '#/components/parameters/PoliteEmail'
     - name: q
       in: query
       description: The search query for autocomplete

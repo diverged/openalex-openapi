@@ -2,6 +2,7 @@ get:
   summary: Get a single Author
   description: Returns details for a single author. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:
+    - $ref: '#/components/parameters/PoliteEmail'
     - name: id
       in: path
       required: true
