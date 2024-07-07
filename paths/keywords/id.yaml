@@ -1,0 +1,24 @@
+get:
+  summary: Get a single Keyword
+  description: Returns details for a single keyword.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: OpenAlex ID of the keyword
+      schema:
+        type: string
+    - $ref: '../../components/parameters/select_parameter.yaml'
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/keyword.yaml'
+    '404':
+      description: Keyword not found
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests

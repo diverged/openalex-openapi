@@ -1,0 +1,24 @@
+get:
+  summary: Get a single Source
+  description: Returns details for a single source. Any ID supported in the `ids` object will successfully return a single entity.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: OpenAlex ID or any supported external ID (ISSN, ISSN-L, MAG, Wikidata) of the source
+      schema:
+        type: string
+    - $ref: '../../components/parameters/select_parameter.yaml'
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/source.yaml'
+    '404':
+      description: Source not found
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests

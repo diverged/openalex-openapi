@@ -1,0 +1,23 @@
+get:
+  summary: Autocomplete Sources
+  description: Returns a list of sources for autocomplete functionality.
+  parameters:
+    - name: q
+      in: query
+      description: The search query for autocomplete
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/autocomplete.yaml'
+    '400':
+      description: Bad request
+    '403':
+      description: Forbidden
+    '429':
+      description: Too many requests
