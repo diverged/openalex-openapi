@@ -20,9 +20,56 @@ components:
       in: header
       description: Optional email address for polite requests
   schemas:
+    Author:
+      $ref: './components/schemas/author.yaml'
+    Authorship:
+      $ref: './components/schemas/authorship.yaml'
     Autocomplete:
       $ref: './components/schemas/autocomplete.yaml'
-
+    Concept:
+      $ref: './components/schemas/concept.yaml'
+    Cursor:
+      $ref: './components/schemas/cursor.yaml'
+    DehydratedAuthor:
+      $ref: './components/schemas/dehydrated_author.yaml'
+    DehydratedConcept:
+      $ref: './components/schemas/dehydrated_concept.yaml'
+    DehydratedInstitution:
+      $ref: './components/schemas/dehydrated_institution.yaml'
+    DehydratedSource:
+      $ref: './components/schemas/dehydrated_source.yaml'
+    Filter:
+      $ref: './components/schemas/filter.yaml'
+    Funder:
+      $ref: './components/schemas/funder.yaml'
+    GroupBy:
+      $ref: './components/schemas/group_by.yaml'
+    Institution:
+      $ref: './components/schemas/institution.yaml'
+    Keyword:
+      $ref: './components/schemas/keyword.yaml'
+    Location:
+      $ref: './components/schemas/location.yaml'
+    Meta:
+      $ref: './components/schemas/meta.yaml'
+    Page:
+      $ref: './components/schemas/page.yaml'
+    PerPage:
+      $ref: './components/schemas/per_page.yaml'
+    Publisher:
+      $ref: './components/schemas/publisher.yaml'
+    Search:
+      $ref: './components/schemas/search.yaml'
+    Select:
+      $ref: './components/schemas/select.yaml'
+    Sort:
+      $ref: './components/schemas/sort.yaml'
+    Source:
+      $ref: './components/schemas/source.yaml'
+    Topic:
+      $ref: './components/schemas/topic.yaml'
+    Work:
+      $ref: './components/schemas/work.yaml'
   parameters:
     filter:
       $ref: './components/parameters/filter_parameter.yaml'

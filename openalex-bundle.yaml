@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: OpenAlex API
   description: An OpenAPI specification for the OpenAlex API
@@ -459,56 +459,8 @@ components:
       in: header
       description: Optional email address for polite requests
   schemas:
-    Author:
-      $ref: '#/components/schemas/author'
-    Authorship:
-      $ref: '#/components/schemas/authorship'
     Autocomplete:
       $ref: '#/components/schemas/autocomplete'
-    Concept:
-      $ref: '#/components/schemas/concept'
-    Cursor:
-      $ref: '#/components/schemas/cursor'
-    DehydratedAuthor:
-      $ref: '#/components/schemas/dehydrated_author'
-    DehydratedConcept:
-      $ref: '#/components/schemas/dehydrated_concept'
-    DehydratedInstitution:
-      $ref: '#/components/schemas/dehydrated_institution'
-    DehydratedSource:
-      $ref: '#/components/schemas/dehydrated_source'
-    Filter:
-      $ref: '#/components/schemas/filter'
-    Funder:
-      $ref: '#/components/schemas/funder'
-    GroupBy:
-      $ref: '#/components/schemas/group_by'
-    Institution:
-      $ref: '#/components/schemas/institution'
-    Keyword:
-      $ref: '#/components/schemas/keyword'
-    Location:
-      $ref: '#/components/schemas/location'
-    Meta:
-      $ref: '#/components/schemas/meta'
-    Page:
-      $ref: '#/components/schemas/page'
-    PerPage:
-      $ref: '#/components/schemas/per_page'
-    Publisher:
-      $ref: '#/components/schemas/publisher'
-    Search:
-      $ref: '#/components/schemas/search'
-    Select:
-      $ref: '#/components/schemas/select'
-    Sort:
-      $ref: '#/components/schemas/sort'
-    Source:
-      $ref: '#/components/schemas/source'
-    Topic:
-      $ref: '#/components/schemas/topic'
-    Work:
-      $ref: '#/components/schemas/work'
     filter:
       type: string
       description: |
@@ -559,7 +511,6 @@ components:
           description: The number of results per page
         groups_count:
           type: integer
-          nullable: true
           description: The count of groups in the current page (null if there are no groups in the response)
       example:
         count: 246136992
@@ -2544,10 +2495,6 @@ components:
             entity_type: institution
             external_id: https://ror.org/02y3ad647
             works_count: 456789
-    search:
-      type: string
-      description: Text search query string to find entities that match the given text. Supports boolean operators (AND, OR, NOT) and exact phrase matching with double quotes.
-      example: dna
   parameters:
     filter:
       $ref: '#/components/parameters/filter_parameter'
@@ -2576,7 +2523,6 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/filter'
-      example: type:book,cited_by_count:>1,is_oa:true
       examples:
         single_filter:
           summary: Filter works by type
@@ -2600,7 +2546,6 @@ components:
       required: false
       schema:
         type: string
-      example: dna
       examples:
         simple_search:
           summary: Simple search query
@@ -2620,7 +2565,6 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/sort'
-      example: cited_by_count:desc
       examples:
         single_sort:
           summary: Sort by cited_by_count in descending order
@@ -2638,7 +2582,6 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/cursor'
-      example: '*'
       examples:
         start_cursor:
           summary: Start cursor pagination
@@ -2653,7 +2596,6 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/per_page'
-      example: 50
       examples:
         default:
           summary: Default number of results per page
@@ -2668,7 +2610,6 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/select'
-      example: id,doi,display_name
       examples:
         single_entity:
           summary: Select fields for a single entity
@@ -2706,7 +2647,6 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/page'
-      example: 2
       examples:
         default_page:
           summary: Default first page
@@ -2726,7 +2666,6 @@ components:
       required: true
       schema:
         type: string
-      example: flori
       examples:
         simple_query:
           summary: Simple autocomplete query
