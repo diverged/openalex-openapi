@@ -72,13 +72,13 @@ properties:
     type: array
     description: List of concepts that this concept descends from, as dehydrated Concept objects.
     items:
-      $ref: '#/components/schemas/DehydratedConcept'
+      $ref: './dehydrated_concept.yaml'
   related_concepts:
     type: array
     description: Concepts that are similar to this one.
     items:
       allOf:
-        - $ref: '#/components/schemas/DehydratedConcept'
+        - $ref: './dehydrated_concept.yaml'
         - type: object
           properties:
             score:
