@@ -105,7 +105,7 @@ components:
     sort:
       $ref: './components/parameters/sort_parameter.yaml'
     page:
-      $ref: './components/parameters/cursor_page_parameter.yaml'
+      $ref: './components/parameters/page_parameter.yaml'
     per_page:
       $ref: './components/parameters/per_page_parameter.yaml'
     select:

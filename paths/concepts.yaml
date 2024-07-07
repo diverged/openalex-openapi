@@ -29,6 +29,10 @@ get:
                 type: array
                 items:
                   $ref: '../components/schemas/concept.yaml'
+              group_by:
+                type: array
+                items:
+                  $ref: '../components/schemas/group_by.yaml'
     '400':
       description: Bad request
     '403':
@@ -39,7 +43,7 @@ get:
 /{id}:
   get:
     summary: Get a single Concept
-    description: Returns details for a single concept.
+    description: Returns details for a single concept. Any ID supported in the `ids` object will successfully return a single entity.
     parameters:
       - name: id
         in: path
@@ -47,6 +51,7 @@ get:
         description: OpenAlex ID or any supported external ID (Wikidata, MAG) of the concept
         schema:
           type: string
+      - $ref: '../components/parameters/select_parameter.yaml'
     responses:
       '200':
         description: Successful response
@@ -56,6 +61,48 @@ get:
               $ref: '../components/schemas/concept.yaml'
       '404':
         description: Concept not found
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
+
+/autocomplete:
+  get:
+    summary: Autocomplete Concepts
+    description: Returns a list of concepts for autocomplete functionality.
+    parameters:
+      - name: q
+        in: query
+        description: The search query for autocomplete
+        required: true
+        schema:
+          type: string
+      - $ref: '../components/parameters/filter_parameter.yaml'
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/autocomplete.yaml'
+      '400':
+        description: Bad request
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
+
+/random:
+  get:
+    summary: Get a random Concept
+    description: Returns a random concept.
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/concept.yaml'
       '403':
         description: Forbidden
       '429':

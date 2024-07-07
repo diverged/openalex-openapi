@@ -5,7 +5,7 @@ get:
     - $ref: '../components/parameters/filter_parameter.yaml'
     - $ref: '../components/parameters/search_parameter.yaml'
     - $ref: '../components/parameters/sort_parameter.yaml'
-    - $ref: '../components/parameters/page_parameter.yaml'
+    - $ref: '../components/parameters/cursor_page_parameter.yaml'
     - $ref: '../components/parameters/per_page_parameter.yaml'
     - $ref: '../components/parameters/select_parameter.yaml'
     - $ref: '../components/parameters/group_by_parameter.yaml'

@@ -1,14 +1,14 @@
-- name: page
-  in: query
-  description: The page number of results to return. Used for basic paging.
-  required: false
-  schema:
-    $ref: '../schemas/page.yaml'
-  example: 2
-  examples:
-    default_page:
-      summary: Default first page
-      value: 1
-    second_page:
-      summary: Second page of results
-      value: 2
+name: page
+in: query
+description: The page number of results to return. Used for basic paging.
+required: false
+schema:
+  $ref: '../schemas/page.yaml'
+example: 2
+examples:
+  default_page:
+    summary: Default first page
+    value: 1
+  second_page:
+    summary: Second page of results
+    value: 2

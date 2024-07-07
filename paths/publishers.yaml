@@ -91,3 +91,19 @@ get:
         description: Forbidden
       '429':
         description: Too many requests
+
+/random:
+  get:
+    summary: Get a random Publisher
+    description: Returns a random publisher.
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/publisher.yaml'
+      '403':
+        description: Forbidden
+      '429':
+        description: Too many requests
