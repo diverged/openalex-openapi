@@ -2,7 +2,6 @@ get:
   summary: List Sources
   description: Returns a list of sources. Sources are where works are hosted, including journals, conferences, preprint repositories, and institutional repositories.
   parameters:
-    - $ref: '#/components/parameters/PoliteEmail'
     - $ref: '../../components/parameters/filter_parameter.yaml'
     - $ref: '../../components/parameters/search_parameter.yaml'
     - $ref: '../../components/parameters/sort_parameter.yaml'

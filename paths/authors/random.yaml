@@ -1,8 +1,6 @@
 get:
   summary: Get a random Author
   description: Returns a random author.
-  parameters:
-  - $ref: '#/components/parameters/PoliteEmail'
   responses:
     '200':
       description: Successful response

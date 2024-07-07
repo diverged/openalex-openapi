@@ -6,7 +6,16 @@ info:
 servers:
   - url: https://api.openalex.org
 
+security:
+  - PoliteEmail: []
+
 components:
+  securitySchemes:
+    PoliteEmail:
+      type: apiKey
+      name: email
+      in: header
+      description: Optional email address for polite requests
   schemas:
     Author:
       $ref: './components/schemas/author.yaml'
@@ -59,14 +68,6 @@ components:
     Work:
       $ref: './components/schemas/work.yaml'
   parameters:
-    PoliteEmail:
-      name: email
-      in: header
-      description: Optional email address for polite requests
-      required: false
-      schema:
-        type: string
-        format: email
     filter:
       $ref: './components/parameters/filter_parameter.yaml'
     search:
