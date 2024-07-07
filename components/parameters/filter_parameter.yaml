@@ -6,7 +6,6 @@ description: |
 required: false
 schema:
   $ref: '../schemas/filter.yaml'
-example: type:book,cited_by_count:>1,is_oa:true
 examples:
   single_filter:
     summary: Filter works by type

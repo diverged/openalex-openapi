@@ -4,7 +4,6 @@ description: Comma-separated list of fields to return in the results. Only root-
 required: false
 schema:
   $ref: '../schemas/select.yaml'
-example: id,doi,display_name
 examples:
   single_entity:
     summary: Select fields for a single entity

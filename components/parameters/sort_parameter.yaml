@@ -6,7 +6,6 @@ description: |
 required: false
 schema:
   $ref: '../schemas/sort.yaml'
-example: cited_by_count:desc
 examples:
   single_sort:
     summary: Sort by cited_by_count in descending order

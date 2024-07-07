@@ -4,7 +4,6 @@ description: The number of results to return per page. Minimum is 1, maximum is 
 required: false
 schema:
   $ref: '../schemas/per_page.yaml'
-example: 50
 examples:
   default:
     summary: Default number of results per page

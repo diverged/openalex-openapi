@@ -4,7 +4,6 @@ description: The page number of results to return. Used for basic paging.
 required: false
 schema:
   $ref: '../schemas/page.yaml'
-example: 2
 examples:
   default_page:
     summary: Default first page

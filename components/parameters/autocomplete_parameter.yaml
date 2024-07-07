@@ -9,7 +9,6 @@ description: |
 required: true
 schema:
   type: string
-example: flori
 examples:
   simple_query:
     summary: Simple autocomplete query

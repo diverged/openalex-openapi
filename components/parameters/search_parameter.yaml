@@ -4,7 +4,6 @@ description: Text search query string to find entities that match the given text
 required: false
 schema:
   type: string
-example: dna
 examples:
   simple_search:
     summary: Simple search query
