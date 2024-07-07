@@ -1,4 +1,5 @@
 get:
+  operationId: getInstitution
   summary: Get a single Institution
   description: Returns details for a single institution. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:

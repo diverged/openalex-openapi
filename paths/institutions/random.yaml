@@ -1,4 +1,5 @@
 get:
+  operationId: randomInstitution
   summary: Get a random Institution
   description: Returns a random institution.
   responses:

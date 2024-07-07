@@ -1,4 +1,5 @@
 get:
+  operationId: randomConcept
   summary: Get a random Concept
   description: Returns a random concept.
   responses:

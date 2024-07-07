@@ -1,4 +1,5 @@
 get:
+  operationId: getSource
   summary: Get a single Source
   description: Returns details for a single source. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:

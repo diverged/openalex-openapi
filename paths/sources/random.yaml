@@ -1,4 +1,5 @@
 get:
+  operationId: randomSource
   summary: Get a random Source
   description: Returns a random source.
   responses:

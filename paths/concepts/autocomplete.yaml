@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteConcepts
   summary: Autocomplete Concepts
   description: Returns a list of concepts for autocomplete functionality.
   parameters:

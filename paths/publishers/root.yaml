@@ -1,4 +1,5 @@
 get:
+  operationId: listPublishers
   summary: List Publishers
   description: Returns a list of publishers.
   parameters:

@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteSources
   summary: Autocomplete Sources
   description: Returns a list of sources for autocomplete functionality.
   parameters:

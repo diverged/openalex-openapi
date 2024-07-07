@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteWorks
   summary: Autocomplete Works
   description: Returns a list of works for autocomplete functionality.
   parameters:

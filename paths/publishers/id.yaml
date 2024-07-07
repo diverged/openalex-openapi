@@ -1,4 +1,5 @@
 get:
+  operationId: getPublisher
   summary: Get a single Publisher
   description: Returns details for a single publisher. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:

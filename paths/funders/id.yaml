@@ -1,4 +1,5 @@
 get:
+  operationId: funder
   summary: Get a single Funder
   description: Returns details for a single funder. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:

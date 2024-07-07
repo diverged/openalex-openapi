@@ -1,4 +1,5 @@
 get:
+  operationId: listSources
   summary: List Sources
   description: Returns a list of sources. Sources are where works are hosted, including journals, conferences, preprint repositories, and institutional repositories.
   parameters:

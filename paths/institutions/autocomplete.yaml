@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteInstitutions
   summary: Autocomplete Institutions
   description: Returns a list of institutions matching the given query string, useful for creating type-ahead style search functions.
   parameters:

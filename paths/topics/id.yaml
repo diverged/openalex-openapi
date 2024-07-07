@@ -1,4 +1,5 @@
 get:
+  operationId: getTopic
   summary: Get a single Topic
   description: Returns details for a single topic.
   parameters:

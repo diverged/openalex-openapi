@@ -1,4 +1,5 @@
 get:
+  operationId: listKeywords
   summary: List Keywords
   description: Returns a list of keywords.
   parameters:

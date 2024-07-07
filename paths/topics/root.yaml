@@ -1,4 +1,5 @@
 get:
+  operationId: listTopics
   summary: List Topics
   description: Returns a list of topics.
   parameters:

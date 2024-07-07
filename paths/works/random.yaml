@@ -1,4 +1,5 @@
 get:
+  operationId: randomWork
   summary: Get a random Work
   description: Returns a random work.
   responses:

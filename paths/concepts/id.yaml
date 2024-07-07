@@ -1,4 +1,5 @@
 get:
+  operationId: getConceptById
   summary: Get a single Concept
   description: Returns details for a single concept. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:

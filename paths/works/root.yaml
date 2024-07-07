@@ -1,4 +1,5 @@
 get:
+  operationId: listWorks
   summary: List Works
   description: Returns a list of works.
   parameters:

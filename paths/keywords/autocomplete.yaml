@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteKeywords
   summary: Autocomplete Keywords
   description: Returns a list of keywords matching the given query string, useful for creating type-ahead style search functions.
   parameters:

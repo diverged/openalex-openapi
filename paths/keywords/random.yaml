@@ -1,4 +1,5 @@
 get:
+  operationId: randomKeyword
   summary: Get a random Keyword
   description: Returns a random keyword.
   responses:

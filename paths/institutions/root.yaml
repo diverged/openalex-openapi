@@ -1,4 +1,5 @@
 get:
+  operationId: listInstitutions
   summary: List Institutions
   description: Returns a list of institutions.
   parameters:

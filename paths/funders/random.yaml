@@ -1,4 +1,5 @@
 get:
+  operationId: randomFunder
   summary: Get a random Funder
   description: Returns a random funder.
   responses:

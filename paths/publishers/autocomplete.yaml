@@ -1,4 +1,5 @@
 get:
+  operationId: autocompletePublishers
   summary: Autocomplete Publishers
   description: Returns a list of publishers matching the given query string, useful for creating type-ahead style search functions.
   parameters:

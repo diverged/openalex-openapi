@@ -1,4 +1,5 @@
 get:
+  operationId: getWork
   summary: Get a single Work
   description: Returns details for a single work. Any ID supported in the `ids` object will successfully return a single entity.
   parameters:

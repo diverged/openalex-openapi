@@ -1,4 +1,5 @@
 get:
+  operationId: randomPublisher
   summary: Get a random Publisher
   description: Returns a random publisher.
   responses:

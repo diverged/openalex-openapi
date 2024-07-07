@@ -1,4 +1,5 @@
 get:
+  operationId: randomAuthor
   summary: Get a random Author
   description: Returns a random author.
   responses:

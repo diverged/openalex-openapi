@@ -1,4 +1,5 @@
 get:
+  operationId: getKeyword
   summary: Get a single Keyword
   description: Returns details for a single keyword.
   parameters:

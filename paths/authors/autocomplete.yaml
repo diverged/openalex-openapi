@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteAuthors
   summary: Autocomplete Authors
   description: Returns a list of authors for autocomplete functionality.
   parameters:

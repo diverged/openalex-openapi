@@ -1,4 +1,5 @@
 get:
+  operationId: listFunders
   summary: List Funders
   description: Returns a list of funders.
   parameters:

@@ -1,4 +1,5 @@
 get:
+  operationId: autocompleteFunders
   summary: Autocomplete Funders
   description: Returns a list of funders for autocomplete functionality.
   parameters:
