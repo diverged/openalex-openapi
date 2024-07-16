@@ -115,7 +115,7 @@ properties:
     type: string
     format: date-time
     description: The last time anything in this author object changed.
-    example: "2022-01-02T00:00:00"
+    example: "2024-07-13T06:17:17.932040"
   works_api_url:
     type: string
     description: A URL that will get you a list of all this author's works.

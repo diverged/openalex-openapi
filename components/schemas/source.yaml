@@ -190,7 +190,7 @@ properties:
     type: string
     format: date-time
     description: The last time anything in this Source object changed, expressed as an ISO 8601 date string. This date is updated for any change at all, including increases in various counts.
-    example: "2022-01-02T00:00:00"
+    example: "2024-07-13T06:17:17.932040"
 
   works_api_url:
     type: string
