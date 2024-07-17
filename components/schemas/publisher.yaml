@@ -160,9 +160,9 @@ properties:
 
   updated_date:
     type: string
-    format: date-time
-    description: The last time anything in this publisher object changed, expressed as an ISO 8601 date string.
-    example: "2021-12-25T14:04:30.578837"
+    format: custom_date_time
+    description: The last time anything in this author object changed. Formatted as ISO 8601 extended format without time zone designator.
+    example: "2024-07-13T06:17:17.932040"
 
   works_count:
     type: integer

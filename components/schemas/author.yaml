@@ -113,8 +113,8 @@ properties:
       i10_index: 205
   updated_date:
     type: string
-    format: date-time
-    description: The last time anything in this author object changed.
+    format: custom_date_time
+    description: The last time anything in this author object changed. Formatted as ISO 8601 extended format without time zone designator.
     example: "2024-07-13T06:17:17.932040"
   works_api_url:
     type: string

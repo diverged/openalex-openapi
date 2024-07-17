@@ -418,7 +418,7 @@ properties:
     type: string
     example: "journal-article"
   updated_date:
-    description: The last time anything in this Work object changed, including counts, formatted as an ISO 8601 date-time. This date is updated for any change at all, including increases in various counts.
-    format: date-time
     type: string
-    example: "2022-01-02T00:22:35.180390"
+    format: custom_date_time
+    description: The last time anything in this author object changed. Formatted as ISO 8601 extended format without time zone designator.
+    example: "2024-07-13T06:17:17.932040"

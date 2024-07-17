@@ -126,9 +126,9 @@ properties:
       i10_index: 176682
   updated_date:
     type: string
-    format: date-time
-    description: The last time anything in this funder object changed, expressed as an ISO 8601 date string.
-    example: "2023-04-21T16:54:19.012138"
+    format: custom_date_time
+    description: The last time anything in this author object changed. Formatted as ISO 8601 extended format without time zone designator.
+    example: "2024-07-13T06:17:17.932040"
   works_count:
     type: integer
     description: The number of works linked to this funder.
