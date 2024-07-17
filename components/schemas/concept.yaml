@@ -77,13 +77,7 @@ properties:
     type: array
     description: Concepts that are similar to this one.
     items:
-      allOf:
-        - $ref: './dehydrated_concept.yaml'
-        - type: object
-          properties:
-            score:
-              type: number
-              description: The strength of association between this concept and the listed concept, on a scale of 0-100.
+      $ref: './related_concept.yaml'
   counts_by_year:
     type: array
     description: The values of works_count and cited_by_count for each of the last ten years, binned by year.

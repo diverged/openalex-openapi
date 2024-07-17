@@ -1,0 +1,11 @@
+type: object
+allOf:
+  - $ref: './dehydrated_concept.yaml'
+  - type: object
+    properties:
+      score:
+        type: 
+          - number
+          - "null"
+        description: The strength of association between this concept and the listed concept, on a scale of 0-100.
+        
