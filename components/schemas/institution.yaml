@@ -3,7 +3,7 @@ properties:
   associated_institutions:
     type: array
     items:
-      $ref: './dehydrated_institution.yaml'
+      $ref: './associated_institution.yaml'
     description: List of institutions related to this one, represented as dehydrated Institution objects with an additional 'relationship' property.
     example:
       - id: "https://openalex.org/I2802101240"
@@ -109,7 +109,7 @@ properties:
       wikidata:
         type: string
       mag:
-        type: integer
+        type: string
     description: External identifiers for this institution.
     example:
       openalex: "https://openalex.org/I114027177"

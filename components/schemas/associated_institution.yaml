@@ -1,0 +1,10 @@
+type: object
+description: A representation of an associated institution, extending the dehydrated institution with a relationship field.
+allOf:
+  - $ref: './dehydrated_institution.yaml'
+  - type: object
+    properties:
+      relationship:
+        type: string
+        description: The relationship between this institution and the main institution. Possible values are `parent`, `child`, and `related`. Institution associations and the relationship vocabulary come from [ROR's Relationships](https://ror.readme.io/docs/ror-data-structure#relationships)
+        example: "related"
