@@ -42,7 +42,7 @@ properties:
         type: string
         description: This concept's Wikipedia page URL.
       mag:
-        type: integer
+        type: string
         description: This concept's Microsoft Academic Graph (MAG) ID.
     example:
       openalex: "https://openalex.org/C2778407487"

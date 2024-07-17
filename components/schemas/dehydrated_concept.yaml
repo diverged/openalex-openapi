@@ -17,12 +17,12 @@ properties:
     type: integer
     description: The hierarchical level of the concept. Level 0 is the most general, and level 5 is the most specific.
     example: 1
-  score:
-    type: number
-    description: The relevance score of this concept to the work. Higher scores indicate greater relevance.
-    example: 0.8534
+  # score:
+  #   type: number
+  #   description: The relevance score of this concept to the work. Higher scores indicate greater relevance.
+  #   example: 0.8534
 required:
   - id
+  - wikidata
   - display_name
   - level
-  - score
