@@ -1,14 +1,14 @@
 name: q
 in: query
+required: true
+schema:
+  type: string
 description: |
   The search string supplied by the user for autocomplete suggestions.
   
   Additional parameters:
   - filter: Optional filter to apply to the autocomplete results. Uses the same syntax as entity filters.
   - search: Optional search query to apply to the autocomplete results. Uses the same syntax as entity search.
-required: true
-schema:
-  type: string
 examples:
   simple_query:
     summary: Simple autocomplete query
