@@ -107,9 +107,23 @@ properties:
       - "https://openalex.org/P4310319965"
 
   parent_publisher:
-    type: string
+    oneOf:
+      - type: "null"
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The OpenAlex ID for the parent publisher.
+          display_name:
+            type: string
+            description: The display name of the parent publisher.
+        required:
+          - id
+          - display_name
     description: An OpenAlex ID linking to the direct parent of the publisher. This will be null if the publisher's hierarchy_level is 0.
-    example: "https://openalex.org/P4310311775"
+    example: 
+      id: "https://openalex.org/P4310318547"
+      display_name: "Wolters Kluwer"
 
   roles:
     type: array
