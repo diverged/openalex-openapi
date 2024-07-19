@@ -112,7 +112,7 @@ properties:
         items:
           type: string
       mag:
-        type: integer
+        type: string
       fatcat:
         type: string
       wikidata:
@@ -209,13 +209,19 @@ properties:
     example: 20184
 
   x_concepts:
+    description: The Concepts most frequently applied to works hosted by this source.
     type: array
     items:
-      $ref: './dehydrated_concept.yaml'
-    description: The Concepts most frequently applied to works hosted by this source. Each is represented as a dehydrated Concept object, with one additional attribute - score (Float) The strength of association between this source and the listed concept, from 0-100.
+      $ref: './related_concept.yaml'
     example:
-      - id: "https://openalex.org/C86803240"
-        wikidata: null
-        display_name: "Biology"
-        level: 0
-        score: 86.7
+    - id: "https://openalex.org/C121332964"
+      wikidata: "https://www.wikidata.org/wiki/Q413"
+      display_name: "Physics"
+      level: 0
+      score: 68
+    - id: "https://openalex.org/C86803240"
+      wikidata: "https://www.wikidata.org/wiki/Q420"
+      display_name: "Biology"
+      level: 0
+      score: 65.9
+

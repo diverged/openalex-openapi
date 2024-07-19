@@ -1,0 +1,35 @@
+type: object
+description: A simplified representation of a topic, used when a topic is referenced by another entity.
+properties:
+  display_name:
+    description: The name of the topic.
+    type: string
+  domain:
+    properties:
+      display_name:
+        type: string
+      id:
+        type: string
+    type: object
+  field:
+    properties:
+      display_name:
+        type: string
+      id:
+        type: string
+    type: object
+  id:
+    description: The OpenAlex ID for this topic.
+    type: string
+  score:
+    description: The strength of the connection between the work and this topic.
+    type: number
+    format: float
+  subfield:
+    properties:
+      display_name:
+        type: string
+      id:
+        type: string
+    type: object
+

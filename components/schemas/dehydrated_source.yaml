@@ -22,10 +22,23 @@ properties:
       - "https://openalex.org/P4310321285"
       - "https://openalex.org/P4310319900"
       - "https://openalex.org/P4310319965"
+  host_organization_lineage_names:
+    type: array
+    description: The display names of the host organization's lineage, from most specific to most general.
+    items:
+      type: string
+    example:
+      - "Elsevier BV"
+      - "Elsevier"
+      - "Elsevier Group"
   host_organization_name:
     type: string
     description: The display_name of the host organization, shown for convenience.
     example: "PeerJ"
+  is_core:
+    type: boolean
+    description: Whether this source is identified as a "core source" by [CWTS](https://www.cwts.nl/), used in the [Open Leiden Ranking](https://open.leidenranking.com/) of universities around the world. The list of core sources can be found [here](https://zenodo.org/records/10949671).
+    example: true
   is_in_doaj:
     type: boolean
     description: Whether this source is listed in the Directory of Open Access Journals (DOAJ).

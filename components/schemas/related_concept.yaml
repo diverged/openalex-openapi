@@ -1,12 +1,14 @@
 type: object
-description: Concepts that are similar to this one. Each listed concept is a dehydrated Concept object, with one additional attribute - score (Float)
-allOf:
-  - $ref: './dehydrated_concept.yaml'
-  - type: object
-    properties:
-      score:
-        type: 
-          - number
-          - "null"
-        description: The strength of association between this concept and the listed concept, on a scale of 0-100.
-        example: 4.56749
+description: The Concepts most frequently applied to this entity. Each is represented as a dehydrated Concept object, with one additional attribute - `score` (Float)
+items:
+  allOf:
+    - $ref: './dehydrated_concept.yaml'
+    - type: object
+      properties:
+        score:
+          description: The strength of association between this source and the listed concept, from 0-100.
+          type: 
+            - number
+            - "null"
+          format: float
+          example: 4.56749

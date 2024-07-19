@@ -75,7 +75,6 @@ properties:
       $ref: './dehydrated_concept.yaml'
   related_concepts:
     type: array
-    description: Concepts that are similar to this one.
     items:
       $ref: './related_concept.yaml'
   counts_by_year:

@@ -128,13 +128,7 @@ properties:
     type: array
     description: The concepts most frequently applied to works created by this author (deprecated).
     items:
-      allOf:
-        - $ref: './dehydrated_concept.yaml'
-        - type: object
-          properties:
-            score:
-              type: number
-              format: float
+      $ref: './related_concept.yaml'
     example:
       - id: "https://openalex.org/C41008148"
         wikidata: null

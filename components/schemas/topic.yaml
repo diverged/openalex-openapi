@@ -21,35 +21,35 @@ properties:
     type: object
     properties:
       id:
-        type: integer
+        type: string
         description: The ID of the subfield.
-        example: 2718
+        example: "https://openalex.org/subfields/2505"
       display_name:
         type: string
         description: The name of the subfield.
-        example: "Health Informatics"
+        example: "Materials Chemistry"
   field:
     type: object
     properties:
       id:
-        type: integer
+        type: string
         description: The ID of the field.
-        example: 27
+        example: "https://openalex.org/fields/25"
       display_name:
         type: string
         description: The name of the field.
-        example: "Medicine"
+        example: "Materials Science"
   domain:
     type: object
     properties:
       id:
-        type: integer
+        type: string
         description: The ID of the domain.
-        example: 4
+        example: "https://openalex.org/domains/3"
       display_name:
         type: string
         description: The name of the domain.
-        example: "Health Sciences"
+        example: "Physical Sciences"
   ids:
     type: object
     description: All the external identifiers that we know about for this topic. IDs are expressed as URIs whenever possible.
@@ -95,6 +95,20 @@ properties:
     format: date
     description: The date this topic was created in the OpenAlex database, expressed as an ISO 8601 date string.
     example: "2022-01-01"
+  siblings:
+    type: array
+    description: Topics that are closely related to this topic.
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the sibling topic.
+          example: "https://openalex.org/T11948"
+        display_name:
+          type: string
+          description: The name of the sibling topic.
+          example: "Accelerating Materials Innovation through Informatics"
 required:
   - id
   - display_name

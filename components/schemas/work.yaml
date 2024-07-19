@@ -94,7 +94,7 @@ properties:
   concepts:
     description: List of concepts (research topics) associated with the work. These are algorithmically inferred based on the work's content.
     items:
-      $ref: ./dehydrated_concept.yaml
+      $ref: ./related_concept.yaml
     type: array
     example:
       - id: "https://openalex.org/C41008148"
@@ -201,7 +201,7 @@ properties:
         type: string
       mag:
         description: The Microsoft Academic Graph ID for this work.
-        type: integer
+        type: string
       openalex:
         description: The OpenAlex ID for this work.
         type: string
@@ -321,7 +321,7 @@ properties:
     $ref: ./location.yaml
     description: The primary location where this work can be found, typically the publisher's site.
   primary_topic:
-    $ref: ./topic.yaml
+    $ref: ./dehydrated_topic.yaml
     description: The top ranked Topic for this work.
   publication_date:
     description: The day when this work was published, formatted as an ISO 8601 date.
@@ -374,41 +374,10 @@ properties:
     type: string
     example: 'The state of OA: a large-scale analysis of the prevalence and impact of Open Access articles'
   topics:
+    type: array
     description: The top ranked Topics for this work.
     items:
-      properties:
-        display_name:
-          description: The name of the topic.
-          type: string
-        domain:
-          properties:
-            display_name:
-              type: string
-            id:
-              type: integer
-          type: object
-        field:
-          properties:
-            display_name:
-              type: string
-            id:
-              type: integer
-          type: object
-        id:
-          description: The OpenAlex ID for this topic.
-          type: string
-        score:
-          description: The strength of the connection between the work and this topic.
-          type: number
-        subfield:
-          properties:
-            display_name:
-              type: string
-            id:
-              type: integer
-          type: object
-      type: object
-    type: array
+      $ref: ./dehydrated_topic.yaml
   type:
     description: The type of the work.
     type: string

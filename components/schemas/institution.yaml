@@ -209,12 +209,6 @@ properties:
     example: 202704
   x_concepts:
     type: array
-    items:
-      allOf:
-        - $ref: './dehydrated_concept.yaml'
-        - type: object
-          properties:
-            score:
-              type: number
-              format: float
     description: The Concepts most frequently applied to works affiliated with this institution.
+    items:
+      $ref: './related_concept.yaml'

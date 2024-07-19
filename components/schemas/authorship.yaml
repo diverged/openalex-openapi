@@ -1,53 +1,70 @@
-type: object
+---
 properties:
-  author_position:
-    type: string
-    enum: [first, middle, last]
-    description: A summarized description of this author's position in the work's author list.
-    example: "first"
+  affiliations:
+    type: array
+    description: "Each institutional affiliation that this author has claimed will be listed here: the raw affiliation string that we found, along with the OpenAlex Institution ID or IDs that we matched it to. This information will be redundant with institutions below, but is useful if you need to know about what we used to match institutions."
+    items:
+      type: object
+      properties:
+        raw_affiliation_string:
+          type: string
+        institution_ids:
+          type: array
+          items:
+            type: string
+    example:
+      - raw_affiliation_string: "Space Science Engineering Center, University of\nWisconsin, Madison, WI, USA"
+        institution_ids:
+          - "https://openalex.org/I135310074"
   author:
-    $ref: './dehydrated_author.yaml'
+    $ref: ./dehydrated_author.yaml
     description: An author of this work, as a dehydrated Author object.
     example:
-      id: "https://openalex.org/A5085171399"
-      display_name: "Juan Pablo Alperin"
-      orcid: "https://orcid.org/0000-0002-9344-7439"
-  institutions:
-    type: array
-    items:
-      $ref: './dehydrated_institution.yaml'
-    description: The institutional affiliations this author claimed in the context of this work, as dehydrated Institution objects.
-    example:
-      - id: "https://openalex.org/I18014758"
-        display_name: "Simon Fraser University"
-        ror: "https://ror.org/0213rcc28"
-        country_code: "CA"
-        type: "education"
-        lineage: ["https://openalex.org/I18014758"]
-  is_corresponding:
-    type: boolean
-    description: If true, this is a corresponding author for this work.
-    example: false
-  raw_affiliation_strings:
-    type: array
-    items:
-      type: string
-    description: This author's affiliation as it originally came to us, as a list of raw unformatted strings.
-    example: 
-      - "Canadian Institute for Studies in Publishing, Simon Fraser University"
-  raw_author_name:
+      display_name: Juan Pablo Alperin
+      id: https://openalex.org/A5085171399
+      orcid: https://orcid.org/0000-0002-9344-7439
+  author_position:
+    description: A summarized description of this author's position in the work's author list.
+    enum: [first, middle, last]
+    example: first
     type: string
-    description: This author's name as it originally came to us, as a raw unformatted string.
-    example: "Juan Pablo Alperin"
   countries:
-    type: array
-    items:
-      type: string
     description: The country or countries for this author, determined using a combination of matched institutions and parsing of the raw affiliation strings.
     example: ["CA"]
+    items:
+      type: string
+    type: array
+  institutions:
+    description: The institutional affiliations this author claimed in the context of this work, as dehydrated Institution objects.
+    example:
+      - country_code: CA
+        display_name: Simon Fraser University
+        id: https://openalex.org/I18014758
+        lineage: ["https://openalex.org/I18014758"]
+        ror: https://ror.org/0213rcc28
+        type: education
+    items:
+      $ref: ./dehydrated_institution.yaml
+    type: array
+  is_corresponding:
+    description: If true, this is a corresponding author for this work.
+    example: false
+    type: boolean
+  raw_affiliation_strings:
+    description: This author's affiliation as it originally came to us, as a list of raw unformatted strings.
+    example:
+      - Canadian Institute for Studies in Publishing, Simon Fraser University
+    items:
+      type: string
+    type: array
+  raw_author_name:
+    description: This author's name as it originally came to us, as a raw unformatted string.
+    example: Juan Pablo Alperin
+    type: string
 required:
   - author_position
   - author
   - institutions
   - raw_affiliation_strings
   - raw_author_name
+type: object
