@@ -189,6 +189,16 @@ properties:
       2yr_mean_citedness: 5.065784263815827
       h_index: 985
       i10_index: 176682
+  topics:
+    type: array
+    items:
+      $ref: './dehydrated_topic.yaml'
+    description: Topics that are frequently associated with works affiliated with this institution, in descending order of count.
+  topic_share:
+    type: array
+    items:
+      $ref: './dehydrated_topic.yaml'
+    description: Topics that are frequently associated with works affiliated with this institution, in descending order of value.
   type:
     type: string
     enum: [Education, Healthcare, Company, Archive, Nonprofit, Government, Facility, Other]

@@ -1,6 +1,9 @@
 type: object
 description: A simplified representation of a topic, used when a topic is referenced by another entity.
 properties:
+  count:
+    description: The number of works associated with this topic.
+    type: integer
   display_name:
     description: The name of the topic.
     type: string
@@ -22,7 +25,7 @@ properties:
     description: The OpenAlex ID for this topic.
     type: string
   score:
-    description: The strength of the connection between the work and this topic.
+    description: The strength of the connection between a work and this topic.
     type: number
     format: float
   subfield:
@@ -32,4 +35,7 @@ properties:
       id:
         type: string
     type: object
+  value:
+    type: number
+    format: float
 

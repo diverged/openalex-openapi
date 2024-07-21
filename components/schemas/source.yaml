@@ -185,6 +185,18 @@ properties:
       h_index: 105
       i10_index: 5045
 
+  topics:
+    type: array
+    items:
+      $ref: './dehydrated_topic.yaml'
+    description: Topics that are frequently associated with works affiliated with this source, in descending order of count.
+  
+  topic_share:
+    type: array
+    items:
+      $ref: './dehydrated_topic.yaml'
+    description: Topics that are frequently associated with works affiliated with this source, in descending order of value.
+
   type:
     type: string
     enum: [journal, repository, conference, ebook platform, book series, metadata, other]
