@@ -111,6 +111,16 @@ properties:
       2yr_mean_citedness: 1.5295340589458237
       h_index: 45
       i10_index: 205
+  topics:
+    type: array
+    items:
+      $ref: './dehydrated_topic.yaml'
+    description: Topics that are frequently associated with works affiliated with this source, in descending order of count.
+  topic_share:
+    type: array
+    items:
+      $ref: './dehydrated_topic.yaml'
+    description: Topics that are frequently associated with works affiliated with this source, in descending order of value.
   updated_date:
     type: string
     format: custom_date_time
