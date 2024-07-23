@@ -1,10 +1,29 @@
 # OpenAlex OpenAPI
 
-This repository contains an unofficial OpenAPI 3.1.0 specification for the [OpenAlex API](https://docs.openalex.org/).
+This repository contains an unofficial OpenAPI 3.1.0 definition for the [OpenAlex API](https://docs.openalex.org/).
 
 [OpenAlex.org](https://openalex.org/) provides access to a wealth of scholarly data, including information about authors, concepts, funders, institutions, publishers, sources, topics, and works.
 
-At present, this specification passes both `openapi-generator validate` and `redocly lint` with zero errors and zero warnings.
+## Development Status
+
+At present, I cannot guarantee absolute correctness of this API definition.
+
+Some disclaimers:
+
+- My purpose in creating this definition was to learn OpenAPI, and to (hopefully) contribute something useful to Open Access along the way.
+- I relied on the official OpenAlex [API docs](https://github.com/ourresearch/openalex-docs) and [Swagger 2.0 definition](https://github.com/ourresearch/openalex-api-docs/blob/0c3ed4dc58040b6802601a19a09bfec4b47e8cb4/source/spec.yaml) for reference, which are mildly incomplete and/or outdated in places.
+
+What I *can* claim:
+
+- This definition passes `openapi-generator validate` and `redocly lint` with zero errors and zero warnings.
+- Go code generated with `openapi-generator` passes all of the [default tests generated](https://github.com/diverged/openalex-go-openapi31/blob/a3fd6ebc623c894615c421dfe1ba9d8fd3d7ed9b/test/api_default_test.go).
+- I have been using Go client code generated from this successfully, including with the use of parameters like filter and sort.
+
+I am continuing to add to and adjust the schema definitions as I encounter problems or response properties not yet documented in the official resources (e.g. relating to the new `topics` entities), but I am sure imperfections remain.
+
+### Contributions
+
+If you identify any problems, you are welcome to create an issue or a submit a pull request.  Either one would be appreciated!
 
 ## API Endpoints
 
